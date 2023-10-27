@@ -1,6 +1,4 @@
 {
-  "name": "kodama",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/experimental/kodama/src",
   "projectType": "application",
   "targets": {
@@ -11,25 +9,37 @@
         "outputPath": "packages/experimental/kodama/dist/types",
         "tsConfig": "packages/experimental/kodama/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": ["packages/experimental/kodama/src/index.ts"],
+        "entryPoints": [
+          "packages/experimental/kodama/src/index.ts"
+        ],
         "outputPath": "packages/experimental/kodama/dist/lib",
-        "platforms": ["node"]
+        "platforms": [
+          "node"
+        ]
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["packages/experimental/kodama/**/*.{ts,tsx,js,jsx}"],
+        "lintFilePatterns": [
+          "packages/experimental/kodama/**/*.{ts,tsx,js,jsx}"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "storybook": {
       "configurations": {
@@ -46,15 +56,29 @@
     "test": {
       "executor": "@dxos/test:run",
       "options": {
-        "ciEnvironments": ["nodejs"],
+        "ciEnvironments": [
+          "nodejs"
+        ],
         "coveragePath": "coverage/packages/experimental/kodama",
         "outputPath": "tmp/mocha/packages/experimental/kodama",
         "resultsPath": "test-results/packages/experimental/kodama",
-        "testPatterns": ["packages/experimental/kodama/src/**/*.test.{ts,js}"],
-        "watchPatterns": ["packages/experimental/kodama/src/**/*"]
+        "testPatterns": [
+          "packages/experimental/kodama/src/**/*.test.{ts,js}"
+        ],
+        "watchPatterns": [
+          "packages/experimental/kodama/src/**/*"
+        ]
       },
-      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
+      "outputs": [
+        "{options.coveragePath}",
+        "{options.outputPath}",
+        "{options.resultsPath}"
+      ]
     }
   },
-  "implicitDependencies": ["test"]
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "implicitDependencies": [
+    "test"
+  ],
+  "name": "kodama"
 }

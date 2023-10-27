@@ -1,6 +1,4 @@
 {
-  "name": "todomvc",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/apps/todomvc/src",
   "projectType": "library",
   "targets": {
@@ -9,17 +7,23 @@
       "options": {
         "main": "packages/apps/todomvc/src/index.ts",
         "outputPath": "packages/apps/todomvc/dist",
-        "transformers": ["@dxos/log-hook/transformer"],
+        "transformers": [
+          "@dxos/log-hook/transformer"
+        ],
         "tsConfig": "packages/apps/todomvc/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "bundle": {
       "executor": "@nx/vite:build",
       "options": {
         "outputPath": "packages/apps/todomvc/out/todomvc"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "e2e": {
       "executor": "@dxos/test:run",
@@ -32,26 +36,40 @@
         "serveOptions": {
           "serveTarget": "preview"
         },
-        "testPatterns": ["packages/apps/todomvc/src/playwright/**/*.spec.{ts,js}"],
-        "watchPatterns": ["packages/apps/todomvc/src/**/*"]
+        "testPatterns": [
+          "packages/apps/todomvc/src/playwright/**/*.spec.{ts,js}"
+        ],
+        "watchPatterns": [
+          "packages/apps/todomvc/src/**/*"
+        ]
       },
-      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
+      "outputs": [
+        "{options.coveragePath}",
+        "{options.outputPath}",
+        "{options.resultsPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["packages/apps/todomvc/**/*.{ts,js}?(x)"],
+        "lintFilePatterns": [
+          "packages/apps/todomvc/**/*.{ts,js}?(x)"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "prebuild": {
       "executor": "nx:run-script",
       "options": {
         "script": "prebuild"
       },
-      "outputs": ["{projectRoot}/src/proto/gen"]
+      "outputs": [
+        "{projectRoot}/src/proto/gen"
+      ]
     },
     "preview": {
       "executor": "@nx/web:file-server",
@@ -70,5 +88,9 @@
       "executor": "@dxos/serve-with-vault:run"
     }
   },
-  "implicitDependencies": ["serve-with-vault"]
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "implicitDependencies": [
+    "serve-with-vault"
+  ],
+  "name": "todomvc"
 }

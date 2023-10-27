@@ -1,6 +1,4 @@
 {
-  "name": "rpc",
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/core/mesh/rpc/src",
   "projectType": "library",
   "targets": {
@@ -11,38 +9,63 @@
         "outputPath": "packages/core/mesh/rpc/dist/types",
         "tsConfig": "packages/core/mesh/rpc/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": ["packages/core/mesh/rpc/src/index.ts"],
+        "entryPoints": [
+          "packages/core/mesh/rpc/src/index.ts"
+        ],
         "injectGlobals": true,
         "outputPath": "packages/core/mesh/rpc/dist/lib"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["packages/core/mesh/rpc/**/*.{ts,js}?(x)"],
+        "lintFilePatterns": [
+          "packages/core/mesh/rpc/**/*.{ts,js}?(x)"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "test": {
       "executor": "@dxos/test:run",
       "options": {
-        "ciEnvironments": ["nodejs"],
+        "ciEnvironments": [
+          "nodejs"
+        ],
         "coveragePath": "coverage/packages/core/mesh/rpc",
         "outputPath": "tmp/mocha/packages/core/mesh/rpc",
         "resultsPath": "test-results/packages/core/mesh/rpc",
-        "testPatterns": ["packages/core/mesh/rpc/src/**/*.test.{ts,js}"],
-        "watchPatterns": ["packages/core/mesh/rpc/src/**/*"]
+        "testPatterns": [
+          "packages/core/mesh/rpc/src/**/*.test.{ts,js}"
+        ],
+        "watchPatterns": [
+          "packages/core/mesh/rpc/src/**/*"
+        ]
       },
-      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
+      "outputs": [
+        "{options.coveragePath}",
+        "{options.outputPath}",
+        "{options.resultsPath}"
+      ]
     }
   },
-  "implicitDependencies": ["esbuild", "test"]
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "implicitDependencies": [
+    "esbuild",
+    "test"
+  ],
+  "name": "rpc"
 }

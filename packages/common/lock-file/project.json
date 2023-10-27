@@ -1,6 +1,4 @@
 {
-  "name": "lock-file",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/common/lock-file/src",
   "projectType": "library",
   "targets": {
@@ -11,39 +9,66 @@
         "outputPath": "packages/common/lock-file/dist/types",
         "tsConfig": "packages/common/lock-file/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": ["packages/common/lock-file/src/index.ts"],
+        "entryPoints": [
+          "packages/common/lock-file/src/index.ts"
+        ],
         "injectGlobals": true,
         "outputPath": "packages/common/lock-file/dist/lib",
-        "platforms": ["node"]
+        "platforms": [
+          "node"
+        ]
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["packages/common/lock-file/**/*.ts"],
+        "lintFilePatterns": [
+          "packages/common/lock-file/**/*.ts"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "test": {
       "executor": "@dxos/test:run",
       "options": {
-        "ciEnvironments": ["nodejs"],
+        "ciEnvironments": [
+          "nodejs"
+        ],
         "coveragePath": "coverage/packages/common/lock-file",
         "outputPath": "tmp/mocha/packages/common/lock-file",
         "resultsPath": "test-results/packages/common/lock-file",
-        "testPatterns": ["packages/common/lock-file/src/**/*.test.{ts,js}"],
-        "watchPatterns": ["packages/common/lock-file/src/**/*"]
+        "testPatterns": [
+          "packages/common/lock-file/src/**/*.test.{ts,js}"
+        ],
+        "watchPatterns": [
+          "packages/common/lock-file/src/**/*"
+        ]
       },
-      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
+      "outputs": [
+        "{options.coveragePath}",
+        "{options.outputPath}",
+        "{options.resultsPath}"
+      ]
     }
   },
-  "implicitDependencies": ["esbuild", "test"]
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "implicitDependencies": [
+    "esbuild",
+    "test"
+  ],
+  "name": "lock-file"
 }

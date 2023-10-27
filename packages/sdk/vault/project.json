@@ -1,6 +1,4 @@
 {
-  "name": "vault",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/sdk/vault/src",
   "projectType": "library",
   "targets": {
@@ -11,44 +9,68 @@
         "outputPath": "packages/sdk/vault/dist/types",
         "tsConfig": "packages/sdk/vault/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "bundle": {
       "executor": "@nx/vite:build",
       "options": {
         "outputPath": "packages/sdk/vault/dist/bundle"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "bundle-test": {
-      "dependsOn": ["compile"],
+      "dependsOn": [
+        "compile"
+      ],
       "executor": "@nx/vite:build",
       "options": {
         "base": "/src/testing",
         "configFile": "packages/sdk/vault/src/testing/vite.config.ts",
         "outputPath": "packages/sdk/vault/src/testing/dist"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "compile": {
-      "dependsOn": ["compile-lib", "compile-node"],
+      "dependsOn": [
+        "compile-lib",
+        "compile-node"
+      ],
       "executor": "nx:run-commands",
       "options": {
-        "commands": ["true"]
+        "commands": [
+          "true"
+        ]
       }
     },
     "compile-lib": {
-      "dependsOn": ["^compile"],
+      "dependsOn": [
+        "^compile"
+      ],
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": ["packages/sdk/vault/src/index.ts", "packages/sdk/vault/src/shared-worker.ts"],
+        "entryPoints": [
+          "packages/sdk/vault/src/index.ts",
+          "packages/sdk/vault/src/shared-worker.ts"
+        ],
         "outputPath": "packages/sdk/vault/dist/lib",
-        "platforms": ["browser"]
+        "platforms": [
+          "browser"
+        ]
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "compile-node": {
-      "dependsOn": ["^compile"],
+      "dependsOn": [
+        "^compile"
+      ],
       "executor": "@dxos/esbuild:build",
       "options": {
         "entryPoints": [
@@ -57,9 +79,13 @@
           "packages/sdk/vault/src/vite-plugin.ts"
         ],
         "outputPath": "packages/sdk/vault/dist/node",
-        "platforms": ["node"]
+        "platforms": [
+          "node"
+        ]
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "e2e": {
       "executor": "@dxos/test:run",
@@ -69,19 +95,31 @@
         "playwrightConfigPath": "packages/sdk/vault/src/playwright/playwright.config.ts",
         "resultsPath": "test-results/packages/sdk/vault",
         "serve": "vault:serve-test",
-        "testPatterns": ["packages/sdk/vault/src/playwright/**/*.spec.{ts,js}"],
-        "watchPatterns": ["packages/sdk/vault/src/**/*"]
+        "testPatterns": [
+          "packages/sdk/vault/src/playwright/**/*.spec.{ts,js}"
+        ],
+        "watchPatterns": [
+          "packages/sdk/vault/src/**/*"
+        ]
       },
-      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
+      "outputs": [
+        "{options.coveragePath}",
+        "{options.outputPath}",
+        "{options.resultsPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["packages/sdk/vault/**/*.{ts,js}?(x)"],
+        "lintFilePatterns": [
+          "packages/sdk/vault/**/*.{ts,js}?(x)"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "preview": {
       "executor": "@nx/web:file-server",
@@ -98,11 +136,16 @@
       }
     },
     "serve-test": {
-      "dependsOn": ["bundle", "compile"],
+      "dependsOn": [
+        "bundle",
+        "compile"
+      ],
       "executor": "@nx/vite:dev-server",
       "options": {
         "buildTarget": "vault:bundle-test"
       }
     }
-  }
+  },
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "vault"
 }

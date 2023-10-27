@@ -1,6 +1,4 @@
 {
-  "name": "local-storage",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/common/local-storage/src",
   "projectType": "library",
   "targets": {
@@ -11,26 +9,41 @@
         "outputPath": "packages/common/local-storage/dist/types",
         "tsConfig": "packages/common/local-storage/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": ["packages/common/local-storage/src/index.ts"],
+        "entryPoints": [
+          "packages/common/local-storage/src/index.ts"
+        ],
         "injectGlobals": true,
         "outputPath": "packages/common/local-storage/dist/lib"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["packages/common/local-storage/**/*.{ts,js}?(x)"],
+        "lintFilePatterns": [
+          "packages/common/local-storage/**/*.{ts,js}?(x)"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     }
   },
-  "implicitDependencies": ["esbuild", "test"]
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "implicitDependencies": [
+    "esbuild",
+    "test"
+  ],
+  "name": "local-storage"
 }

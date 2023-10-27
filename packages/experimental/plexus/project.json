@@ -1,6 +1,4 @@
 {
-  "name": "plexus",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/experimental/plexus/src",
   "projectType": "application",
   "targets": {
@@ -11,24 +9,34 @@
         "outputPath": "packages/experimental/plexus/dist/types",
         "tsConfig": "packages/experimental/plexus/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": ["packages/experimental/plexus/src/index.ts"],
+        "entryPoints": [
+          "packages/experimental/plexus/src/index.ts"
+        ],
         "outputPath": "packages/experimental/plexus/dist/lib"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["packages/experimental/plexus/**/*.{ts,tsx,js,jsx}"],
+        "lintFilePatterns": [
+          "packages/experimental/plexus/**/*.{ts,tsx,js,jsx}"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "storybook": {
       "configurations": {
@@ -45,15 +53,29 @@
     "test": {
       "executor": "@dxos/test:run",
       "options": {
-        "ciEnvironments": ["nodejs"],
+        "ciEnvironments": [
+          "nodejs"
+        ],
         "coveragePath": "coverage/packages/experimental/plexus",
         "outputPath": "tmp/mocha/packages/experimental/plexus",
         "resultsPath": "test-results/packages/experimental/plexus",
-        "testPatterns": ["packages/experimental/plexus/src/**/*.test.{ts,js}"],
-        "watchPatterns": ["packages/experimental/plexus/src/**/*"]
+        "testPatterns": [
+          "packages/experimental/plexus/src/**/*.test.{ts,js}"
+        ],
+        "watchPatterns": [
+          "packages/experimental/plexus/src/**/*"
+        ]
       },
-      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
+      "outputs": [
+        "{options.coveragePath}",
+        "{options.outputPath}",
+        "{options.resultsPath}"
+      ]
     }
   },
-  "implicitDependencies": ["test"]
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "implicitDependencies": [
+    "test"
+  ],
+  "name": "plexus"
 }

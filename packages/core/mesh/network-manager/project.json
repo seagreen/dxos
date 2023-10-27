@@ -1,6 +1,4 @@
 {
-  "name": "network-manager",
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/core/mesh/network-manager/src",
   "projectType": "library",
   "targets": {
@@ -11,7 +9,9 @@
         "outputPath": "packages/core/mesh/network-manager/dist/types",
         "tsConfig": "packages/core/mesh/network-manager/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
@@ -23,21 +23,31 @@
         "injectGlobals": true,
         "outputPath": "packages/core/mesh/network-manager/dist/lib"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["packages/core/mesh/network-manager/**/*.{ts,js}?(x)"],
+        "lintFilePatterns": [
+          "packages/core/mesh/network-manager/**/*.{ts,js}?(x)"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "test": {
       "executor": "@dxos/test:run",
       "options": {
-        "ciEnvironments": ["chromium", "firefox", "nodejs"],
+        "ciEnvironments": [
+          "chromium",
+          "firefox",
+          "nodejs"
+        ],
         "coveragePath": "coverage/packages/core/mesh/network-manager",
         "envVariables": {
           "SIGNAL_PORT": 12005
@@ -49,11 +59,24 @@
         "setupOptions": {
           "port": 12005
         },
-        "testPatterns": ["packages/core/mesh/network-manager/src/**/*.test.{ts,js}"],
-        "watchPatterns": ["packages/core/mesh/network-manager/src/**/*"]
+        "testPatterns": [
+          "packages/core/mesh/network-manager/src/**/*.test.{ts,js}"
+        ],
+        "watchPatterns": [
+          "packages/core/mesh/network-manager/src/**/*"
+        ]
       },
-      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
+      "outputs": [
+        "{options.coveragePath}",
+        "{options.outputPath}",
+        "{options.resultsPath}"
+      ]
     }
   },
-  "implicitDependencies": ["esbuild", "test"]
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "implicitDependencies": [
+    "esbuild",
+    "test"
+  ],
+  "name": "network-manager"
 }

@@ -1,6 +1,4 @@
 {
-  "name": "gem-spore",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/experimental/gem-spore/src",
   "projectType": "library",
   "targets": {
@@ -11,7 +9,9 @@
         "outputPath": "packages/experimental/gem-spore/dist/types",
         "tsConfig": "packages/experimental/gem-spore/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
@@ -22,16 +22,22 @@
         ],
         "outputPath": "packages/experimental/gem-spore/dist/lib"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["packages/experimental/gem-spore/**/*.{ts,tsx,js,jsx}"],
+        "lintFilePatterns": [
+          "packages/experimental/gem-spore/**/*.{ts,tsx,js,jsx}"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "storybook": {
       "configurations": {
@@ -46,5 +52,9 @@
       }
     }
   },
-  "implictDependencies": ["test"]
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "implictDependencies": [
+    "test"
+  ],
+  "name": "gem-spore"
 }

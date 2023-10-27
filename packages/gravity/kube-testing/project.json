@@ -1,25 +1,34 @@
 {
-  "name": "kube-testing",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/gravity/kube-testing/src",
   "projectType": "library",
   "targets": {
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": ["packages/gravity/kube-testing/src/index.ts", "packages/gravity/kube-testing/src/main.ts"],
+        "entryPoints": [
+          "packages/gravity/kube-testing/src/index.ts",
+          "packages/gravity/kube-testing/src/main.ts"
+        ],
         "outputPath": "packages/gravity/kube-testing/dist/lib"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["packages/gravity/kube-testing/**/*.{ts,tsx,js,jsx}"],
+        "lintFilePatterns": [
+          "packages/gravity/kube-testing/**/*.{ts,tsx,js,jsx}"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     }
-  }
+  },
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "kube-testing"
 }

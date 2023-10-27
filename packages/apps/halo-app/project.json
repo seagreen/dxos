@@ -1,6 +1,4 @@
 {
-  "name": "halo-app",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/apps/halo-app/src",
   "projectType": "library",
   "targets": {
@@ -9,40 +7,64 @@
       "options": {
         "main": "packages/apps/halo-app/src/index.ts",
         "outputPath": "packages/apps/halo-app/dist/types",
-        "transformers": ["@dxos/log-hook/transformer"],
+        "transformers": [
+          "@dxos/log-hook/transformer"
+        ],
         "tsConfig": "packages/apps/halo-app/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "bundle": {
       "executor": "@nx/vite:build",
       "options": {
         "outputPath": "packages/apps/halo-app/out/halo"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "e2e": {
       "executor": "@dxos/test:run",
       "options": {
-        "ciEnvironments": ["android", "chromium", "firefox", "ios", "webkit"],
+        "ciEnvironments": [
+          "android",
+          "chromium",
+          "firefox",
+          "ios",
+          "webkit"
+        ],
         "coveragePath": "coverage/packages/apps/halo-app",
         "outputPath": "tmp/playwright/packages/apps/halo-app",
         "playwrightConfigPath": "packages/apps/halo-app/src/playwright/playwright.config.ts",
         "resultsPath": "test-results/packages/apps/halo-app",
         "serve": "halo-app:preview",
-        "testPatterns": ["packages/apps/halo-app/src/playwright/**/*.spec.{ts,js}"],
-        "watchPatterns": ["packages/apps/halo-app/src/**/*"]
+        "testPatterns": [
+          "packages/apps/halo-app/src/playwright/**/*.spec.{ts,js}"
+        ],
+        "watchPatterns": [
+          "packages/apps/halo-app/src/**/*"
+        ]
       },
-      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
+      "outputs": [
+        "{options.coveragePath}",
+        "{options.outputPath}",
+        "{options.resultsPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["packages/apps/halo-app/**/*.{ts,js}?(x)"],
+        "lintFilePatterns": [
+          "packages/apps/halo-app/**/*.{ts,js}?(x)"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "preview": {
       "executor": "@nx/web:file-server",
@@ -70,5 +92,7 @@
         "uiFramework": "@storybook/react"
       }
     }
-  }
+  },
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "halo-app"
 }

@@ -1,6 +1,4 @@
 {
-  "name": "devtools-extension",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/devtools/devtools-extension/src",
   "projectType": "application",
   "targets": {
@@ -9,10 +7,16 @@
       "options": {
         "outputPath": "packages/devtools/devtools-extension/out/devtools-extension"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "e2e": {
-      "dependsOn": ["^build", "bundle", "prebuild"],
+      "dependsOn": [
+        "^build",
+        "bundle",
+        "prebuild"
+      ],
       "executor": "@dxos/test:run",
       "options": {
         "coveragePath": "coverage/packages/devtools/devtools-extension",
@@ -21,19 +25,34 @@
         "outputPath": "tmp/playwright/packages/devtools/devtools-extension",
         "playwrightConfigPath": "packages/devtools/devtools-extension/src/playwright/playwright.config.ts",
         "resultsPath": "test-results/packages/devtools/devtools-extension",
-        "testPatterns": ["packages/devtools/devtools-extension/src/playwright/**/*.spec.{ts,js}"],
-        "watchPatterns": ["packages/devtools/devtools-extension/src/**/*"]
+        "testPatterns": [
+          "packages/devtools/devtools-extension/src/playwright/**/*.spec.{ts,js}"
+        ],
+        "watchPatterns": [
+          "packages/devtools/devtools-extension/src/**/*"
+        ]
       },
-      "outputs": ["{options.coveragePath}", "{options.extensionPath}", "{options.outputPath}", "{options.resultsPath}"]
+      "outputs": [
+        "{options.coveragePath}",
+        "{options.extensionPath}",
+        "{options.outputPath}",
+        "{options.resultsPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["packages/devtools/devtools-extension/**/*.{ts,tsx,js,jsx}"],
+        "lintFilePatterns": [
+          "packages/devtools/devtools-extension/**/*.{ts,tsx,js,jsx}"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     }
-  }
+  },
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "devtools-extension"
 }

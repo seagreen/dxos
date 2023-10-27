@@ -1,6 +1,4 @@
 {
-  "name": "react-ui-stack",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/ui/react-ui-stack/src",
   "projectType": "library",
   "targets": {
@@ -11,25 +9,37 @@
         "outputPath": "packages/ui/react-ui-stack/dist/types",
         "tsConfig": "packages/ui/react-ui-stack/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": ["packages/ui/react-ui-stack/src/index.ts"],
+        "entryPoints": [
+          "packages/ui/react-ui-stack/src/index.ts"
+        ],
         "outputPath": "packages/ui/react-ui-stack/dist/lib",
-        "platforms": ["browser"]
+        "platforms": [
+          "browser"
+        ]
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["packages/ui/react-ui-stack/src/**/*.{js,jsx,ts,tsx}"],
+        "lintFilePatterns": [
+          "packages/ui/react-ui-stack/src/**/*.{js,jsx,ts,tsx}"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "storybook": {
       "configurations": {
@@ -53,8 +63,14 @@
         "configDir": "packages/ui/react-ui-stack/.storybook",
         "outputDir": "packages/ui/react-ui-stack/out/react-ui"
       },
-      "outputs": ["{options.outputDir}"]
+      "outputs": [
+        "{options.outputDir}"
+      ]
     }
   },
-  "implicitDependencies": ["esbuild"]
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "implicitDependencies": [
+    "esbuild"
+  ],
+  "name": "react-ui-stack"
 }

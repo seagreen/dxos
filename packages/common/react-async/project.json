@@ -1,6 +1,4 @@
 {
-  "name": "react-async",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/common/react-async/src",
   "projectType": "library",
   "targets": {
@@ -11,24 +9,34 @@
         "outputPath": "packages/common/react-async/dist/types",
         "tsConfig": "packages/common/react-async/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": ["packages/common/react-async/src/index.ts"],
+        "entryPoints": [
+          "packages/common/react-async/src/index.ts"
+        ],
         "outputPath": "packages/common/react-async/dist/lib"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["packages/common/react-async/**/*.{ts,tsx,js,jsx}"],
+        "lintFilePatterns": [
+          "packages/common/react-async/**/*.{ts,tsx,js,jsx}"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "test": {
       "executor": "@dxos/test:run",
@@ -38,11 +46,24 @@
         "forceExit": true,
         "outputPath": "tmp/mocha/packages/common/react-async",
         "resultsPath": "test-results/packages/common/react-async",
-        "testPatterns": ["packages/common/react-async/src/**/*.test.{ts,tsx,js,jsx}"],
-        "watchPatterns": ["packages/common/react-async/src/**/*"]
+        "testPatterns": [
+          "packages/common/react-async/src/**/*.test.{ts,tsx,js,jsx}"
+        ],
+        "watchPatterns": [
+          "packages/common/react-async/src/**/*"
+        ]
       },
-      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
+      "outputs": [
+        "{options.coveragePath}",
+        "{options.outputPath}",
+        "{options.resultsPath}"
+      ]
     }
   },
-  "implicitDependencies": ["esbuild", "test"]
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "implicitDependencies": [
+    "esbuild",
+    "test"
+  ],
+  "name": "react-async"
 }

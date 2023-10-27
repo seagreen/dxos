@@ -1,6 +1,4 @@
 {
-  "name": "react-ui-editor",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/ui/react-ui-editor/src",
   "projectType": "library",
   "targets": {
@@ -11,32 +9,46 @@
         "outputPath": "packages/ui/react-ui-editor/dist/types",
         "tsConfig": "packages/ui/react-ui-editor/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": ["packages/ui/react-ui-editor/src/index.ts"],
+        "entryPoints": [
+          "packages/ui/react-ui-editor/src/index.ts"
+        ],
         "outputPath": "packages/ui/react-ui-editor/dist/lib",
-        "platforms": ["browser"]
+        "platforms": [
+          "browser"
+        ]
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["packages/ui/react-ui-editor/src/**/*.{js,jsx,ts,tsx}"],
+        "lintFilePatterns": [
+          "packages/ui/react-ui-editor/src/**/*.{js,jsx,ts,tsx}"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "prebuild": {
       "executor": "nx:run-script",
       "options": {
         "script": "prebuild"
       },
-      "outputs": ["{projectRoot}/src/testing/proto/gen"]
+      "outputs": [
+        "{projectRoot}/src/testing/proto/gen"
+      ]
     },
     "storybook": {
       "configurations": {
@@ -55,13 +67,23 @@
           "quiet": true
         }
       },
-      "dependsOn": ["^compile", "prebuild"],
+      "dependsOn": [
+        "^compile",
+        "prebuild"
+      ],
       "executor": "@nx/storybook:storybook",
-      "inputs": ["^production", "production"],
+      "inputs": [
+        "^production",
+        "production"
+      ],
       "options": {
         "configDir": "packages/ui/react-ui-editor/.storybook/html"
       }
     }
   },
-  "implicitDependencies": ["esbuild"]
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "implicitDependencies": [
+    "esbuild"
+  ],
+  "name": "react-ui-editor"
 }

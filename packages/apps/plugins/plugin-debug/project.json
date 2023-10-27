@@ -1,6 +1,4 @@
 {
-  "name": "plugin-debug",
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/apps/plugins/plugin-debug/src",
   "projectType": "library",
   "targets": {
@@ -11,25 +9,37 @@
         "outputPath": "packages/apps/plugins/plugin-debug/dist/types",
         "tsConfig": "packages/apps/plugins/plugin-debug/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": ["packages/apps/plugins/plugin-debug/src/index.ts"],
+        "entryPoints": [
+          "packages/apps/plugins/plugin-debug/src/index.ts"
+        ],
         "outputPath": "packages/apps/plugins/plugin-debug/dist/lib",
-        "platforms": ["browser"]
+        "platforms": [
+          "browser"
+        ]
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["packages/apps/plugins/plugin-debug/src/**/*.{js,jsx,ts,tsx}"],
+        "lintFilePatterns": [
+          "packages/apps/plugins/plugin-debug/src/**/*.{js,jsx,ts,tsx}"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "storybook": {
       "configurations": {
@@ -48,11 +58,23 @@
         "coveragePath": "coverage/packages/apps/plugins/plugin-debug",
         "outputPath": "tmp/mocha/packages/apps/plugins/plugin-debug",
         "resultsPath": "test-results/packages/apps/plugins/plugin-debug",
-        "testPatterns": ["packages/apps/plugins/plugin-debug/src/**/*.test.{ts,js}"],
-        "watchPatterns": ["packages/apps/plugins/plugin-debug/src/**/*"]
+        "testPatterns": [
+          "packages/apps/plugins/plugin-debug/src/**/*.test.{ts,js}"
+        ],
+        "watchPatterns": [
+          "packages/apps/plugins/plugin-debug/src/**/*"
+        ]
       },
-      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
+      "outputs": [
+        "{options.coveragePath}",
+        "{options.outputPath}",
+        "{options.resultsPath}"
+      ]
     }
   },
-  "implicitDependencies": ["esbuild"]
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "implicitDependencies": [
+    "esbuild"
+  ],
+  "name": "plugin-debug"
 }

@@ -1,6 +1,4 @@
 {
-  "name": "examples",
-  "$schema": "../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "targets": {
     "build": {
@@ -10,20 +8,26 @@
         "outputPath": "packages/sdk/examples/dist/types",
         "tsConfig": "packages/sdk/examples/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "bundle": {
       "executor": "@nx/vite:build",
       "options": {
         "outputPath": "packages/sdk/examples/out/demo"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["packages/sdk/examples/**/*.{ts,tsx,js,jsx}"],
+        "lintFilePatterns": [
+          "packages/sdk/examples/**/*.{ts,tsx,js,jsx}"
+        ],
         "quiet": true
       }
     },
@@ -32,7 +36,9 @@
       "options": {
         "script": "prebuild"
       },
-      "outputs": ["{projectRoot}/src/proto/gen"]
+      "outputs": [
+        "{projectRoot}/src/proto/gen"
+      ]
     },
     "serve": {
       "executor": "@nx/vite:dev-server",
@@ -62,7 +68,11 @@
         "configDir": "packages/sdk/examples/.storybook",
         "outputDir": "packages/sdk/examples/out"
       },
-      "outputs": ["{options.outputDir}"]
+      "outputs": [
+        "{options.outputDir}"
+      ]
     }
-  }
+  },
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "name": "examples"
 }

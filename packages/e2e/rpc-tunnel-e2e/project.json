@@ -1,6 +1,4 @@
 {
-  "name": "rpc-tunnel-e2e",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/e2e/rpc-tunnel-e2e/src",
   "projectType": "library",
   "targets": {
@@ -9,17 +7,23 @@
       "options": {
         "main": "packages/e2e/rpc-tunnel-e2e/src/index.ts",
         "outputPath": "packages/e2e/rpc-tunnel-e2e/dist",
-        "transformers": ["@dxos/log-hook/transformer"],
+        "transformers": [
+          "@dxos/log-hook/transformer"
+        ],
         "tsConfig": "packages/e2e/rpc-tunnel-e2e/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "bundle": {
       "executor": "@nx/vite:build",
       "options": {
         "outputPath": "packages/e2e/rpc-tunnel-e2e/out"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "e2e": {
       "executor": "@dxos/test:run",
@@ -29,19 +33,31 @@
         "playwrightConfigPath": "packages/e2e/rpc-tunnel-e2e/src/playwright/playwright.config.ts",
         "resultsPath": "test-results/packages/e2e/rpc-tunnel-e2e",
         "serve": "rpc-tunnel-e2e:serve",
-        "testPatterns": ["packages/e2e/rpc-tunnel-e2e/src/playwright/**/*.spec.{ts,js}"],
-        "watchPatterns": ["packages/e2e/rpc-tunnel-e2e/src/**/*"]
+        "testPatterns": [
+          "packages/e2e/rpc-tunnel-e2e/src/playwright/**/*.spec.{ts,js}"
+        ],
+        "watchPatterns": [
+          "packages/e2e/rpc-tunnel-e2e/src/**/*"
+        ]
       },
-      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
+      "outputs": [
+        "{options.coveragePath}",
+        "{options.outputPath}",
+        "{options.resultsPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["packages/e2e/rpc-tunnel-e2e/**/*.{ts,js}?(x)"],
+        "lintFilePatterns": [
+          "packages/e2e/rpc-tunnel-e2e/**/*.{ts,js}?(x)"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "serve": {
       "executor": "@nx/vite:dev-server",
@@ -50,5 +66,9 @@
       }
     }
   },
-  "implicitDependencies": ["test"]
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "implicitDependencies": [
+    "test"
+  ],
+  "name": "rpc-tunnel-e2e"
 }

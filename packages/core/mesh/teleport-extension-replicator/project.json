@@ -1,6 +1,4 @@
 {
-  "name": "teleport-extension-replicator",
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/core/mesh/teleport-extension-replicator/src",
   "projectType": "library",
   "targets": {
@@ -11,38 +9,63 @@
         "outputPath": "packages/core/mesh/teleport-extension-replicator/dist/types",
         "tsConfig": "packages/core/mesh/teleport-extension-replicator/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": ["packages/core/mesh/teleport-extension-replicator/src/index.ts"],
+        "entryPoints": [
+          "packages/core/mesh/teleport-extension-replicator/src/index.ts"
+        ],
         "injectGlobals": true,
         "outputPath": "packages/core/mesh/teleport-extension-replicator/dist/lib"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["packages/core/mesh/teleport-extension-replicator/**/*.{ts,js}?(x)"],
+        "lintFilePatterns": [
+          "packages/core/mesh/teleport-extension-replicator/**/*.{ts,js}?(x)"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "test": {
       "executor": "@dxos/test:run",
       "options": {
-        "ciEnvironments": ["nodejs"],
+        "ciEnvironments": [
+          "nodejs"
+        ],
         "coveragePath": "coverage/packages/core/mesh/teleport-extension-replicator",
         "outputPath": "tmp/mocha/packages/core/mesh/teleport-extension-replicator",
         "resultsPath": "test-results/packages/core/mesh/teleport-extension-replicator",
-        "testPatterns": ["packages/core/mesh/teleport-extension-replicator/src/**/*.test.{ts,js}"],
-        "watchPatterns": ["packages/core/mesh/teleport-extension-replicator/src/**/*"]
+        "testPatterns": [
+          "packages/core/mesh/teleport-extension-replicator/src/**/*.test.{ts,js}"
+        ],
+        "watchPatterns": [
+          "packages/core/mesh/teleport-extension-replicator/src/**/*"
+        ]
       },
-      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
+      "outputs": [
+        "{options.coveragePath}",
+        "{options.outputPath}",
+        "{options.resultsPath}"
+      ]
     }
   },
-  "implicitDependencies": ["esbuild", "test"]
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "implicitDependencies": [
+    "esbuild",
+    "test"
+  ],
+  "name": "teleport-extension-replicator"
 }

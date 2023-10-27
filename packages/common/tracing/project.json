@@ -1,6 +1,4 @@
 {
-  "name": "tracing",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/common/tracing/src",
   "projectType": "library",
   "targets": {
@@ -11,24 +9,34 @@
         "outputPath": "packages/common/tracing/dist/types",
         "tsConfig": "packages/common/tracing/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": ["packages/common/tracing/src/index.ts"],
+        "entryPoints": [
+          "packages/common/tracing/src/index.ts"
+        ],
         "outputPath": "packages/common/tracing/dist/lib"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["packages/common/tracing/**/*.{ts,js}?(x)"],
+        "lintFilePatterns": [
+          "packages/common/tracing/**/*.{ts,js}?(x)"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "test": {
       "executor": "@dxos/test:run",
@@ -36,11 +44,24 @@
         "coveragePath": "coverage/packages/common/tracing",
         "outputPath": "tmp/mocha/packages/common/tracing",
         "resultsPath": "test-results/packages/common/tracing",
-        "testPatterns": ["packages/common/tracing/src/**/*.test.{ts,js}"],
-        "watchPatterns": ["packages/common/tracing/src/**/*"]
+        "testPatterns": [
+          "packages/common/tracing/src/**/*.test.{ts,js}"
+        ],
+        "watchPatterns": [
+          "packages/common/tracing/src/**/*"
+        ]
       },
-      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
+      "outputs": [
+        "{options.coveragePath}",
+        "{options.outputPath}",
+        "{options.resultsPath}"
+      ]
     }
   },
-  "implicitDependencies": ["esbuild", "test"]
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "implicitDependencies": [
+    "esbuild",
+    "test"
+  ],
+  "name": "tracing"
 }

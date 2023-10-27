@@ -1,6 +1,4 @@
 {
-  "name": "echo-typegen",
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/core/echo/echo-typegen/src",
   "projectType": "library",
   "targets": {
@@ -11,26 +9,38 @@
         "outputPath": "packages/core/echo/echo-typegen/dist/types",
         "tsConfig": "packages/core/echo/echo-typegen/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": ["packages/core/echo/echo-typegen/src/main.ts"],
+        "entryPoints": [
+          "packages/core/echo/echo-typegen/src/main.ts"
+        ],
         "injectGlobals": true,
         "outputPath": "packages/core/echo/echo-typegen/dist/lib",
-        "platforms": ["node"]
+        "platforms": [
+          "node"
+        ]
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["packages/core/echo/echo-typegen/src/**/*.{ts,js}?(x)"],
+        "lintFilePatterns": [
+          "packages/core/echo/echo-typegen/src/**/*.{ts,js}?(x)"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "test": {
       "executor": "@dxos/test:run",
@@ -38,10 +48,20 @@
         "coveragePath": "coverage/packages/core/echo/echo-typegen",
         "outputPath": "tmp/mocha/packages/core/echo/echo-typegen",
         "resultsPath": "test-results/packages/core/echo/echo-typegen",
-        "testPatterns": ["packages/core/echo/echo-typegen/**/*.test.{ts,js}"],
-        "watchPatterns": ["packages/core/echo/echo-typegen/**/*"]
+        "testPatterns": [
+          "packages/core/echo/echo-typegen/**/*.test.{ts,js}"
+        ],
+        "watchPatterns": [
+          "packages/core/echo/echo-typegen/**/*"
+        ]
       },
-      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
+      "outputs": [
+        "{options.coveragePath}",
+        "{options.outputPath}",
+        "{options.resultsPath}"
+      ]
     }
-  }
+  },
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "name": "echo-typegen"
 }

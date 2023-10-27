@@ -1,6 +1,4 @@
 {
-  "name": "telemetry",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/common/telemetry/src",
   "projectType": "library",
   "targets": {
@@ -11,25 +9,39 @@
         "outputPath": "packages/common/telemetry/dist/types",
         "tsConfig": "packages/common/telemetry/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": ["packages/common/telemetry/src/index.ts"],
+        "entryPoints": [
+          "packages/common/telemetry/src/index.ts"
+        ],
         "outputPath": "packages/common/telemetry/dist/lib"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["packages/common/telemetry/**/*.{ts,js}?(x)"],
+        "lintFilePatterns": [
+          "packages/common/telemetry/**/*.{ts,js}?(x)"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     }
   },
-  "implicitDependencies": ["esbuild"]
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "implicitDependencies": [
+    "esbuild"
+  ],
+  "name": "telemetry"
 }

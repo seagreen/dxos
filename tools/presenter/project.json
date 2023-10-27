@@ -1,6 +1,4 @@
 {
-  "name": "presenter",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "tools/presenter/src",
   "projectType": "library",
   "targets": {
@@ -9,10 +7,16 @@
       "options": {
         "main": "tools/presenter/src/index.ts",
         "outputPath": "tools/presenter/dist",
-        "transformers": ["@dxos/log-hook/transformer"],
+        "transformers": [
+          "@dxos/log-hook/transformer"
+        ],
         "tsConfig": "tools/presenter/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     }
-  }
+  },
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "presenter"
 }

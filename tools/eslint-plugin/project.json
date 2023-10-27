@@ -1,6 +1,4 @@
 {
-  "name": "eslint-plugin",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "tools/eslint-plugin",
   "projectType": "library",
   "targets": {
@@ -8,10 +6,16 @@
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["tools/eslint-plugin/**/*.{ts,js}?(x)"],
+        "lintFilePatterns": [
+          "tools/eslint-plugin/**/*.{ts,js}?(x)"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     }
-  }
+  },
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "eslint-plugin"
 }

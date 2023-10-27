@@ -1,6 +1,4 @@
 {
-  "name": "devtools",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/devtools/devtools/src",
   "projectType": "application",
   "targets": {
@@ -11,7 +9,9 @@
         "outputPath": "packages/devtools/devtools/dist/types",
         "tsConfig": "packages/devtools/devtools/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "build-storybook": {
       "configurations": {
@@ -25,31 +25,43 @@
         "outputPath": "packages/devtools/devtools/out/dxos/storybook/devtools",
         "uiFramework": "@storybook/react"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "bundle": {
       "executor": "@nx/vite:build",
       "options": {
         "outputPath": "packages/devtools/devtools/out/devtools"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": ["packages/devtools/devtools/src/index.ts"],
+        "entryPoints": [
+          "packages/devtools/devtools/src/index.ts"
+        ],
         "outputPath": "packages/devtools/devtools/dist/lib"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["packages/devtools/devtools/**/*.{ts,js}?(x)"],
+        "lintFilePatterns": [
+          "packages/devtools/devtools/**/*.{ts,js}?(x)"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "serve": {
       "executor": "@nx/vite:dev-server",
@@ -73,5 +85,9 @@
       }
     }
   },
-  "implicitDependencies": ["esbuild"]
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "implicitDependencies": [
+    "esbuild"
+  ],
+  "name": "devtools"
 }

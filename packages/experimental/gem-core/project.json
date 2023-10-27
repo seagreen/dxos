@@ -1,6 +1,4 @@
 {
-  "name": "gem-core",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/experimental/gem-core/src",
   "projectType": "library",
   "targets": {
@@ -11,24 +9,34 @@
         "outputPath": "packages/experimental/gem-core/dist/types",
         "tsConfig": "packages/experimental/gem-core/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": ["packages/experimental/gem-core/src/index.ts"],
+        "entryPoints": [
+          "packages/experimental/gem-core/src/index.ts"
+        ],
         "outputPath": "packages/experimental/gem-core/dist/lib"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["packages/experimental/gem-core/**/*.{ts,tsx,js,jsx}"],
+        "lintFilePatterns": [
+          "packages/experimental/gem-core/**/*.{ts,tsx,js,jsx}"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "storybook": {
       "configurations": {
@@ -43,5 +51,9 @@
       }
     }
   },
-  "implicitDependencies": ["test"]
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "implicitDependencies": [
+    "test"
+  ],
+  "name": "gem-core"
 }

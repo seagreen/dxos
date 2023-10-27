@@ -1,6 +1,4 @@
 {
-  "name": "esbuild",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "tools/executors/esbuild/src",
   "targets": {
     "compile": {
@@ -8,20 +6,32 @@
       "options": {
         "main": "tools/executors/esbuild/src/index.ts",
         "outputPath": "tools/executors/esbuild/dist",
-        "transformers": ["@dxos/log-hook/transformer"],
+        "transformers": [
+          "@dxos/log-hook/transformer"
+        ],
         "tsConfig": "tools/executors/esbuild/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["tools/executors/esbuild/**/*.{ts,js}?(x)"],
+        "lintFilePatterns": [
+          "tools/executors/esbuild/**/*.{ts,js}?(x)"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     }
   },
-  "implicitDependencies": ["log-hook"]
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "implicitDependencies": [
+    "log-hook"
+  ],
+  "name": "esbuild"
 }

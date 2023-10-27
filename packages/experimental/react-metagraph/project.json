@@ -1,6 +1,4 @@
 {
-  "name": "react-metagraph",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/experimental/react-metagraph/src",
   "projectType": "library",
   "targets": {
@@ -11,25 +9,40 @@
         "outputPath": "packages/experimental/react-metagraph/dist/types",
         "tsConfig": "packages/experimental/react-metagraph/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": ["packages/experimental/react-metagraph/src/index.ts"],
+        "entryPoints": [
+          "packages/experimental/react-metagraph/src/index.ts"
+        ],
         "outputPath": "packages/experimental/react-metagraph/dist/lib"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["packages/experimental/react-metagraph/**/*.{ts,tsx,js,jsx}"],
+        "lintFilePatterns": [
+          "packages/experimental/react-metagraph/**/*.{ts,tsx,js,jsx}"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     }
   },
-  "implicitDependencies": ["esbuild", "test"]
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "implicitDependencies": [
+    "esbuild",
+    "test"
+  ],
+  "name": "react-metagraph"
 }

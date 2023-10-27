@@ -1,6 +1,4 @@
 {
-  "name": "metagraph",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/experimental/metagraph/src",
   "projectType": "library",
   "targets": {
@@ -11,42 +9,67 @@
         "outputPath": "packages/experimental/metagraph/dist/types",
         "tsConfig": "packages/experimental/metagraph/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "compile": {
-      "dependsOn": ["compile-lib", "compile-node"],
+      "dependsOn": [
+        "compile-lib",
+        "compile-node"
+      ],
       "executor": "nx:run-commands",
       "options": {
-        "commands": ["true"]
+        "commands": [
+          "true"
+        ]
       }
     },
     "compile-lib": {
-      "dependsOn": ["^compile"],
+      "dependsOn": [
+        "^compile"
+      ],
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": ["packages/experimental/metagraph/src/index.ts"],
+        "entryPoints": [
+          "packages/experimental/metagraph/src/index.ts"
+        ],
         "outputPath": "packages/experimental/metagraph/dist/lib"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "compile-node": {
-      "dependsOn": ["^compile"],
+      "dependsOn": [
+        "^compile"
+      ],
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": ["packages/experimental/metagraph/src/testing/index.ts"],
+        "entryPoints": [
+          "packages/experimental/metagraph/src/testing/index.ts"
+        ],
         "outputPath": "packages/experimental/metagraph/dist/testing",
-        "platforms": ["node"]
+        "platforms": [
+          "node"
+        ]
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["packages/experimental/metagraph/**/*.{ts,js}?(x)"],
+        "lintFilePatterns": [
+          "packages/experimental/metagraph/**/*.{ts,js}?(x)"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "test": {
       "executor": "@dxos/test:run",
@@ -54,11 +77,24 @@
         "coveragePath": "coverage/packages/experimental/metagraph",
         "outputPath": "tmp/mocha/packages/experimental/metagraph",
         "resultsPath": "test-results/packages/experimental/metagraph",
-        "testPatterns": ["packages/experimental/metagraph/src/**/*.test.{ts,js}"],
-        "watchPatterns": ["packages/experimental/metagraph/src/**/*"]
+        "testPatterns": [
+          "packages/experimental/metagraph/src/**/*.test.{ts,js}"
+        ],
+        "watchPatterns": [
+          "packages/experimental/metagraph/src/**/*"
+        ]
       },
-      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
+      "outputs": [
+        "{options.coveragePath}",
+        "{options.outputPath}",
+        "{options.resultsPath}"
+      ]
     }
   },
-  "implicitDependencies": ["esbuild", "test"]
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "implicitDependencies": [
+    "esbuild",
+    "test"
+  ],
+  "name": "metagraph"
 }

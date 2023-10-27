@@ -1,6 +1,4 @@
 {
-  "name": "client-services",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/sdk/client-services/src",
   "projectType": "library",
   "targets": {
@@ -11,7 +9,9 @@
         "outputPath": "packages/sdk/client-services/dist/types",
         "tsConfig": "packages/sdk/client-services/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
@@ -23,22 +23,32 @@
         "injectGlobals": true,
         "outputPath": "packages/sdk/client-services/dist/lib"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["packages/sdk/client-services/**/*.{ts,tsx,js,jsx}"],
+        "lintFilePatterns": [
+          "packages/sdk/client-services/**/*.{ts,tsx,js,jsx}"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "test": {
       "executor": "@dxos/test:run",
       "options": {
         "checkLeaks": false,
-        "ciEnvironments": ["chromium", "firefox", "nodejs"],
+        "ciEnvironments": [
+          "chromium",
+          "firefox",
+          "nodejs"
+        ],
         "coveragePath": "coverage/packages/sdk/client-services",
         "envVariables": {
           "SIGNAL_PORT": 12004
@@ -50,11 +60,24 @@
         "setupOptions": {
           "port": 12004
         },
-        "testPatterns": ["packages/sdk/client-services/src/**/*.test.{ts,js}"],
-        "watchPatterns": ["packages/sdk/client-services/src/**/*"]
+        "testPatterns": [
+          "packages/sdk/client-services/src/**/*.test.{ts,js}"
+        ],
+        "watchPatterns": [
+          "packages/sdk/client-services/src/**/*"
+        ]
       },
-      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
+      "outputs": [
+        "{options.coveragePath}",
+        "{options.outputPath}",
+        "{options.resultsPath}"
+      ]
     }
   },
-  "implicitDependencies": ["esbuild", "test"]
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "implicitDependencies": [
+    "esbuild",
+    "test"
+  ],
+  "name": "client-services"
 }

@@ -1,6 +1,4 @@
 {
-  "name": "context",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/common/context/src",
   "projectType": "library",
   "targets": {
@@ -11,24 +9,34 @@
         "outputPath": "packages/common/context/dist/types",
         "tsConfig": "packages/common/context/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": ["packages/common/context/src/index.ts"],
+        "entryPoints": [
+          "packages/common/context/src/index.ts"
+        ],
         "outputPath": "packages/common/context/dist/lib"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["packages/common/context/**/*.{ts,js}?(x)"],
+        "lintFilePatterns": [
+          "packages/common/context/**/*.{ts,js}?(x)"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "test": {
       "executor": "@dxos/test:run",
@@ -36,11 +44,24 @@
         "coveragePath": "coverage/packages/common/context",
         "outputPath": "tmp/mocha/packages/common/context",
         "resultsPath": "test-results/packages/common/context",
-        "testPatterns": ["packages/common/context/src/**/*.test.{ts,js}"],
-        "watchPatterns": ["packages/common/context/src/**/*"]
+        "testPatterns": [
+          "packages/common/context/src/**/*.test.{ts,js}"
+        ],
+        "watchPatterns": [
+          "packages/common/context/src/**/*"
+        ]
       },
-      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
+      "outputs": [
+        "{options.coveragePath}",
+        "{options.outputPath}",
+        "{options.resultsPath}"
+      ]
     }
   },
-  "implicitDependencies": ["esbuild", "test"]
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "implicitDependencies": [
+    "esbuild",
+    "test"
+  ],
+  "name": "context"
 }

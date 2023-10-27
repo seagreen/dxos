@@ -1,6 +1,4 @@
 {
-  "name": "spyglass",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/experimental/spyglass/src",
   "projectType": "library",
   "targets": {
@@ -11,7 +9,11 @@
         "outputPath": "packages/experimental/spyglass/dist",
         "tsConfig": "packages/experimental/spyglass/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     }
-  }
+  },
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "spyglass"
 }

@@ -1,6 +1,4 @@
 {
-  "name": "codec-protobuf",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/common/codec-protobuf/src",
   "projectType": "library",
   "targets": {
@@ -11,25 +9,35 @@
         "outputPath": "packages/common/codec-protobuf/dist/types",
         "tsConfig": "packages/common/codec-protobuf/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": ["packages/common/codec-protobuf/src/index.ts"],
+        "entryPoints": [
+          "packages/common/codec-protobuf/src/index.ts"
+        ],
         "injectGlobals": true,
         "outputPath": "packages/common/codec-protobuf/dist/lib"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["packages/common/codec-protobuf/**/*.{ts,js}?(x)"],
+        "lintFilePatterns": [
+          "packages/common/codec-protobuf/**/*.{ts,js}?(x)"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "test": {
       "executor": "@dxos/test:run",
@@ -37,11 +45,24 @@
         "coveragePath": "coverage/packages/common/codec-protobuf",
         "outputPath": "tmp/mocha/packages/common/codec-protobuf",
         "resultsPath": "test-results/packages/common/codec-protobuf",
-        "testPatterns": ["packages/common/codec-protobuf/src/**/*.test.{ts,js}"],
-        "watchPatterns": ["packages/common/codec-protobuf/src/**/*"]
+        "testPatterns": [
+          "packages/common/codec-protobuf/src/**/*.test.{ts,js}"
+        ],
+        "watchPatterns": [
+          "packages/common/codec-protobuf/src/**/*"
+        ]
       },
-      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
+      "outputs": [
+        "{options.coveragePath}",
+        "{options.outputPath}",
+        "{options.resultsPath}"
+      ]
     }
   },
-  "implicitDependencies": ["esbuild", "test"]
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "implicitDependencies": [
+    "esbuild",
+    "test"
+  ],
+  "name": "codec-protobuf"
 }

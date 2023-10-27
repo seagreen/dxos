@@ -1,6 +1,4 @@
 {
-  "name": "log-hook",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "tools/log-hook/src",
   "projectType": "library",
   "targets": {
@@ -11,16 +9,24 @@
         "outputPath": "tools/log-hook/dist",
         "tsConfig": "tools/log-hook/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["tools/log-hook/**/*.{ts,js}?(x)"],
+        "lintFilePatterns": [
+          "tools/log-hook/**/*.{ts,js}?(x)"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     }
-  }
+  },
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "log-hook"
 }

@@ -1,6 +1,4 @@
 {
-  "name": "echo-signals",
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/core/echo/echo-signals/src",
   "projectType": "library",
   "targets": {
@@ -11,7 +9,9 @@
         "outputPath": "packages/core/echo/echo-signals/dist/types",
         "tsConfig": "packages/core/echo/echo-signals/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
@@ -23,17 +23,27 @@
         ],
         "outputPath": "packages/core/echo/echo-signals/dist/lib"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["packages/core/echo/echo-signals/src/**/*.{ts,js}?(x)"],
+        "lintFilePatterns": [
+          "packages/core/echo/echo-signals/src/**/*.{ts,js}?(x)"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     }
   },
-  "implicitDependencies": ["esbuild"]
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "implicitDependencies": [
+    "esbuild"
+  ],
+  "name": "echo-signals"
 }

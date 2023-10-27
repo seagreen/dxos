@@ -1,6 +1,4 @@
 {
-  "name": "test",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "tools/executors/test/src",
   "projectType": "library",
   "targets": {
@@ -9,20 +7,33 @@
       "options": {
         "main": "tools/executors/test/src/main.ts",
         "outputPath": "tools/executors/test/dist",
-        "transformers": ["@dxos/log-hook/transformer"],
+        "transformers": [
+          "@dxos/log-hook/transformer"
+        ],
         "tsConfig": "tools/executors/test/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["tools/executors/test/**/*.{ts,js}?(x)"],
+        "lintFilePatterns": [
+          "tools/executors/test/**/*.{ts,js}?(x)"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     }
   },
-  "implicitDependencies": ["esbuild-plugins", "log-hook"]
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "implicitDependencies": [
+    "esbuild-plugins",
+    "log-hook"
+  ],
+  "name": "test"
 }

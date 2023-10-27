@@ -1,6 +1,4 @@
 {
-  "name": "beast",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "tools/beast/src",
   "projectType": "library",
   "targets": {
@@ -9,31 +7,51 @@
       "options": {
         "main": "tools/beast/src/index.ts",
         "outputPath": "tools/beast/dist",
-        "transformers": ["@dxos/log-hook/transformer"],
+        "transformers": [
+          "@dxos/log-hook/transformer"
+        ],
         "tsConfig": "tools/beast/tsconfig.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": ["tools/beast/**/*.{ts,js}?(x)"],
+        "lintFilePatterns": [
+          "tools/beast/**/*.{ts,js}?(x)"
+        ],
         "quiet": true
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "test": {
       "executor": "@dxos/test:run",
       "options": {
-        "ciEnvironments": ["nodejs"],
+        "ciEnvironments": [
+          "nodejs"
+        ],
         "coveragePath": "coverage/tools/beast",
         "outputPath": "tmp/mocha/tools/beast",
         "resultsPath": "test-results/tools/beast",
-        "testPatterns": ["tools/beast/src/**/*.test.{ts,js}"],
-        "watchPatterns": ["tools/beast/src/**/*"]
+        "testPatterns": [
+          "tools/beast/src/**/*.test.{ts,js}"
+        ],
+        "watchPatterns": [
+          "tools/beast/src/**/*"
+        ]
       },
-      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
+      "outputs": [
+        "{options.coveragePath}",
+        "{options.outputPath}",
+        "{options.resultsPath}"
+      ]
     }
-  }
+  },
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "beast"
 }
