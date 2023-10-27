@@ -7,7 +7,8 @@
       "options": {
         "main": "tools/log-hook/src/index.ts",
         "outputPath": "tools/log-hook/dist",
-        "tsConfig": "tools/log-hook/tsconfig.json"
+        "tsConfig": "tools/log-hook/tsconfig.json",
+        "assets": []
       },
       "outputs": [
         "{options.outputPath}"

@@ -29,7 +29,7 @@ export const bundle = async (
   options: EsbuildExecutorOptions,
   context: ExecutorContext,
 ): Promise<{ success: boolean }> => {
-  console.info('Executing esbuild...');
+  // console.info('Executing esbuild...');
   if (context.isVerbose) {
     console.info(`Options: ${JSON.stringify(options, null, 2)}`);
   }
@@ -39,8 +39,10 @@ export const bundle = async (
     await rm(options.outputPath, { recursive: true });
   } catch {}
 
+
+  const rootDir = context.projectGraph?.nodes[context.projectName!]!.data!.root!;
   // TODO(wittjosiah): Workspace from context is deprecated.
-  const packagePath = join(context.workspace!.projects[context.projectName!].root, 'package.json');
+  const packagePath = join(rootDir, 'package.json');
   const packageJson = JSON.parse(await readFile(packagePath, 'utf-8'));
 
   const logTransformer = new LogTransformer({ isVerbose: context.isVerbose });
