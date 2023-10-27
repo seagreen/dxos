@@ -1,4 +1,6 @@
 {
+  "name": "client",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/sdk/client/src",
   "projectType": "library",
   "targets": {
@@ -9,9 +11,7 @@
         "outputPath": "packages/sdk/client/dist/types",
         "tsConfig": "packages/sdk/client/tsconfig.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
@@ -28,22 +28,16 @@
         ],
         "outputPath": "packages/sdk/client/dist/lib"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": [
-          "packages/sdk/client/**/*.{ts,tsx,js,jsx}"
-        ],
+        "lintFilePatterns": ["packages/sdk/client/**/*.{ts,tsx,js,jsx}"],
         "quiet": true
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@dxos/test:run",
@@ -59,24 +53,11 @@
         "setupOptions": {
           "port": 12003
         },
-        "testPatterns": [
-          "packages/sdk/client/src/**/*.test.{ts,js}"
-        ],
-        "watchPatterns": [
-          "packages/sdk/client/src/**/*"
-        ]
+        "testPatterns": ["packages/sdk/client/src/**/*.test.{ts,js}"],
+        "watchPatterns": ["packages/sdk/client/src/**/*"]
       },
-      "outputs": [
-        "{options.coveragePath}",
-        "{options.outputPath}",
-        "{options.resultsPath}"
-      ]
+      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
     }
   },
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": [
-    "esbuild",
-    "test"
-  ],
-  "name": "client"
+  "implicitDependencies": ["esbuild", "test"]
 }

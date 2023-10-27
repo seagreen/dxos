@@ -1,4 +1,6 @@
 {
+  "name": "types",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/apps/types/src",
   "projectType": "library",
   "targets": {
@@ -9,46 +11,32 @@
         "outputPath": "packages/apps/types/dist/types",
         "tsConfig": "packages/apps/types/tsconfig.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": [
-          "packages/apps/types/src/index.ts"
-        ],
+        "entryPoints": ["packages/apps/types/src/index.ts"],
         "injectGlobals": true,
         "outputPath": "packages/apps/types/dist/lib"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": [
-          "packages/apps/types/**/*.{ts,js}?(x)"
-        ],
+        "lintFilePatterns": ["packages/apps/types/**/*.{ts,js}?(x)"],
         "quiet": true
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "prebuild": {
       "executor": "nx:run-script",
       "options": {
         "script": "prebuild"
       },
-      "outputs": [
-        "{projectRoot}/src/proto/gen"
-      ]
+      "outputs": ["{projectRoot}/src/proto/gen"]
     }
-  },
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "name": "types"
+  }
 }

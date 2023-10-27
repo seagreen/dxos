@@ -1,4 +1,6 @@
 {
+  "name": "model-factory",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/core/echo/model-factory/src",
   "projectType": "library",
   "targets": {
@@ -9,9 +11,7 @@
         "outputPath": "packages/core/echo/model-factory/dist/types",
         "tsConfig": "packages/core/echo/model-factory/tsconfig.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
@@ -22,22 +22,16 @@
         ],
         "outputPath": "packages/core/echo/model-factory/dist/lib"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": [
-          "packages/core/echo/model-factory/**/*.{ts,js}?(x)"
-        ],
+        "lintFilePatterns": ["packages/core/echo/model-factory/**/*.{ts,js}?(x)"],
         "quiet": true
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@dxos/test:run",
@@ -45,24 +39,11 @@
         "coveragePath": "coverage/packages/core/echo/model-factory",
         "outputPath": "tmp/mocha/packages/core/echo/model-factory",
         "resultsPath": "test-results/packages/core/echo/model-factory",
-        "testPatterns": [
-          "packages/core/echo/model-factory/src/**/*.test.{ts,js}"
-        ],
-        "watchPatterns": [
-          "packages/core/echo/model-factory/src/**/*"
-        ]
+        "testPatterns": ["packages/core/echo/model-factory/src/**/*.test.{ts,js}"],
+        "watchPatterns": ["packages/core/echo/model-factory/src/**/*"]
       },
-      "outputs": [
-        "{options.coveragePath}",
-        "{options.outputPath}",
-        "{options.resultsPath}"
-      ]
+      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
     }
   },
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": [
-    "esbuild",
-    "test"
-  ],
-  "name": "model-factory"
+  "implicitDependencies": ["esbuild", "test"]
 }

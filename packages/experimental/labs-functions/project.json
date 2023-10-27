@@ -1,4 +1,6 @@
 {
+  "name": "labs-functions",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/experimental/labs-functions/src",
   "projectType": "library",
   "targets": {
@@ -9,62 +11,37 @@
         "outputPath": "packages/experimental/labs-functions/dist/types",
         "tsConfig": "packages/experimental/labs-functions/tsconfig.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": [
-          "packages/experimental/labs-functions/src/index.ts"
-        ],
+        "entryPoints": ["packages/experimental/labs-functions/src/index.ts"],
         "outputPath": "packages/experimental/labs-functions/dist/lib"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": [
-          "packages/experimental/labs-functions/**/!(*.d).{ts,js}"
-        ],
+        "lintFilePatterns": ["packages/experimental/labs-functions/**/!(*.d).{ts,js}"],
         "quiet": true
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@dxos/test:run",
       "options": {
-        "ciEnvironments": [
-          "nodejs"
-        ],
+        "ciEnvironments": ["nodejs"],
         "coveragePath": "coverage/packages/experimental/labs-functions",
         "outputPath": "tmp/mocha/packages/experimental/labs-functions",
         "resultsPath": "test-results/packages/experimental/labs-functions",
-        "testPatterns": [
-          "packages/experimental/labs-functions/src/**/*.test.{ts,js}"
-        ],
-        "watchPatterns": [
-          "packages/experimental/labs-functions/src/**/*"
-        ]
+        "testPatterns": ["packages/experimental/labs-functions/src/**/*.test.{ts,js}"],
+        "watchPatterns": ["packages/experimental/labs-functions/src/**/*"]
       },
-      "outputs": [
-        "{options.coveragePath}",
-        "{options.outputPath}",
-        "{options.resultsPath}"
-      ]
+      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
     }
   },
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": [
-    "esbuild",
-    "test"
-  ],
-  "name": "labs-functions"
+  "implicitDependencies": ["esbuild", "test"]
 }

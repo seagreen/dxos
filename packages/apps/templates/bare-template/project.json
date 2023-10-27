@@ -1,4 +1,6 @@
 {
+  "name": "bare-template",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/apps/templates/bare-template/src",
   "projectType": "library",
   "targets": {
@@ -9,57 +11,37 @@
         "outputPath": "packages/apps/templates/bare-template/dist",
         "tsConfig": "packages/apps/templates/bare-template/tsconfig.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "gen": {
       "executor": "nx:run-script",
       "options": {
         "script": "gen"
       },
-      "outputs": [
-        "{projectRoot}/test/variants"
-      ]
+      "outputs": ["{projectRoot}/test/variants"]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": [
-          "packages/apps/templates/bare-template/{src,test}/**/*.{ts,js}?(x)"
-        ],
+        "lintFilePatterns": ["packages/apps/templates/bare-template/{src,test}/**/*.{ts,js}?(x)"],
         "quiet": true
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@dxos/test:run",
       "options": {
         "checkLeaks": false,
-        "ciEnvironments": [
-          "nodejs"
-        ],
+        "ciEnvironments": ["nodejs"],
         "coveragePath": "coverage/packages/apps/templates/bare-template",
         "forceExit": true,
         "outputPath": "tmp/mocha/packages/apps/templates/bare-template",
         "resultsPath": "test-results/packages/apps/templates/bare-template",
-        "testPatterns": [
-          "packages/apps/templates/bare-template/test/**/*.test.{ts,js}"
-        ],
-        "watchPatterns": [
-          "packages/apps/templates/bare-template/test/**/*"
-        ]
+        "testPatterns": ["packages/apps/templates/bare-template/test/**/*.test.{ts,js}"],
+        "watchPatterns": ["packages/apps/templates/bare-template/test/**/*"]
       },
-      "outputs": [
-        "{options.coveragePath}",
-        "{options.outputPath}",
-        "{options.resultsPath}"
-      ]
+      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
     }
-  },
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "name": "bare-template"
+  }
 }

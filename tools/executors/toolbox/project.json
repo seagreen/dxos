@@ -1,4 +1,6 @@
 {
+  "name": "toolbox",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "tools/executors/toolbox/src",
   "projectType": "library",
   "targets": {
@@ -7,27 +9,19 @@
       "options": {
         "main": "tools/executors/toolbox/src/main.ts",
         "outputPath": "tools/executors/toolbox/dist",
-        "transformers": [
-          "@dxos/log-hook/transformer"
-        ],
+        "transformers": ["@dxos/log-hook/transformer"],
         "tsConfig": "tools/executors/toolbox/tsconfig.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": [
-          "tools/executors/toolbox/**/*.{ts,js}?(x)"
-        ],
+        "lintFilePatterns": ["tools/executors/toolbox/**/*.{ts,js}?(x)"],
         "quiet": true
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@dxos/test:run",
@@ -35,24 +29,11 @@
         "coveragePath": "coverage/tools/executors/toolbox",
         "outputPath": "tmp/mocha/tools/executors/toolbox",
         "resultsPath": "test-results/tools/executors/toolbox",
-        "testPatterns": [
-          "tools/executors/toolbox/src/**/*.test.{ts,js}"
-        ],
-        "watchPatterns": [
-          "tools/executors/toolbox/src/**/*"
-        ]
+        "testPatterns": ["tools/executors/toolbox/src/**/*.test.{ts,js}"],
+        "watchPatterns": ["tools/executors/toolbox/src/**/*"]
       },
-      "outputs": [
-        "{options.coveragePath}",
-        "{options.outputPath}",
-        "{options.resultsPath}"
-      ]
+      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
     }
   },
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": [
-    "log-hook",
-    "test"
-  ],
-  "name": "toolbox"
+  "implicitDependencies": ["log-hook", "test"]
 }

@@ -1,4 +1,6 @@
 {
+  "name": "document-model",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/core/echo/document-model/src",
   "projectType": "library",
   "targets": {
@@ -9,35 +11,25 @@
         "outputPath": "packages/core/echo/document-model/dist/types",
         "tsConfig": "packages/core/echo/document-model/tsconfig.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": [
-          "packages/core/echo/document-model/src/index.ts"
-        ],
+        "entryPoints": ["packages/core/echo/document-model/src/index.ts"],
         "injectGlobals": true,
         "outputPath": "packages/core/echo/document-model/dist/lib"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": [
-          "packages/core/echo/document-model/**/*.{ts,js}?(x)"
-        ],
+        "lintFilePatterns": ["packages/core/echo/document-model/**/*.{ts,js}?(x)"],
         "quiet": true
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@dxos/test:run",
@@ -45,24 +37,11 @@
         "coveragePath": "coverage/packages/core/echo/document-model",
         "outputPath": "tmp/mocha/packages/core/echo/document-model",
         "resultsPath": "test-results/packages/core/echo/document-model",
-        "testPatterns": [
-          "packages/core/echo/document-model/src/**/*.test.{ts,js}"
-        ],
-        "watchPatterns": [
-          "packages/core/echo/document-model/src/**/*"
-        ]
+        "testPatterns": ["packages/core/echo/document-model/src/**/*.test.{ts,js}"],
+        "watchPatterns": ["packages/core/echo/document-model/src/**/*"]
       },
-      "outputs": [
-        "{options.coveragePath}",
-        "{options.outputPath}",
-        "{options.resultsPath}"
-      ]
+      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
     }
   },
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": [
-    "esbuild",
-    "test"
-  ],
-  "name": "document-model"
+  "implicitDependencies": ["esbuild", "test"]
 }

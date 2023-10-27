@@ -1,4 +1,6 @@
 {
+  "name": "echo-db",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/core/echo/echo-db/src",
   "projectType": "library",
   "targets": {
@@ -9,9 +11,7 @@
         "outputPath": "packages/core/echo/echo-db/dist/types",
         "tsConfig": "packages/core/echo/echo-db/tsconfig.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
@@ -23,22 +23,16 @@
         "injectGlobals": true,
         "outputPath": "packages/core/echo/echo-db/dist/lib"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": [
-          "packages/core/echo/echo-db/src/packlets/**/*.{ts,js}?(x)"
-        ],
+        "lintFilePatterns": ["packages/core/echo/echo-db/src/packlets/**/*.{ts,js}?(x)"],
         "quiet": true
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@dxos/test:run",
@@ -54,24 +48,11 @@
         "setupOptions": {
           "port": 12000
         },
-        "testPatterns": [
-          "packages/core/echo/echo-db/src/**/*.test.{ts,js}"
-        ],
-        "watchPatterns": [
-          "packages/core/echo/echo-db/src/**/*"
-        ]
+        "testPatterns": ["packages/core/echo/echo-db/src/**/*.test.{ts,js}"],
+        "watchPatterns": ["packages/core/echo/echo-db/src/**/*"]
       },
-      "outputs": [
-        "{options.coveragePath}",
-        "{options.outputPath}",
-        "{options.resultsPath}"
-      ]
+      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
     }
   },
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": [
-    "esbuild",
-    "test"
-  ],
-  "name": "echo-db"
+  "implicitDependencies": ["esbuild", "test"]
 }

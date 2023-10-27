@@ -1,4 +1,6 @@
 {
+  "name": "random-access-storage",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/common/random-access-storage/src",
   "projectType": "library",
   "targets": {
@@ -9,35 +11,25 @@
         "outputPath": "packages/common/random-access-storage/dist/types",
         "tsConfig": "packages/common/random-access-storage/tsconfig.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": [
-          "packages/common/random-access-storage/src/index.ts"
-        ],
+        "entryPoints": ["packages/common/random-access-storage/src/index.ts"],
         "injectGlobals": true,
         "outputPath": "packages/common/random-access-storage/dist/lib"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": [
-          "packages/common/random-access-storage/**/*.ts"
-        ],
+        "lintFilePatterns": ["packages/common/random-access-storage/**/*.ts"],
         "quiet": true
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@dxos/test:run",
@@ -45,24 +37,11 @@
         "coveragePath": "coverage/packages/common/random-access-storage",
         "outputPath": "tmp/mocha/packages/common/random-access-storage",
         "resultsPath": "test-results/packages/common/random-access-storage",
-        "testPatterns": [
-          "packages/common/random-access-storage/src/**/*.test.{ts,js}"
-        ],
-        "watchPatterns": [
-          "packages/common/random-access-storage/src/**/*"
-        ]
+        "testPatterns": ["packages/common/random-access-storage/src/**/*.test.{ts,js}"],
+        "watchPatterns": ["packages/common/random-access-storage/src/**/*"]
       },
-      "outputs": [
-        "{options.coveragePath}",
-        "{options.outputPath}",
-        "{options.resultsPath}"
-      ]
+      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
     }
   },
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": [
-    "esbuild",
-    "test"
-  ],
-  "name": "random-access-storage"
+  "implicitDependencies": ["esbuild", "test"]
 }

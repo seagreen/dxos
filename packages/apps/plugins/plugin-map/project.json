@@ -1,4 +1,6 @@
 {
+  "name": "plugin-map",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/apps/plugins/plugin-map/src",
   "projectType": "library",
   "targets": {
@@ -9,37 +11,25 @@
         "outputPath": "packages/apps/plugins/plugin-map/dist/types",
         "tsConfig": "packages/apps/plugins/plugin-map/tsconfig.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": [
-          "packages/apps/plugins/plugin-map/src/index.ts"
-        ],
+        "entryPoints": ["packages/apps/plugins/plugin-map/src/index.ts"],
         "outputPath": "packages/apps/plugins/plugin-map/dist/lib",
-        "platforms": [
-          "browser"
-        ]
+        "platforms": ["browser"]
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": [
-          "packages/apps/plugins/plugin-map/src/**/*.{js,jsx,ts,tsx}"
-        ],
+        "lintFilePatterns": ["packages/apps/plugins/plugin-map/src/**/*.{js,jsx,ts,tsx}"],
         "quiet": true
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "storybook": {
       "configurations": {
@@ -53,9 +43,5 @@
       }
     }
   },
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": [
-    "esbuild"
-  ],
-  "name": "plugin-map"
+  "implicitDependencies": ["esbuild"]
 }

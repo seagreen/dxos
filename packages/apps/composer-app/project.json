@@ -1,4 +1,6 @@
 {
+  "name": "composer-app",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/apps/composer-app/src",
   "projectType": "library",
   "targets": {
@@ -7,23 +9,17 @@
       "options": {
         "main": "packages/apps/composer-app/src/index.ts",
         "outputPath": "packages/apps/composer-app/dist",
-        "transformers": [
-          "@dxos/log-hook/transformer"
-        ],
+        "transformers": ["@dxos/log-hook/transformer"],
         "tsConfig": "packages/apps/composer-app/tsconfig.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "bundle": {
       "executor": "@nx/vite:build",
       "options": {
         "outputPath": "packages/apps/composer-app/out/composer"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "e2e": {
       "executor": "@dxos/test:run",
@@ -36,31 +32,19 @@
         "serveOptions": {
           "serveTarget": "preview"
         },
-        "testPatterns": [
-          "packages/apps/composer-app/src/playwright/**/*.spec.{ts,js}"
-        ],
-        "watchPatterns": [
-          "packages/apps/composer-app/src/**/*"
-        ]
+        "testPatterns": ["packages/apps/composer-app/src/playwright/**/*.spec.{ts,js}"],
+        "watchPatterns": ["packages/apps/composer-app/src/**/*"]
       },
-      "outputs": [
-        "{options.coveragePath}",
-        "{options.outputPath}",
-        "{options.resultsPath}"
-      ]
+      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": [
-          "packages/apps/composer-app/**/*.{ts,js}?(x)"
-        ],
+        "lintFilePatterns": ["packages/apps/composer-app/**/*.{ts,js}?(x)"],
         "quiet": true
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "preview": {
       "executor": "@nx/web:file-server",
@@ -90,9 +74,5 @@
       }
     }
   },
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": [
-    "serve-with-vault"
-  ],
-  "name": "composer-app"
+  "implicitDependencies": ["serve-with-vault"]
 }

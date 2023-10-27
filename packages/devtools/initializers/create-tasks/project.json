@@ -1,4 +1,6 @@
 {
+  "name": "create-tasks",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/devtools/initializers/create-tasks/src",
   "projectType": "library",
   "targets": {
@@ -6,16 +8,10 @@
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": [
-          "packages/devtools/initializers/create-tasks/src/**/*.{ts,js}?(x)"
-        ],
+        "lintFilePatterns": ["packages/devtools/initializers/create-tasks/src/**/*.{ts,js}?(x)"],
         "quiet": true
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     }
-  },
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "name": "create-tasks"
+  }
 }

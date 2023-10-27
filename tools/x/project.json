@@ -1,4 +1,6 @@
 {
+  "name": "x",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "tools/x/src",
   "projectType": "library",
   "targets": {
@@ -7,51 +9,31 @@
       "options": {
         "main": "tools/x/src/index.ts",
         "outputPath": "tools/x/dist",
-        "transformers": [
-          "@dxos/log-hook/transformer"
-        ],
+        "transformers": ["@dxos/log-hook/transformer"],
         "tsConfig": "tools/x/tsconfig.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": [
-          "tools/x/**/*.{ts,js}?(x)"
-        ],
+        "lintFilePatterns": ["tools/x/**/*.{ts,js}?(x)"],
         "quiet": true
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@dxos/test:run",
       "options": {
-        "ciEnvironments": [
-          "nodejs"
-        ],
+        "ciEnvironments": ["nodejs"],
         "coveragePath": "coverage/tools/x",
         "outputPath": "tmp/mocha/tools/x",
         "resultsPath": "test-results/tools/x",
-        "testPatterns": [
-          "tools/x/src/**/*.test.{ts,js}"
-        ],
-        "watchPatterns": [
-          "tools/x/src/**/*"
-        ]
+        "testPatterns": ["tools/x/src/**/*.test.{ts,js}"],
+        "watchPatterns": ["tools/x/src/**/*"]
       },
-      "outputs": [
-        "{options.coveragePath}",
-        "{options.outputPath}",
-        "{options.resultsPath}"
-      ]
+      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
     }
-  },
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "name": "x"
+  }
 }

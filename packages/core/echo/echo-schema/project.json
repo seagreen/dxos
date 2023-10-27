@@ -1,4 +1,6 @@
 {
+  "name": "echo-schema",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/core/echo/echo-schema/src",
   "projectType": "library",
   "targets": {
@@ -9,49 +11,33 @@
         "outputPath": "packages/core/echo/echo-schema/dist/types",
         "tsConfig": "packages/core/echo/echo-schema/tsconfig.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": [
-          "packages/core/echo/echo-schema/src/index.ts",
-          "packages/core/echo/echo-schema/src/testing.ts"
-        ],
+        "entryPoints": ["packages/core/echo/echo-schema/src/index.ts", "packages/core/echo/echo-schema/src/testing.ts"],
         "injectGlobals": true,
         "outputPath": "packages/core/echo/echo-schema/dist/lib"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": [
-          "packages/core/echo/echo-schema/src/**/*.{ts,js}?(x)"
-        ],
+        "lintFilePatterns": ["packages/core/echo/echo-schema/src/**/*.{ts,js}?(x)"],
         "quiet": true
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "prebuild": {
       "executor": "nx:run-script",
       "options": {
         "script": "prebuild",
-        "transformers": [
-          "@dxos/log-hook/transformer"
-        ]
+        "transformers": ["@dxos/log-hook/transformer"]
       },
-      "outputs": [
-        "{projectRoot}/src/proto/gen",
-        "{projectRoot}/src/test/proto/gen"
-      ]
+      "outputs": ["{projectRoot}/src/proto/gen", "{projectRoot}/src/test/proto/gen"]
     },
     "test": {
       "executor": "@dxos/test:run",
@@ -60,24 +46,11 @@
         "forceExit": true,
         "outputPath": "tmp/mocha/packages/core/echo/echo-schema",
         "resultsPath": "test-results/packages/core/echo/echo-schema",
-        "testPatterns": [
-          "packages/core/echo/echo-schema/src/**/*.test.{ts,js}"
-        ],
-        "watchPatterns": [
-          "packages/core/echo/echo-schema/src/**/*"
-        ]
+        "testPatterns": ["packages/core/echo/echo-schema/src/**/*.test.{ts,js}"],
+        "watchPatterns": ["packages/core/echo/echo-schema/src/**/*"]
       },
-      "outputs": [
-        "{options.coveragePath}",
-        "{options.outputPath}",
-        "{options.resultsPath}"
-      ]
+      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
     }
   },
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": [
-    "esbuild",
-    "test"
-  ],
-  "name": "echo-schema"
+  "implicitDependencies": ["esbuild", "test"]
 }

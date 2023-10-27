@@ -1,4 +1,6 @@
 {
+  "name": "invariant",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/common/invariant/src",
   "projectType": "library",
   "targets": {
@@ -9,40 +11,25 @@
         "outputPath": "packages/common/invariant/dist/types",
         "tsConfig": "packages/common/invariant/tsconfig.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": [
-          "packages/common/invariant/src/index.ts"
-        ],
+        "entryPoints": ["packages/common/invariant/src/index.ts"],
         "outputPath": "packages/common/invariant/dist/lib"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": [
-          "packages/common/invariant/**/*.{ts,js}?(x)"
-        ],
+        "lintFilePatterns": ["packages/common/invariant/**/*.{ts,js}?(x)"],
         "quiet": true
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     }
   },
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": [
-    "esbuild",
-    "test"
-  ],
-  "name": "invariant"
+  "implicitDependencies": ["esbuild", "test"]
 }

@@ -1,4 +1,6 @@
 {
+  "name": "node-std",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/common/node-std/src",
   "projectType": "library",
   "targets": {
@@ -48,31 +50,19 @@
           "packages/common/node-std/src/util.js"
         ],
         "outputPath": "packages/common/node-std/dist/lib",
-        "platforms": [
-          "browser"
-        ]
+        "platforms": ["browser"]
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": [
-          "packages/common/node-std/**/*.{ts,js}?(x)"
-        ],
+        "lintFilePatterns": ["packages/common/node-std/**/*.{ts,js}?(x)"],
         "quiet": true
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     }
   },
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": [
-    "esbuild"
-  ],
-  "name": "node-std"
+  "implicitDependencies": ["esbuild"]
 }

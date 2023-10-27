@@ -1,4 +1,6 @@
 {
+  "name": "kai-sandbox",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/experimental/kai-sandbox/src",
   "projectType": "library",
   "targets": {
@@ -9,49 +11,32 @@
         "outputPath": "packages/experimental/kai-sandbox/dist/types",
         "tsConfig": "packages/experimental/kai-sandbox/tsconfig.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": [
-          "packages/experimental/kai-sandbox/src/index.ts"
-        ],
+        "entryPoints": ["packages/experimental/kai-sandbox/src/index.ts"],
         "outputPath": "packages/experimental/kai-sandbox/dist/lib"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": [
-          "packages/experimental/kai-sandbox/**/*.{ts,tsx,js,jsx}"
-        ],
+        "lintFilePatterns": ["packages/experimental/kai-sandbox/**/*.{ts,tsx,js,jsx}"],
         "quiet": true
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "prebuild": {
       "executor": "nx:run-script",
       "options": {
         "script": "prebuild"
       },
-      "outputs": [
-        "{projectRoot}/src/proto/gen"
-      ]
+      "outputs": ["{projectRoot}/src/proto/gen"]
     }
   },
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": [
-    "esbuild",
-    "test"
-  ],
-  "name": "kai-sandbox"
+  "implicitDependencies": ["esbuild", "test"]
 }

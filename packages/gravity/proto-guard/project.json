@@ -1,4 +1,6 @@
 {
+  "name": "proto-guard",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/gravity/proto-guard/src",
   "projectType": "library",
   "targets": {
@@ -7,32 +9,22 @@
       "options": {
         "main": "packages/gravity/proto-guard/src/index.ts",
         "outputPath": "packages/gravity/proto-guard/dist",
-        "transformers": [
-          "@dxos/log-hook/transformer"
-        ],
+        "transformers": ["@dxos/log-hook/transformer"],
         "tsConfig": "packages/gravity/proto-guard/tsconfig.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": [
-          "packages/gravity/proto-guard/**/*.{ts,tsx,js,jsx}"
-        ],
+        "lintFilePatterns": ["packages/gravity/proto-guard/**/*.{ts,tsx,js,jsx}"],
         "quiet": true
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "storage": {
-      "dependsOn": [
-        "build"
-      ],
+      "dependsOn": ["build"],
       "executor": "nx:run-script",
       "options": {
         "script": "storage"
@@ -42,25 +34,13 @@
       "executor": "@dxos/test:run",
       "options": {
         "coveragePath": "coverage/packages/gravity/proto-guard",
-        "environments": [
-          "nodejs"
-        ],
+        "environments": ["nodejs"],
         "outputPath": "tmp/mocha/packages/gravity/proto-guard",
         "resultsPath": "test-results/packages/gravity/proto-guard",
-        "testPatterns": [
-          "packages/gravity/proto-guard/src/**/*.test.{ts,js}"
-        ],
-        "watchPatterns": [
-          "packages/gravity/proto-guard/src/**/*"
-        ]
+        "testPatterns": ["packages/gravity/proto-guard/src/**/*.test.{ts,js}"],
+        "watchPatterns": ["packages/gravity/proto-guard/src/**/*"]
       },
-      "outputs": [
-        "{options.coveragePath}",
-        "{options.outputPath}",
-        "{options.resultsPath}"
-      ]
+      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
     }
-  },
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "name": "proto-guard"
+  }
 }

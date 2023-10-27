@@ -1,4 +1,6 @@
 {
+  "name": "crypto-names",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/common/crypto-names/src",
   "projectType": "library",
   "targets": {
@@ -9,35 +11,25 @@
         "outputPath": "packages/common/crypto-names/dist/types",
         "tsConfig": "packages/common/crypto-names/tsconfig.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": [
-          "packages/common/crypto-names/src/names.ts"
-        ],
+        "entryPoints": ["packages/common/crypto-names/src/names.ts"],
         "injectGlobals": true,
         "outputPath": "packages/common/crypto-names/dist/lib"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": [
-          "packages/common/crypto-names/**/*.{ts,js}?(x)"
-        ],
+        "lintFilePatterns": ["packages/common/crypto-names/**/*.{ts,js}?(x)"],
         "quiet": true
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@dxos/test:run",
@@ -45,24 +37,11 @@
         "coveragePath": "coverage/packages/common/crypto-names",
         "outputPath": "tmp/mocha/packages/common/crypto-names",
         "resultsPath": "test-results/packages/common/crypto-names",
-        "testPatterns": [
-          "packages/common/crypto-names/src/**/*.test.{ts,js}"
-        ],
-        "watchPatterns": [
-          "packages/common/crypto-names/src/**/*"
-        ]
+        "testPatterns": ["packages/common/crypto-names/src/**/*.test.{ts,js}"],
+        "watchPatterns": ["packages/common/crypto-names/src/**/*"]
       },
-      "outputs": [
-        "{options.coveragePath}",
-        "{options.outputPath}",
-        "{options.resultsPath}"
-      ]
+      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
     }
   },
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": [
-    "esbuild",
-    "test"
-  ],
-  "name": "crypto-names"
+  "implicitDependencies": ["esbuild", "test"]
 }

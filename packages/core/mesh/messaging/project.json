@@ -1,4 +1,6 @@
 {
+  "name": "messaging",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/core/mesh/messaging/src",
   "projectType": "library",
   "targets": {
@@ -9,63 +11,38 @@
         "outputPath": "packages/core/mesh/messaging/dist/types",
         "tsConfig": "packages/core/mesh/messaging/tsconfig.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": [
-          "packages/core/mesh/messaging/src/index.ts"
-        ],
+        "entryPoints": ["packages/core/mesh/messaging/src/index.ts"],
         "injectGlobals": true,
         "outputPath": "packages/core/mesh/messaging/dist/lib"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": [
-          "packages/core/mesh/messaging/**/*.{ts,js}?(x)"
-        ],
+        "lintFilePatterns": ["packages/core/mesh/messaging/**/*.{ts,js}?(x)"],
         "quiet": true
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@dxos/test:run",
       "options": {
-        "ciEnvironments": [
-          "nodejs"
-        ],
+        "ciEnvironments": ["nodejs"],
         "coveragePath": "coverage/packages/core/mesh/messaging",
         "outputPath": "tmp/mocha/packages/core/mesh/messaging",
         "resultsPath": "test-results/packages/core/mesh/messaging",
-        "testPatterns": [
-          "packages/core/mesh/messaging/src/**/*.test.{ts,js}"
-        ],
-        "watchPatterns": [
-          "packages/core/mesh/messaging/src/**/*"
-        ]
+        "testPatterns": ["packages/core/mesh/messaging/src/**/*.test.{ts,js}"],
+        "watchPatterns": ["packages/core/mesh/messaging/src/**/*"]
       },
-      "outputs": [
-        "{options.coveragePath}",
-        "{options.outputPath}",
-        "{options.resultsPath}"
-      ]
+      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
     }
   },
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": [
-    "esbuild",
-    "test"
-  ],
-  "name": "messaging"
+  "implicitDependencies": ["esbuild", "test"]
 }

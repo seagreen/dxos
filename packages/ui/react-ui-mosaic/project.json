@@ -1,4 +1,6 @@
 {
+  "name": "react-ui-mosaic",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/ui/react-ui-mosaic/src",
   "projectType": "library",
   "targets": {
@@ -9,37 +11,25 @@
         "outputPath": "packages/ui/react-ui-mosaic/dist/types",
         "tsConfig": "packages/ui/react-ui-mosaic/tsconfig.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": [
-          "packages/ui/react-ui-mosaic/src/index.ts"
-        ],
+        "entryPoints": ["packages/ui/react-ui-mosaic/src/index.ts"],
         "outputPath": "packages/ui/react-ui-mosaic/dist/lib",
-        "platforms": [
-          "browser"
-        ]
+        "platforms": ["browser"]
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": [
-          "packages/ui/react-ui-mosaic/src/**/*.{js,jsx,ts,tsx}"
-        ],
+        "lintFilePatterns": ["packages/ui/react-ui-mosaic/src/**/*.{js,jsx,ts,tsx}"],
         "quiet": true
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "storybook": {
       "configurations": {
@@ -63,9 +53,7 @@
         "configDir": "packages/ui/react-ui-mosaic/.storybook",
         "outputDir": "packages/ui/react-ui-mosaic/out/react-ui"
       },
-      "outputs": [
-        "{options.outputDir}"
-      ]
+      "outputs": ["{options.outputDir}"]
     },
     "test": {
       "executor": "@dxos/test:run",
@@ -73,23 +61,11 @@
         "coveragePath": "coverage/packages/ui/react-ui-mosaic",
         "outputPath": "tmp/mocha/packages/ui/react-ui-mosaic",
         "resultsPath": "test-results/packages/ui/react-ui-mosaic",
-        "testPatterns": [
-          "packages/ui/react-ui-mosaic/src/**/*.test.{ts,js}"
-        ],
-        "watchPatterns": [
-          "packages/ui/react-ui-mosaic/src/**/*"
-        ]
+        "testPatterns": ["packages/ui/react-ui-mosaic/src/**/*.test.{ts,js}"],
+        "watchPatterns": ["packages/ui/react-ui-mosaic/src/**/*"]
       },
-      "outputs": [
-        "{options.coveragePath}",
-        "{options.outputPath}",
-        "{options.resultsPath}"
-      ]
+      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
     }
   },
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": [
-    "esbuild"
-  ],
-  "name": "react-ui-mosaic"
+  "implicitDependencies": ["esbuild"]
 }

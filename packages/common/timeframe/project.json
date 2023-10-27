@@ -1,4 +1,6 @@
 {
+  "name": "timeframe",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/common/timeframe/src",
   "projectType": "library",
   "targets": {
@@ -9,35 +11,25 @@
         "outputPath": "packages/common/timeframe/dist/types",
         "tsConfig": "packages/common/timeframe/tsconfig.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": [
-          "packages/common/timeframe/src/index.ts"
-        ],
+        "entryPoints": ["packages/common/timeframe/src/index.ts"],
         "injectGlobals": true,
         "outputPath": "packages/common/timeframe/dist/lib"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": [
-          "packages/common/timeframe/**/*.{ts,js}?(x)"
-        ],
+        "lintFilePatterns": ["packages/common/timeframe/**/*.{ts,js}?(x)"],
         "quiet": true
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@dxos/test:run",
@@ -45,24 +37,11 @@
         "coveragePath": "coverage/packages/common/timeframe",
         "outputPath": "tmp/mocha/packages/common/timeframe",
         "resultsPath": "test-results/packages/common/timeframe",
-        "testPatterns": [
-          "packages/common/timeframe/src/**/*.test.{ts,js}"
-        ],
-        "watchPatterns": [
-          "packages/common/timeframe/src/**/*"
-        ]
+        "testPatterns": ["packages/common/timeframe/src/**/*.test.{ts,js}"],
+        "watchPatterns": ["packages/common/timeframe/src/**/*"]
       },
-      "outputs": [
-        "{options.coveragePath}",
-        "{options.outputPath}",
-        "{options.resultsPath}"
-      ]
+      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
     }
   },
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": [
-    "esbuild",
-    "test"
-  ],
-  "name": "timeframe"
+  "implicitDependencies": ["esbuild", "test"]
 }

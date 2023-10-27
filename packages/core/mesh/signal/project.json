@@ -1,4 +1,6 @@
 {
+  "name": "signal",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/core/mesh/signal/src",
   "projectType": "library",
   "targets": {
@@ -9,42 +11,26 @@
         "outputPath": "packages/core/mesh/signal/dist/types",
         "tsConfig": "packages/core/mesh/signal/tsconfig.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": [
-          "packages/core/mesh/signal/src/index.ts"
-        ],
+        "entryPoints": ["packages/core/mesh/signal/src/index.ts"],
         "outputPath": "packages/core/mesh/signal/dist/lib",
-        "platforms": [
-          "node"
-        ]
+        "platforms": ["node"]
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": [
-          "packages/core/mesh/signal/**/*.{ts,js}?(x)"
-        ],
+        "lintFilePatterns": ["packages/core/mesh/signal/**/*.{ts,js}?(x)"],
         "quiet": true
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     }
   },
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": [
-    "esbuild"
-  ],
-  "name": "signal"
+  "implicitDependencies": ["esbuild"]
 }

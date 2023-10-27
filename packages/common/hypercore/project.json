@@ -1,4 +1,6 @@
 {
+  "name": "hypercore",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/common/hypercore/src",
   "projectType": "library",
   "targets": {
@@ -9,9 +11,7 @@
         "outputPath": "packages/common/hypercore/dist/types",
         "tsConfig": "packages/common/hypercore/tsconfig.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
@@ -72,28 +72,20 @@
           "xsalsa20",
           "xsalsa20-universal"
         ],
-        "entryPoints": [
-          "packages/common/hypercore/src/index.ts"
-        ],
+        "entryPoints": ["packages/common/hypercore/src/index.ts"],
         "injectGlobals": true,
         "outputPath": "packages/common/hypercore/dist/lib"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": [
-          "packages/common/hypercore/**/*.{ts,js}?(x)"
-        ],
+        "lintFilePatterns": ["packages/common/hypercore/**/*.{ts,js}?(x)"],
         "quiet": true
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@dxos/test:run",
@@ -101,24 +93,11 @@
         "coveragePath": "coverage/packages/common/hypercore",
         "outputPath": "tmp/mocha/packages/common/hypercore",
         "resultsPath": "test-results/packages/common/hypercore",
-        "testPatterns": [
-          "packages/common/hypercore/src/**/*.test.{ts,js}"
-        ],
-        "watchPatterns": [
-          "packages/common/hypercore/src/**/*"
-        ]
+        "testPatterns": ["packages/common/hypercore/src/**/*.test.{ts,js}"],
+        "watchPatterns": ["packages/common/hypercore/src/**/*"]
       },
-      "outputs": [
-        "{options.coveragePath}",
-        "{options.outputPath}",
-        "{options.resultsPath}"
-      ]
+      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
     }
   },
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": [
-    "esbuild",
-    "test"
-  ],
-  "name": "hypercore"
+  "implicitDependencies": ["esbuild", "test"]
 }

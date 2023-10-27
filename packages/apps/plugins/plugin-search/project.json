@@ -1,4 +1,6 @@
 {
+  "name": "plugin-search",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/apps/plugins/plugin-search/src",
   "projectType": "library",
   "targets": {
@@ -9,37 +11,25 @@
         "outputPath": "packages/apps/plugins/plugin-search/dist/types",
         "tsConfig": "packages/apps/plugins/plugin-search/tsconfig.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": [
-          "packages/apps/plugins/plugin-search/src/index.ts"
-        ],
+        "entryPoints": ["packages/apps/plugins/plugin-search/src/index.ts"],
         "outputPath": "packages/apps/plugins/plugin-search/dist/lib",
-        "platforms": [
-          "browser"
-        ]
+        "platforms": ["browser"]
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": [
-          "packages/apps/plugins/plugin-search/src/**/*.{js,jsx,ts,tsx}"
-        ],
+        "lintFilePatterns": ["packages/apps/plugins/plugin-search/src/**/*.{js,jsx,ts,tsx}"],
         "quiet": true
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "storybook": {
       "configurations": {
@@ -59,18 +49,10 @@
         "forceExit": true,
         "outputPath": "tmp/mocha/packages/apps/plugins/plugin-search",
         "resultsPath": "test-results/packages/apps/plugins/plugin-search",
-        "testPatterns": [
-          "packages/apps/plugins/plugin-search/src/**/*.test.{ts,js}"
-        ],
-        "watchPatterns": [
-          "packages/apps/plugins/plugin-search/src/**/*"
-        ]
+        "testPatterns": ["packages/apps/plugins/plugin-search/src/**/*.test.{ts,js}"],
+        "watchPatterns": ["packages/apps/plugins/plugin-search/src/**/*"]
       }
     }
   },
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": [
-    "esbuild"
-  ],
-  "name": "plugin-search"
+  "implicitDependencies": ["esbuild"]
 }

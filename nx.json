@@ -4,8 +4,14 @@
     "defaultBase": "main"
   },
   "namedInputs": {
-    "default": ["{projectRoot}/**/*", "sharedGlobals"],
-    "sharedGlobals": ["{workspaceRoot}/tsconfig.json", "{workspaceRoot}/.eslintrc*.js"],
+    "default": [
+      "{projectRoot}/**/*",
+      "sharedGlobals"
+    ],
+    "sharedGlobals": [
+      "{workspaceRoot}/tsconfig.json",
+      "{workspaceRoot}/.eslintrc*.js"
+    ],
     "production": [
       "default",
       "!{projectRoot}/**/*.spec.ts",
@@ -17,8 +23,15 @@
   },
   "targetDefaults": {
     "build": {
-      "inputs": ["production", "^production"],
-      "dependsOn": ["^build", "prebuild", "compile"],
+      "inputs": [
+        "production",
+        "^production"
+      ],
+      "dependsOn": [
+        "^build",
+        "prebuild",
+        "compile"
+      ],
       "cache": true
     },
     "bundle": {
@@ -53,16 +66,30 @@
           "env": "SENTRY_RELEASE_AUTH_TOKEN"
         }
       ],
-      "dependsOn": ["^build", "prebuild"],
+      "dependsOn": [
+        "^build",
+        "prebuild"
+      ],
       "cache": true
     },
     "chromatic": {
-      "inputs": ["production", "^production"],
-      "dependsOn": ["storybook-build"]
+      "inputs": [
+        "production",
+        "^production"
+      ],
+      "dependsOn": [
+        "storybook-build"
+      ]
     },
     "compile": {
-      "inputs": ["production", "^production"],
-      "dependsOn": ["^compile", "prebuild"],
+      "inputs": [
+        "production",
+        "^production"
+      ],
+      "dependsOn": [
+        "^compile",
+        "prebuild"
+      ],
       "cache": true
     },
     "e2e": {
@@ -79,41 +106,83 @@
           "env": "LOG_PROCESSOR"
         }
       ],
-      "dependsOn": ["prebuild", "^compile"],
+      "dependsOn": [
+        "prebuild",
+        "^compile"
+      ],
       "cache": true
     },
     "lint": {
-      "inputs": ["default"],
+      "inputs": [
+        "default"
+      ],
       "cache": true
     },
     "prebuild": {
-      "inputs": ["production", "^production"],
-      "dependsOn": ["^compile"],
+      "inputs": [
+        "production",
+        "^production"
+      ],
+      "dependsOn": [
+        "^compile"
+      ],
       "cache": true
     },
     "prerelease": {
-      "inputs": ["default", "^production"],
-      "dependsOn": ["^build"],
+      "inputs": [
+        "default",
+        "^production"
+      ],
+      "dependsOn": [
+        "^build"
+      ],
       "cache": true
     },
     "preview": {
-      "inputs": ["production", "^production"]
+      "inputs": [
+        "production",
+        "^production"
+      ]
     },
     "serve": {
-      "inputs": ["production", "^production"],
-      "dependsOn": ["^compile", "prebuild"]
+      "inputs": [
+        "production",
+        "^production"
+      ],
+      "dependsOn": [
+        "^compile",
+        "prebuild"
+      ]
     },
     "serve-with-vault": {
-      "inputs": ["production", "^production"],
-      "dependsOn": ["^compile", "prebuild"]
+      "inputs": [
+        "production",
+        "^production"
+      ],
+      "dependsOn": [
+        "^compile",
+        "prebuild"
+      ]
     },
     "storybook": {
-      "inputs": ["production", "^production"],
-      "dependsOn": ["^compile", "prebuild"]
+      "inputs": [
+        "production",
+        "^production"
+      ],
+      "dependsOn": [
+        "^compile",
+        "prebuild"
+      ]
     },
     "storybook-build": {
-      "inputs": ["production", "^production"],
-      "dependsOn": ["^compile", "prebuild"],
+      "inputs": [
+        "production",
+        "^production"
+      ],
+      "dependsOn": [
+        "^compile",
+        "prebuild"
+      ],
       "cache": true
     },
     "test": {
@@ -130,7 +199,10 @@
           "env": "LOG_PROCESSOR"
         }
       ],
-      "dependsOn": ["prebuild", "^compile"],
+      "dependsOn": [
+        "prebuild",
+        "^compile"
+      ],
       "cache": true
     },
     "compile-lib": {
@@ -141,5 +213,6 @@
     }
   },
   "nxCloudAccessToken": "ZGVlNTQ0ODctNGI4ZS00MTc0LTljZDQtMzFlMzJkOTViMmQyfHJlYWQtd3JpdGU=",
-  "parallel": 6
+  "parallel": 6,
+  "$schema": "./node_modules/nx/schemas/nx-schema.json"
 }

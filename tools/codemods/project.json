@@ -1,4 +1,6 @@
 {
+  "name": "codemods",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "tools/codemods/src",
   "projectType": "library",
   "targets": {
@@ -6,16 +8,10 @@
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": [
-          "tools/beast/**/*.{ts,js}?(x)"
-        ],
+        "lintFilePatterns": ["tools/beast/**/*.{ts,js}?(x)"],
         "quiet": true
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     }
-  },
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "name": "codemods"
+  }
 }

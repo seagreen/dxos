@@ -1,4 +1,6 @@
 {
+  "name": "client-protocol",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/sdk/client-protocol/src",
   "projectType": "library",
   "targets": {
@@ -9,48 +11,32 @@
         "outputPath": "packages/sdk/client-protocol/dist/types",
         "tsConfig": "packages/sdk/client-protocol/tsconfig.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": [
-          "packages/sdk/client-protocol/src/index.ts"
-        ],
+        "entryPoints": ["packages/sdk/client-protocol/src/index.ts"],
         "outputPath": "packages/sdk/client-protocol/dist/lib"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": [
-          "packages/sdk/client-protocol/**/*.{ts,tsx,js,jsx}"
-        ],
+        "lintFilePatterns": ["packages/sdk/client-protocol/**/*.{ts,tsx,js,jsx}"],
         "quiet": true
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "prebuild": {
       "executor": "nx:run-script",
       "options": {
         "script": "prebuild"
       },
-      "outputs": [
-        "{projectRoot}/src/proto/gen"
-      ]
+      "outputs": ["{projectRoot}/src/proto/gen"]
     }
   },
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": [
-    "esbuild"
-  ],
-  "name": "client-protocol"
+  "implicitDependencies": ["esbuild"]
 }

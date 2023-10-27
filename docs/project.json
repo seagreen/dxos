@@ -1,18 +1,15 @@
 {
+  "name": "docs",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "targets": {
     "apidoc": {
-      "dependsOn": [
-        "^build",
-        "typedoc"
-      ],
+      "dependsOn": ["^build", "typedoc"],
       "executor": "nx:run-script",
       "options": {
         "script": "apidoc"
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "build": {
       "executor": "@nx/js:tsc",
@@ -21,32 +18,21 @@
         "outputPath": "docs/dist",
         "tsConfig": "docs/tsconfig.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "bundle": {
-      "dependsOn": [
-        "^build",
-        "^bundle",
-        "build",
-        "prebuild"
-      ],
+      "dependsOn": ["^build", "^bundle", "build", "prebuild"],
       "executor": "nx:run-script",
       "options": {
         "script": "bundle"
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": [
-          "docs/src/**/*.{ts,tsx,js,jsx}"
-        ],
+        "lintFilePatterns": ["docs/src/**/*.{ts,tsx,js,jsx}"],
         "quiet": true
       }
     },
@@ -55,15 +41,10 @@
       "options": {
         "script": "prerelease"
       },
-      "outputs": [
-        "{projectRoot}/docs",
-        "{projectRoot}/docs/.vuepress/dist"
-      ]
+      "outputs": ["{projectRoot}/docs", "{projectRoot}/docs/.vuepress/dist"]
     },
     "serve": {
-      "dependsOn": [
-        "^build"
-      ],
+      "dependsOn": ["^build"],
       "executor": "nx:run-script",
       "options": {
         "script": "serve"
@@ -73,18 +54,12 @@
       "executor": "@dxos/toolbox:exec"
     },
     "typedoc": {
-      "dependsOn": [
-        "^build"
-      ],
+      "dependsOn": ["^build"],
       "executor": "nx:run-script",
       "options": {
         "script": "typedoc"
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     }
-  },
-  "$schema": "../node_modules/nx/schemas/project-schema.json",
-  "name": "docs"
+  }
 }

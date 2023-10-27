@@ -1,4 +1,6 @@
 {
+  "name": "sentry",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/common/sentry/src",
   "projectType": "library",
   "targets": {
@@ -9,34 +11,24 @@
         "outputPath": "packages/common/sentry/dist/types",
         "tsConfig": "packages/common/sentry/tsconfig.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": [
-          "packages/common/sentry/src/index.ts"
-        ],
+        "entryPoints": ["packages/common/sentry/src/index.ts"],
         "outputPath": "packages/common/sentry/dist/lib"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": [
-          "packages/common/sentry/**/*.{ts,js}?(x)"
-        ],
+        "lintFilePatterns": ["packages/common/sentry/**/*.{ts,js}?(x)"],
         "quiet": true
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@dxos/test:run",
@@ -45,24 +37,11 @@
         "coveragePath": "coverage/packages/common/sentry",
         "outputPath": "tmp/mocha/packages/common/sentry",
         "resultsPath": "test-results/packages/common/sentry",
-        "testPatterns": [
-          "packages/common/sentry/src/**/*.test.{ts,js}"
-        ],
-        "watchPatterns": [
-          "packages/common/sentry/src/**/*"
-        ]
+        "testPatterns": ["packages/common/sentry/src/**/*.test.{ts,js}"],
+        "watchPatterns": ["packages/common/sentry/src/**/*"]
       },
-      "outputs": [
-        "{options.coveragePath}",
-        "{options.outputPath}",
-        "{options.resultsPath}"
-      ]
+      "outputs": ["{options.coveragePath}", "{options.outputPath}", "{options.resultsPath}"]
     }
   },
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": [
-    "esbuild",
-    "test"
-  ],
-  "name": "sentry"
+  "implicitDependencies": ["esbuild", "test"]
 }

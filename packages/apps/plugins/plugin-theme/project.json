@@ -1,4 +1,6 @@
 {
+  "name": "plugin-theme",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/apps/plugins/plugin-theme/src",
   "projectType": "library",
   "targets": {
@@ -9,42 +11,26 @@
         "outputPath": "packages/apps/plugins/plugin-theme/dist/types",
         "tsConfig": "packages/apps/plugins/plugin-theme/tsconfig.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "compile": {
       "executor": "@dxos/esbuild:build",
       "options": {
-        "entryPoints": [
-          "packages/apps/plugins/plugin-theme/src/index.ts"
-        ],
+        "entryPoints": ["packages/apps/plugins/plugin-theme/src/index.ts"],
         "outputPath": "packages/apps/plugins/plugin-theme/dist/lib",
-        "platforms": [
-          "browser"
-        ]
+        "platforms": ["browser"]
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
         "format": "unix",
-        "lintFilePatterns": [
-          "packages/apps/plugins/plugin-theme/src/**/*.{js,jsx,ts,tsx}"
-        ],
+        "lintFilePatterns": ["packages/apps/plugins/plugin-theme/src/**/*.{js,jsx,ts,tsx}"],
         "quiet": true
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     }
   },
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": [
-    "esbuild"
-  ],
-  "name": "plugin-theme"
+  "implicitDependencies": ["esbuild"]
 }
