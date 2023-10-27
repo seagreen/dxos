@@ -2,6 +2,7 @@
   "executors": {
     "build": {
       "implementation": "./dist/src/main",
+      "batchImplementation": "./src/main-batch",
       "schema": "./schema.json",
       "description": "Runs esbuild."
     }
