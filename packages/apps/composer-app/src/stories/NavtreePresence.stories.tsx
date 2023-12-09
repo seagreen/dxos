@@ -1,7 +1,9 @@
 //
 // Copyright 2023 DXOS.org
 //
+
 import '@dxosTheme';
+
 import { faker } from '@faker-js/faker';
 import { Minus, Plus } from '@phosphor-icons/react';
 import React from 'react';
