@@ -48,7 +48,7 @@ const createStacks = () =>
         () => ({
           id: faker.string.uuid(),
           title: faker.lorem.sentence(),
-          blocks: faker.helpers.multiple(() => faker.lorem.sentences()),
+          blocks: faker.helpers.multiple(() => faker.lorem.sentences(), { count: { min: 1, max: 8 } }),
         }),
         { count: 16 },
       ),

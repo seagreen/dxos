@@ -2,7 +2,8 @@
 // Copyright 2023 DXOS.org
 //
 
-import React from 'react';
+// import { useArrowNavigationGroup } from '@fluentui/react-tabster';
+import React, { type KeyboardEvent, useEffect, useRef, useState } from 'react';
 
 import { List, ListItem } from '@dxos/react-ui';
 import { groupSurface, inputSurface, mx } from '@dxos/react-ui-theme';
@@ -23,11 +24,21 @@ export type MatrixProps<T extends Item> = {
 
 // TODO(burdon): Virtualize
 export const Matrix = <T extends Item>({ stacks = [], itemRenderer }: MatrixProps<T>) => {
+  const [selected, setSelected] = useState<string>();
+  // const domAttributes = useArrowNavigationGroup({ axis: 'grid' });
+
   return (
-    <div className='flex grow overflow-hidden m-4'>
-      <div className='flex overflow-x-scroll gap-[200px] snap-x px-[800px]'>
+    <div className='flex grow overflow-hidden'>
+      <div className='flex overflow-x-scroll gap-[200px] snap-x px-[800px] p-4'>
         {stacks.map((stack) => (
-          <Stack<T> key={stack.id} stack={stack} classNames='w-[800px]' itemRenderer={itemRenderer} />
+          <Stack<T>
+            key={stack.id}
+            stack={stack}
+            selected={selected === stack.id}
+            onSelect={() => setSelected(stack.id)}
+            classNames='w-[800px]'
+            itemRenderer={itemRenderer}
+          />
         ))}
       </div>
     </div>
@@ -40,24 +51,109 @@ export type ItemRenderer<T extends Item> = (item: T) => JSX.Element;
 export type StackProps<T extends Item> = {
   classNames?: string;
   stack: Stack<T>;
+  selected?: boolean;
+  onSelect?: () => void;
+  onBack?: () => void;
+  onForward?: () => void;
   itemRenderer?: ItemRenderer<T>;
 };
 
-// TODO(burdon): Virtualize
-export const Stack = <T extends Item>({ classNames, stack, itemRenderer }: StackProps<T>) => {
+export const Stack = <T extends Item>({
+  classNames,
+  stack,
+  selected: _selected,
+  onSelect,
+  onBack,
+  onForward,
+  itemRenderer,
+}: StackProps<T>) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const itemRef = useRef<HTMLInputElement>(null);
+  const [selected, setSelected] = useState(_selected);
+  useEffect(() => {
+    setSelected(_selected);
+    if (_selected) {
+      // ref.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [ref, selected, _selected]);
+
+  const [itemSelected, setItemSelected] = useState<string>();
+  useEffect(() => {
+    if (selected && !itemSelected) {
+      setItemSelected(stack.items[0]?.id);
+    }
+  }, [stack, selected]);
+  useEffect(() => {
+    if (itemSelected) {
+      itemRef.current?.focus();
+    }
+  }, [itemRef, itemSelected]);
+
+  const handleSelect = (item: Item, target?: Element) => {
+    setItemSelected(item.id);
+    setTimeout(() => {
+      onSelect?.();
+    }, 100);
+  };
+
+  const handleKeyDown = (ev: KeyboardEvent<HTMLInputElement>) => {
+    const idx = stack.items.findIndex((item) => item.id === itemSelected);
+    switch (ev.key) {
+      case 'ArrowUp':
+        if (idx > 0) {
+          setItemSelected(stack.items[idx - 1].id);
+        }
+        break;
+      case 'ArrowDown':
+        if (idx < stack.items.length - 1) {
+          setItemSelected(stack.items[idx + 1].id);
+        }
+        break;
+      case 'ArrowLeft':
+        onBack?.();
+        break;
+      case 'ArrowRight':
+        onForward?.();
+        break;
+    }
+  };
+
   return (
     <div
+      ref={ref}
       className={mx(
-        'flex flex-col shrink-0 grow h-full overflow-hidden border rounded px-16 snap-center',
+        'flex flex-col shrink-0 grow m-1 overflow-hidden border rounded px-16 snap-center',
         groupSurface,
+        selected && 'ring ring-neutral-200',
         classNames,
       )}
     >
-      <div className='flex shrink-0 px-10 py-4'>{stack.title}</div>
-      <List classNames='flex flex-col w-full gap-4 overflow-y-scroll'>
+      <div className={mx('flex shrink-0 px-6 my-4 items-center gap-4 cursor-pointer')} onClick={() => onSelect?.()}>
+        <div className='grow truncate text-lg'>{stack.title}</div>
+        <div className='text-xs text-neutral-500'>{stack.id.slice(0, 8)}</div>
+      </div>
+      <List classNames='flex flex-col w-full gap-2 overflow-y-scroll'>
         {stack.items.map((item) => (
-          <ListItem.Root key={item.id} classNames={mx('px-10 py-4 border rounded', inputSurface)}>
-            {itemRenderer?.(item)}
+          <ListItem.Root key={item.id} onClick={() => handleSelect(item)}>
+            <input
+              className='w-1 h-1 opacity-0'
+              onKeyDown={handleKeyDown}
+              onFocus={(event) => {
+                event.target.scrollIntoView({ behavior: selected ? 'smooth' : 'instant', block: 'start' });
+                handleSelect(item, event.target);
+              }}
+              ref={itemSelected === item.id ? itemRef : undefined}
+            />
+            <div
+              className={mx(
+                'flex flex-col mx-4 my-1 px-10 py-4 border rounded',
+                itemSelected === item.id && (selected ? 'ring' : 'border border-neutral-500'),
+                inputSurface,
+              )}
+            >
+              <div>{itemRenderer?.(item)}</div>
+              <div className='mt-4 text-xs text-neutral-500'>{item.id}</div>
+            </div>
           </ListItem.Root>
         ))}
       </List>
