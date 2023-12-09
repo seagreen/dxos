@@ -47,7 +47,7 @@ export const SearchMain = () => {
   return (
     <div className='flex flex-col grow h-full overflow-hidden'>
       <DensityProvider density='fine'>
-        <div className={mx('flex bs-[--topbar-size] px-2 py-2')}>
+        <div className={mx('flex bs-[--topbar-size] p-2')}>
           <Searchbar
             classes={{ root: 'rounded shadow' }}
             variant='subdued'

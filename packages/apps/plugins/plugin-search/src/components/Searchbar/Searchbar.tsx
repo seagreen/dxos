@@ -8,7 +8,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Button, Input, type TextInputProps } from '@dxos/react-ui';
 import { getSize, inputSurface, mx } from '@dxos/react-ui-theme';
 
+// TODO(burdon): Factor out input with icon (reconcile with ChatInput).
 export type SearchbarProps = Pick<TextInputProps, 'variant' | 'placeholder'> & {
+  // TODO(burdon): Change to slots?
   classes?: {
     root?: string;
     input?: string;
@@ -42,6 +44,7 @@ export const Searchbar = ({ classes, variant, placeholder, value, onChange }: Se
           placeholder={placeholder}
           variant={variant}
           value={text ?? ''}
+          // TODO(burdon): Width based on density.
           classNames={mx('pl-3 pr-[40px]', classes?.input)}
           onChange={({ target }) => handleChange(target.value)}
           onKeyDown={({ key }) => key === 'Escape' && handleReset()}
