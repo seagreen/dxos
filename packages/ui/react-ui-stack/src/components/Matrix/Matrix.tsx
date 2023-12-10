@@ -6,7 +6,7 @@
 import React, { type KeyboardEvent, useEffect, useRef, useState } from 'react';
 
 import { List, ListItem } from '@dxos/react-ui';
-import { groupSurface, inputSurface, mx } from '@dxos/react-ui-theme';
+import { inputSurface, mx } from '@dxos/react-ui-theme';
 
 export type Item = {
   id: string;
@@ -26,8 +26,14 @@ export type MatrixProps<T extends Item> = {
  * Row of Stacks.
  */
 export const Matrix = <T extends Item>({ stacks = [], itemRenderer }: MatrixProps<T>) => {
-  const [selected, setSelected] = useState<string>();
   // const domAttributes = useArrowNavigationGroup({ axis: 'grid' });
+
+  const [selected, setSelected] = useState<string>();
+  useEffect(() => {
+    if (!selected && stacks.length) {
+      setSelected(stacks[0].id);
+    }
+  }, []);
 
   const handleBack = () => {
     const idx = stacks.findIndex((stack) => stack.id === selected);
@@ -45,7 +51,8 @@ export const Matrix = <T extends Item>({ stacks = [], itemRenderer }: MatrixProp
 
   return (
     <div className='flex grow overflow-hidden'>
-      <div className='flex overflow-x-scroll gap-[200px] snap-x px-[800px] p-4'>
+      <div className='flex overflow-x-scroll __snap-x py-4 gap-20'>
+        <div className='flex shrink-0 w-[800px]' />
         {stacks.map((stack) => (
           <Stack<T>
             key={stack.id}
@@ -58,6 +65,7 @@ export const Matrix = <T extends Item>({ stacks = [], itemRenderer }: MatrixProp
             itemRenderer={itemRenderer}
           />
         ))}
+        <div className='flex shrink-0 w-[800px]' />
       </div>
     </div>
   );
@@ -88,55 +96,51 @@ export const Stack = <T extends Item>({
   itemRenderer,
 }: StackProps<T>) => {
   const ref = useRef<HTMLDivElement>(null);
-  const itemRef = useRef<HTMLInputElement>(null);
-  const [selected, setSelected] = useState(_selected);
-  const [itemSelected, setItemSelected] = useState<string>();
 
+  // Is stack selected.
+  const [selected, setSelected] = useState(_selected);
   useEffect(() => {
     setSelected(_selected);
-    if (_selected) {
-      ref.current?.scrollIntoView({ behavior: 'instant', block: 'center' });
-    }
-  }, [ref, selected, _selected]);
-
+  }, [ref, _selected]);
   useEffect(() => {
-    if (itemSelected) {
-      itemRef.current?.focus();
+    if (selected) {
+      ref.current?.scrollIntoView({ behavior: 'smooth', inline: 'center' });
     }
-  }, [itemRef, itemSelected]);
+  }, [selected]);
 
+  // Item selected.
+  const [itemSelected, setItemSelected] = useState<string>();
   useEffect(() => {
+    // Set first.
     if (selected && !itemSelected) {
       setItemSelected(stack.items[0]?.id);
     }
   }, [stack, selected]);
 
-  // TODO(burdon): Select.
-
-  const handleSelect = (item: Item, target?: Element) => {
+  const handleSelect = (item: Item) => {
     setItemSelected(item.id);
     if (!selected) {
       onSelect?.();
     }
   };
 
-  const handleKeyDown = (ev: KeyboardEvent<HTMLInputElement>) => {
+  const handleNavigate: SectionProps<T>['onNavigate'] = (direction) => {
     const idx = stack.items.findIndex((item) => item.id === itemSelected);
-    switch (ev.key) {
-      case 'ArrowUp':
+    switch (direction) {
+      case 'up':
         if (idx > 0) {
           setItemSelected(stack.items[idx - 1].id);
         }
         break;
-      case 'ArrowDown':
+      case 'down':
         if (idx < stack.items.length - 1) {
           setItemSelected(stack.items[idx + 1].id);
         }
         break;
-      case 'ArrowLeft':
+      case 'left':
         onBack?.();
         break;
-      case 'ArrowRight':
+      case 'right':
         onForward?.();
         break;
     }
@@ -146,43 +150,108 @@ export const Stack = <T extends Item>({
     <div
       ref={ref}
       className={mx(
-        'flex flex-col shrink-0 grow m-1 overflow-hidden border rounded px-16 snap-center',
-        groupSurface,
-        selected && 'ring ring-neutral-200',
+        'flex flex-col shrink-0 grow my-1 overflow-hidden shadow rounded __snap-center',
+        inputSurface,
+        // selected && 'ring ring-neutral-200',
         classNames,
       )}
     >
-      <div className={mx('flex shrink-0 px-6 my-4 items-center gap-4 cursor-pointer')} onClick={() => onSelect?.()}>
+      <div
+        className={mx('flex shrink-0 px-20 my-4 items-center gap-4 cursor-pointer border-x-4 border-transparent')}
+        onClick={() => onSelect?.()}
+      >
         <div className='grow truncate text-lg'>{stack.title}</div>
         <div className='text-xs text-neutral-500'>{stack.id.slice(0, 8)}</div>
       </div>
 
       <List classNames='flex flex-col w-full gap-2 overflow-y-scroll'>
         {stack.items.map((item) => (
-          <ListItem.Root key={item.id} onClick={() => handleSelect(item)}>
-            <input
-              className='w-2 h-2 __opacity-0'
-              onKeyDown={handleKeyDown}
-              onFocus={(event) => {
-                // TODO(burdon): Jumps if scrolling up.
-                event.target.scrollIntoView({ behavior: selected ? 'instant' : 'instant', block: 'start' });
-                handleSelect(item);
-              }}
-              ref={itemSelected === item.id ? itemRef : undefined}
-            />
-            <div
-              className={mx(
-                'flex flex-col mx-4 my-1 px-10 py-4 border rounded',
-                itemSelected === item.id && (selected ? 'ring' : 'border border-neutral-500'),
-                inputSurface,
-              )}
-            >
-              <div>{itemRenderer?.(item)}</div>
-              <div className='mt-4 text-xs text-neutral-500'>{item.id}</div>
-            </div>
-          </ListItem.Root>
+          <Section
+            key={item.id}
+            item={item}
+            itemRenderer={itemRenderer}
+            active={selected}
+            selected={itemSelected === item.id}
+            onSelect={() => handleSelect(item)}
+            onNavigate={handleNavigate}
+          />
         ))}
       </List>
     </div>
+  );
+};
+
+export type SectionProps<T extends Item> = {
+  item: T;
+  itemRenderer?: ItemRenderer<T>;
+  active?: boolean; // Stack is active.
+  selected?: boolean;
+  onSelect?: () => void;
+  onNavigate?: (direction: 'up' | 'down' | 'left' | 'right') => void;
+};
+
+// TODO(burdon): Track focus.
+export const Section = <T extends Item>({
+  item,
+  itemRenderer,
+  active,
+  selected,
+  onSelect,
+  onNavigate,
+}: SectionProps<T>) => {
+  const ref = useRef<HTMLInputElement>(null);
+  const [focused, setFocused] = useState(false);
+  useEffect(() => {
+    if (focused) {
+      onSelect?.();
+      ref.current?.scrollIntoView({ behavior: active ? 'smooth' : 'instant', block: 'start' });
+    }
+  }, [focused]);
+  useEffect(() => {
+    if (active && selected) {
+      ref.current?.focus({ preventScroll: true });
+      setFocused(true);
+    }
+  }, [ref, active, selected]);
+
+  const handleKeyDown = (ev: KeyboardEvent<HTMLInputElement>) => {
+    switch (ev.key) {
+      case 'ArrowUp':
+        onNavigate?.('up');
+        break;
+      case 'ArrowDown':
+        onNavigate?.('down');
+        break;
+      case 'ArrowLeft':
+        onNavigate?.('left');
+        break;
+      case 'ArrowRight':
+        onNavigate?.('right');
+        break;
+    }
+  };
+
+  return (
+    <ListItem.Root key={item.id} onClick={() => ref.current?.focus()}>
+      <div
+        className={mx(
+          'flex flex-col _mx-4 my-1 px-20 py-4 border-l-4 border-transparent',
+          focused ? 'border-blue-300' : selected && 'border-neutral-200',
+          inputSurface,
+        )}
+      >
+        <div>{itemRenderer?.(item)}</div>
+        <div className='mt-4 text-xs text-neutral-500'>
+          {JSON.stringify({ id: item.id.slice(0, 8), active, selected, focused })}
+        </div>
+      </div>
+      <input
+        ref={ref}
+        className='w-1 h-1 __opacity-0'
+        onKeyDown={handleKeyDown}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
+      />
+    </ListItem.Root>
   );
 };

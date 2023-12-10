@@ -35,7 +35,7 @@ const ItemRenderer = ({ title, blocks }: Data) => (
     <div className='text-lg'>{title}</div>
     <div className='flex flex-col gap-2 text-neutral-500'>
       {blocks.map((block, i) => (
-        <div key={i} className='text-sm'>
+        <div key={i} className='w-full text-sm'>
           {block}
         </div>
       ))}
