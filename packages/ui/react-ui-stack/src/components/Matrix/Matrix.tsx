@@ -220,7 +220,7 @@ export const Section = <T extends Item>({
   useEffect(() => {
     if (focused) {
       onSelect?.();
-      ref.current?.scrollIntoView({ behavior: active ? 'smooth' : 'instant', block: 'start', inline: 'center' });
+      ref.current?.scrollIntoView({ behavior: active ? 'instant' : 'instant', block: 'start', inline: 'center' });
     }
   }, [focused]);
   useEffect(() => {
