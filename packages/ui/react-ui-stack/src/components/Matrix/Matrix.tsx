@@ -53,7 +53,7 @@ export const Matrix = <T extends Item>({ stacks = [], itemRenderer, debug = fals
 
   return (
     <div className='flex grow overflow-hidden'>
-      <div className='flex overflow-x-scroll snap-x py-4 gap-20'>
+      <div className='flex overflow-x-scroll snap-x py-4 gap-40'>
         <div className='flex shrink-0 w-[800px]' />
         {stacks.map((stack) => (
           <Stack<T>
