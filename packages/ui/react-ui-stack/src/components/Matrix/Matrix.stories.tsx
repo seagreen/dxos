@@ -25,7 +25,6 @@ import { Matrix } from './Matrix';
 
 faker.seed(1);
 
-// TODO(burdon): Command-K nav: https://www.npmjs.com/package/kbar.
 // TODO(burdon): Context (forward) vs desk/table.
 // TODO(burdon): Add stack; Add item; buttons.
 
@@ -46,36 +45,6 @@ type Data = {
   blocks?: string[];
   bullets?: { done: boolean; text: string }[];
   image?: string;
-};
-
-const ItemRenderer = ({ title, blocks, bullets, image }: Data) => {
-  const Image = image && images[image];
-
-  return (
-    <div className='flex flex-col gap-2'>
-      <div className='text-lg'>{title}</div>
-      <div className='flex flex-col gap-2 text-neutral-500'>
-        {blocks?.map((block, i) => (
-          <div key={i} className='w-full text-sm'>
-            {block}
-          </div>
-        ))}
-        {bullets?.map(({ done, text }, i) => (
-          <div key={i} className='flex items-center gap-4'>
-            <Input.Root>
-              <Input.Checkbox checked={done} />
-            </Input.Root>
-            {text}
-          </div>
-        ))}
-        {Image && (
-          <div className='flex justify-center'>
-            <Image weight='thin' className='w-[400px] h-[400px] text-neutral-300' />
-          </div>
-        )}
-      </div>
-    </div>
-  );
 };
 
 const createStacks = () =>
@@ -112,22 +81,76 @@ const createStacks = () =>
     { count: 4 },
   );
 
-export default {
-  component: Matrix,
-  render: () => {
-    const [stacks, setStacks] = useState(createStacks());
-    const [selected, setSelected] = useState<string>();
+const ItemRenderer = ({ title, blocks, bullets, image }: Data) => {
+  const Image = image && images[image];
 
-    // https://github.com/timc1/kbar#readme
-    const actions = useMemo<Action[]>(() => {
-      const actions: Action[] = [];
+  return (
+    <div className='flex flex-col gap-2'>
+      <div className='text-lg'>{title}</div>
+      <div className='flex flex-col gap-2 text-neutral-500'>
+        {blocks?.map((block, i) => (
+          <div key={i} className='w-full text-sm'>
+            {block}
+          </div>
+        ))}
+        {bullets?.map(({ done, text }, i) => (
+          <div key={i} className='flex items-center gap-4'>
+            <Input.Root>
+              <Input.Checkbox checked={done} />
+            </Input.Root>
+            {text}
+          </div>
+        ))}
+        {Image && (
+          <div className='flex justify-center'>
+            <Image weight='thin' className='w-[400px] h-[400px] text-neutral-300' />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
 
-      actions.push({
+const RenderResults = () => {
+  const { results } = useMatches();
+
+  return (
+    <div className='shadow rounded'>
+      <KBarResults
+        items={results}
+        onRender={({ item, active }) => {
+          const { name, shortcut } = item as Action;
+
+          return (
+            <div
+              className={mx(
+                'flex w-full px-2 py-1 gap-4 border-l-4',
+                active ? 'border-neutral-500 bg-neutral-50' : 'border-transparent',
+              )}
+            >
+              <div className='w-full truncate'>{name}</div>
+              <div className='text-neutral-400'>{shortcut}</div>
+            </div>
+          );
+        }}
+      />
+    </div>
+  );
+};
+
+const Story = () => {
+  const [stacks, setStacks] = useState(createStacks());
+  const [selected, setSelected] = useState<string>();
+
+  // https://github.com/timc1/kbar#readme
+  const actions = useMemo<Action[]>(() => {
+    return [
+      {
         id: 'stack',
         shortcut: ['s'],
         name: 'Select stack...',
-      });
-      actions.push({
+      },
+      {
         id: 'stack-create',
         shortcut: ['c'],
         name: 'Create stack...',
@@ -145,64 +168,47 @@ export default {
           setStacks((stacks) => [...stacks, stack]);
           setSelected(stack.id);
         },
-      });
-      actions.push({
+      },
+      {
         id: 'help',
         shortcut: ['h'],
         name: 'Help',
         perform: () => {},
-      });
-      actions.push(
-        ...stacks.map((stack) => ({
-          id: stack.id,
-          parent: 'stack',
-          name: stack.title,
-          perform: () => setSelected(stack.id),
-        })),
-      );
-
-      return actions;
-    }, [stacks]);
-
-    return (
-      <KBarProvider actions={actions}>
-        <KBarPortal>
-          <KBarPositioner>
-            <KBarAnimator>
-              <div className={mx(inputSurface, groupBorder, 'border shadow w-[500px]')}>
-                <KBarSearch className='w-full p-3 outline-none' />
-                <RenderResults />
-              </div>
-            </KBarAnimator>
-          </KBarPositioner>
-        </KBarPortal>
-
-        <div className={mx(fixedInsetFlexLayout, 'bg-neutral-100')}>
-          <Matrix<Data> stacks={stacks} selected={selected} itemRenderer={ItemRenderer} />
-        </div>
-      </KBarProvider>
-    );
-  },
-  layout: 'fullscreen',
-};
-
-const RenderResults = () => {
-  const { results } = useMatches();
+      },
+      ...stacks.map((stack, i) => ({
+        id: stack.id,
+        parent: 'stack',
+        shortcut: [String(i + 1)],
+        name: stack.title,
+        perform: () => setSelected(stack.id),
+      })),
+    ];
+  }, [stacks]);
 
   return (
-    <div className='shadow rounded'>
-      <KBarResults
-        items={results}
-        onRender={({ item, active }) => (
-          <div
-            className={mx('px-2 py-1 border-l-4', active ? 'border-neutral-500 bg-neutral-50' : 'border-transparent')}
-          >
-            {(item as any).name ?? item}
-          </div>
-        )}
-      />
-    </div>
+    <KBarProvider actions={actions}>
+      <KBarPortal>
+        <KBarPositioner>
+          <KBarAnimator>
+            <div className={mx(inputSurface, groupBorder, 'border shadow w-[500px]')}>
+              <KBarSearch className='w-full p-3 outline-none' />
+              <RenderResults />
+            </div>
+          </KBarAnimator>
+        </KBarPositioner>
+      </KBarPortal>
+
+      <div className={mx(fixedInsetFlexLayout, 'bg-neutral-100')}>
+        <Matrix<Data> stacks={stacks} selected={selected} itemRenderer={ItemRenderer} />
+      </div>
+    </KBarProvider>
   );
+};
+
+export default {
+  component: Matrix,
+  render: Story,
+  layout: 'fullscreen',
 };
 
 export const Default = {};
