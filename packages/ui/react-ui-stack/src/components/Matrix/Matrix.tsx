@@ -3,10 +3,11 @@
 //
 
 // import { useArrowNavigationGroup } from '@fluentui/react-tabster';
+import { Article } from '@phosphor-icons/react';
 import React, { type KeyboardEvent, useEffect, useRef, useState } from 'react';
 
-import { List, ListItem } from '@dxos/react-ui';
-import { inputSurface, mx } from '@dxos/react-ui-theme';
+import { DensityProvider, List, ListItem } from '@dxos/react-ui';
+import { getSize, inputSurface, mx } from '@dxos/react-ui-theme';
 
 export type Item = {
   id: string;
@@ -20,12 +21,13 @@ export type Stack<T extends Item> = {
 
 export type MatrixProps<T extends Item> = {
   stacks?: Stack<T>[];
+  debug?: boolean;
 } & Pick<StackProps<T>, 'itemRenderer'>;
 
 /**
  * Row of Stacks.
  */
-export const Matrix = <T extends Item>({ stacks = [], itemRenderer }: MatrixProps<T>) => {
+export const Matrix = <T extends Item>({ stacks = [], itemRenderer, debug = false }: MatrixProps<T>) => {
   // const domAttributes = useArrowNavigationGroup({ axis: 'grid' });
 
   const [selected, setSelected] = useState<string>();
@@ -63,6 +65,7 @@ export const Matrix = <T extends Item>({ stacks = [], itemRenderer }: MatrixProp
             onForward={handleForward}
             classNames='w-[800px]'
             itemRenderer={itemRenderer}
+            debug={debug}
           />
         ))}
         <div className='flex shrink-0 w-[800px]' />
@@ -81,6 +84,7 @@ export type StackProps<T extends Item> = {
   onBack?: () => void;
   onForward?: () => void;
   itemRenderer?: ItemRenderer<T>;
+  debug?: boolean;
 };
 
 /**
@@ -94,6 +98,7 @@ export const Stack = <T extends Item>({
   onBack,
   onForward,
   itemRenderer,
+  debug,
 }: StackProps<T>) => {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -142,37 +147,44 @@ export const Stack = <T extends Item>({
   };
 
   return (
-    <div
-      ref={ref}
-      className={mx(
-        'flex flex-col shrink-0 grow my-1 overflow-hidden shadow rounded __snap-center',
-        inputSurface,
-        selected ? 'opacity-100' : 'opacity-50',
-        classNames,
-      )}
-    >
+    <DensityProvider density='fine'>
       <div
-        className={mx('flex shrink-0 px-20 my-4 items-center gap-4 cursor-pointer border-x-4 border-transparent')}
-        onClick={() => onSelect?.()}
+        ref={ref}
+        className={mx(
+          'flex flex-col shrink-0 grow my-1 overflow-hidden shadow rounded __snap-center',
+          inputSurface,
+          selected ? 'opacity-100' : 'opacity-50',
+          classNames,
+        )}
       >
-        <div className='grow truncate text-lg'>{stack.title}</div>
-        <div className='text-xs text-neutral-500'>{stack.id.slice(0, 8)}</div>
-      </div>
+        <div
+          className={mx('flex shrink-0 my-4 items-center gap-4 cursor-pointer border-x-4 border-transparent')}
+          onClick={() => onSelect?.()}
+        >
+          <div className='w-16 px-4'>
+            <Article className={getSize(6)} />
+          </div>
+          <div className='grow truncate text-lg'>{stack.title}</div>
+          {debug && <div className='text-xs text-neutral-200 font-thin'>{stack.id.slice(0, 8)}</div>}
+          <div className='w-16' />
+        </div>
 
-      <List classNames='flex flex-col w-full gap-2 overflow-y-scroll'>
-        {stack.items.map((item) => (
-          <Section
-            key={item.id}
-            item={item}
-            itemRenderer={itemRenderer}
-            active={selected}
-            selected={itemSelected === item.id}
-            onSelect={() => handleSelect(item)}
-            onNavigate={handleNavigate}
-          />
-        ))}
-      </List>
-    </div>
+        <List classNames='flex flex-col w-full gap-2 divide-y overflow-y-scroll'>
+          {stack.items.map((item) => (
+            <Section
+              key={item.id}
+              item={item}
+              itemRenderer={itemRenderer}
+              active={selected}
+              selected={itemSelected === item.id}
+              onSelect={() => handleSelect(item)}
+              onNavigate={handleNavigate}
+              debug={debug}
+            />
+          ))}
+        </List>
+      </div>
+    </DensityProvider>
   );
 };
 
@@ -183,9 +195,12 @@ export type SectionProps<T extends Item> = {
   selected?: boolean;
   onSelect?: () => void;
   onNavigate?: (direction: 'up' | 'down' | 'left' | 'right') => void;
+  debug?: boolean;
 };
 
-// TODO(burdon): Track focus.
+/**
+ * Section.
+ */
 export const Section = <T extends Item>({
   item,
   itemRenderer,
@@ -193,6 +208,7 @@ export const Section = <T extends Item>({
   selected,
   onSelect,
   onNavigate,
+  debug,
 }: SectionProps<T>) => {
   const ref = useRef<HTMLInputElement>(null);
   const [focused, setFocused] = useState(false);
@@ -243,9 +259,12 @@ export const Section = <T extends Item>({
         )}
       >
         <div>{itemRenderer?.(item)}</div>
-        <div className='mt-4 text-xs text-neutral-200 font-thin'>
-          {JSON.stringify({ id: item.id.slice(0, 8), active, selected, focused })}
-        </div>
+
+        {debug && (
+          <div className='mt-4 text-xs text-neutral-200 font-thin'>
+            {JSON.stringify({ id: item.id.slice(0, 8), active, selected, focused })}
+          </div>
+        )}
       </div>
     </ListItem.Root>
   );
