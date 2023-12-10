@@ -3,10 +3,10 @@
 //
 
 // import { useArrowNavigationGroup } from '@fluentui/react-tabster';
-import { Article } from '@phosphor-icons/react';
+import { Article, DotsThreeVertical } from '@phosphor-icons/react';
 import React, { type KeyboardEvent, useEffect, useRef, useState } from 'react';
 
-import { DensityProvider, List, ListItem } from '@dxos/react-ui';
+import { Button, DensityProvider, List, ListItem } from '@dxos/react-ui';
 import { getSize, inputSurface, mx } from '@dxos/react-ui-theme';
 
 export type Item = {
@@ -53,7 +53,7 @@ export const Matrix = <T extends Item>({ stacks = [], itemRenderer, debug = fals
 
   return (
     <div className='flex grow overflow-hidden'>
-      <div className='flex overflow-x-scroll __snap-x py-4 gap-20'>
+      <div className='flex overflow-x-scroll snap-x py-4 gap-20'>
         <div className='flex shrink-0 w-[800px]' />
         {stacks.map((stack) => (
           <Stack<T>
@@ -151,7 +151,7 @@ export const Stack = <T extends Item>({
       <div
         ref={ref}
         className={mx(
-          'flex flex-col shrink-0 grow my-1 overflow-hidden shadow rounded __snap-center',
+          'flex flex-col shrink-0 grow my-1 overflow-hidden shadow rounded snap-center',
           inputSurface,
           selected ? 'opacity-100' : 'opacity-50',
           classNames,
@@ -161,12 +161,16 @@ export const Stack = <T extends Item>({
           className={mx('flex shrink-0 my-4 items-center gap-4 cursor-pointer border-x-4 border-transparent')}
           onClick={() => onSelect?.()}
         >
-          <div className='w-16 px-4'>
-            <Article className={getSize(6)} />
+          <div className='flex shrink-0 flex-row-reverse w-16'>
+            <Article className={mx(getSize(5), 'text-neutral-500')} />
           </div>
           <div className='grow truncate text-lg'>{stack.title}</div>
           {debug && <div className='text-xs text-neutral-200 font-thin'>{stack.id.slice(0, 8)}</div>}
-          <div className='w-16' />
+          <div className='flex shrink-0 flex-row-reverse w-16 pr-1'>
+            <Button variant='ghost'>
+              <DotsThreeVertical className={mx(getSize(5), 'text-neutral-500')} />
+            </Button>
+          </div>
         </div>
 
         <List classNames='flex flex-col w-full gap-2 divide-y overflow-y-scroll'>
@@ -253,18 +257,29 @@ export const Section = <T extends Item>({
       />
       <div
         className={mx(
-          'flex flex-col _mx-4 my-1 px-20 py-4 border-l-4 border-transparent',
+          'flex flex-col my-1 py-4 border-l-4 border-transparent',
           focused ? 'border-blue-300' : selected && 'border-neutral-200',
           inputSurface,
         )}
       >
-        <div>{itemRenderer?.(item)}</div>
-
-        {debug && (
-          <div className='mt-4 text-xs text-neutral-200 font-thin'>
-            {JSON.stringify({ id: item.id.slice(0, 8), active, selected, focused })}
+        <div className='flex'>
+          <div className='flex shrink-0 flex-row-reverse w-20' />
+          <div className='flex flex-col w-full'>
+            {itemRenderer?.(item)}
+            {debug && (
+              <div className='mt-4 text-xs text-neutral-200 font-thin'>
+                {JSON.stringify({ id: item.id.slice(0, 8), active, selected, focused })}
+              </div>
+            )}
           </div>
-        )}
+          <div className='flex shrink-0 flex-row-reverse w-20 pr-2'>
+            <div>
+              <Button variant='ghost'>
+                <DotsThreeVertical className={mx(getSize(5), 'text-neutral-500')} />
+              </Button>
+            </div>
+          </div>
+        </div>
       </div>
     </ListItem.Root>
   );

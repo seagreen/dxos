@@ -13,7 +13,7 @@ import { fixedInsetFlexLayout, mx } from '@dxos/react-ui-theme';
 
 import { Matrix } from './Matrix';
 
-faker.seed(100);
+faker.seed(1);
 
 // TODO(burdon): Command-K nav: https://www.npmjs.com/package/kbar.
 // TODO(burdon): Context (forward) vs desk/table.
@@ -81,7 +81,7 @@ const createStacks = () =>
 
           if (faker.datatype.boolean({ probability: 0.7 })) {
             data.blocks = faker.helpers.multiple(() => faker.lorem.sentences(), { count: { min: 1, max: 8 } });
-          } else if (faker.datatype.boolean({ probability: 0.5 })) {
+          } else if (faker.datatype.boolean({ probability: 0.4 })) {
             data.image = faker.helpers.arrayElement(Object.keys(images));
           } else {
             data.bullets = faker.helpers.multiple(
