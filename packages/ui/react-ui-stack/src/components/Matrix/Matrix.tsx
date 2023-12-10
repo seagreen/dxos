@@ -151,8 +151,9 @@ export const Stack = <T extends Item>({
       <div
         ref={ref}
         className={mx(
-          'flex flex-col shrink-0 grow my-1 overflow-hidden shadow rounded snap-center',
+          'flex flex-col shrink-0 grow my-1 overflow-hidden shadow rounded snap-center ',
           inputSurface,
+          'transition ease-in-out duration-500',
           selected ? 'opacity-100' : 'opacity-50',
           classNames,
         )}

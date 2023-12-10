@@ -5,7 +5,7 @@
 import '@dxosTheme';
 
 import { faker } from '@faker-js/faker';
-import { ChartPie, ChartScatter, Polygon, type Icon } from '@phosphor-icons/react';
+import { ChartPieSlice, ChartScatter, Image, Polygon, type Icon } from '@phosphor-icons/react';
 import React, { useState } from 'react';
 
 import { Input } from '@dxos/react-ui';
@@ -25,8 +25,9 @@ faker.seed(1);
 
 const images: { [key: string]: Icon } = {
   chart: ChartScatter,
-  pie: ChartPie,
+  pie: ChartPieSlice,
   polygon: Polygon,
+  image: Image,
 };
 
 type Data = {
@@ -59,7 +60,7 @@ const ItemRenderer = ({ title, blocks, bullets, image }: Data) => {
         ))}
         {Image && (
           <div className='flex justify-center'>
-            <Image weight='thin' className='w-[300px] h-[300px]' />
+            <Image weight='thin' className='w-[400px] h-[400px] text-neutral-300' />
           </div>
         )}
       </div>
