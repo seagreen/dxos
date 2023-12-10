@@ -102,11 +102,6 @@ export const Stack = <T extends Item>({
   useEffect(() => {
     setSelected(_selected);
   }, [ref, _selected]);
-  useEffect(() => {
-    if (selected) {
-      ref.current?.scrollIntoView({ behavior: 'smooth', inline: 'center' });
-    }
-  }, [selected]);
 
   // Item selected.
   const [itemSelected, setItemSelected] = useState<string>();
@@ -152,7 +147,7 @@ export const Stack = <T extends Item>({
       className={mx(
         'flex flex-col shrink-0 grow my-1 overflow-hidden shadow rounded __snap-center',
         inputSurface,
-        // selected && 'ring ring-neutral-200',
+        selected ? 'opacity-100' : 'opacity-50',
         classNames,
       )}
     >
@@ -204,7 +199,7 @@ export const Section = <T extends Item>({
   useEffect(() => {
     if (focused) {
       onSelect?.();
-      ref.current?.scrollIntoView({ behavior: active ? 'smooth' : 'instant', block: 'start' });
+      ref.current?.scrollIntoView({ behavior: active ? 'smooth' : 'instant', block: 'start', inline: 'center' });
     }
   }, [focused]);
   useEffect(() => {
@@ -232,7 +227,14 @@ export const Section = <T extends Item>({
   };
 
   return (
-    <ListItem.Root key={item.id} onClick={() => ref.current?.focus()}>
+    <ListItem.Root key={item.id} classNames='flex flex-col' onClick={() => ref.current?.focus()}>
+      <input
+        ref={ref}
+        className='w-full h-1 opacity-0'
+        onKeyDown={handleKeyDown}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
+      />
       <div
         className={mx(
           'flex flex-col _mx-4 my-1 px-20 py-4 border-l-4 border-transparent',
@@ -241,17 +243,10 @@ export const Section = <T extends Item>({
         )}
       >
         <div>{itemRenderer?.(item)}</div>
-        <div className='mt-4 text-xs text-neutral-500'>
+        <div className='mt-4 text-xs text-neutral-200 font-thin'>
           {JSON.stringify({ id: item.id.slice(0, 8), active, selected, focused })}
         </div>
       </div>
-      <input
-        ref={ref}
-        className='w-1 h-1 __opacity-0'
-        onKeyDown={handleKeyDown}
-        onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
-      />
     </ListItem.Root>
   );
 };
