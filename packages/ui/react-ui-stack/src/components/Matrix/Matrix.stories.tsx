@@ -6,10 +6,20 @@ import '@dxosTheme';
 
 import { faker } from '@faker-js/faker';
 import { ChartPieSlice, ChartScatter, Image, Polygon, type Icon } from '@phosphor-icons/react';
-import React, { useState } from 'react';
+import {
+  type Action,
+  KBarAnimator,
+  KBarPortal,
+  KBarPositioner,
+  KBarProvider,
+  KBarResults,
+  KBarSearch,
+  useMatches,
+} from 'kbar';
+import React, { useMemo, useState } from 'react';
 
 import { Input } from '@dxos/react-ui';
-import { fixedInsetFlexLayout, mx } from '@dxos/react-ui-theme';
+import { fixedInsetFlexLayout, groupBorder, inputSurface, mx } from '@dxos/react-ui-theme';
 
 import { Matrix } from './Matrix';
 
@@ -105,14 +115,94 @@ const createStacks = () =>
 export default {
   component: Matrix,
   render: () => {
-    const [stacks] = useState(createStacks());
+    const [stacks, setStacks] = useState(createStacks());
+    const [selected, setSelected] = useState<string>();
+
+    // https://github.com/timc1/kbar#readme
+    const actions = useMemo<Action[]>(() => {
+      const actions: Action[] = [];
+
+      actions.push({
+        id: 'stack',
+        shortcut: ['s'],
+        name: 'Select stack...',
+      });
+      actions.push({
+        id: 'stack-create',
+        shortcut: ['c'],
+        name: 'Create stack...',
+        perform: () => {
+          const stack = {
+            id: faker.string.uuid(),
+            title: faker.lorem.sentence(),
+            items: [
+              {
+                id: faker.string.uuid(),
+                title: faker.lorem.sentence(),
+              },
+            ],
+          };
+          setStacks((stacks) => [...stacks, stack]);
+          setSelected(stack.id);
+        },
+      });
+      actions.push({
+        id: 'help',
+        shortcut: ['h'],
+        name: 'Help',
+        perform: () => {},
+      });
+      actions.push(
+        ...stacks.map((stack) => ({
+          id: stack.id,
+          parent: 'stack',
+          name: stack.title,
+          perform: () => setSelected(stack.id),
+        })),
+      );
+
+      return actions;
+    }, [stacks]);
+
     return (
-      <div className={mx(fixedInsetFlexLayout, 'bg-neutral-100')}>
-        <Matrix<Data> stacks={stacks} itemRenderer={ItemRenderer} />
-      </div>
+      <KBarProvider actions={actions}>
+        <KBarPortal>
+          <KBarPositioner>
+            <KBarAnimator>
+              <div className={mx(inputSurface, groupBorder, 'border shadow w-[500px]')}>
+                <KBarSearch className='w-full p-3 outline-none' />
+                <RenderResults />
+              </div>
+            </KBarAnimator>
+          </KBarPositioner>
+        </KBarPortal>
+
+        <div className={mx(fixedInsetFlexLayout, 'bg-neutral-100')}>
+          <Matrix<Data> stacks={stacks} selected={selected} itemRenderer={ItemRenderer} />
+        </div>
+      </KBarProvider>
     );
   },
   layout: 'fullscreen',
+};
+
+const RenderResults = () => {
+  const { results } = useMatches();
+
+  return (
+    <div className='shadow rounded'>
+      <KBarResults
+        items={results}
+        onRender={({ item, active }) => (
+          <div
+            className={mx('px-2 py-1 border-l-4', active ? 'border-neutral-500 bg-neutral-50' : 'border-transparent')}
+          >
+            {(item as any).name ?? item}
+          </div>
+        )}
+      />
+    </div>
+  );
 };
 
 export const Default = {};

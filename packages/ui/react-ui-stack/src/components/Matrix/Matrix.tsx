@@ -21,16 +21,23 @@ export type Stack<T extends Item> = {
 
 export type MatrixProps<T extends Item> = {
   stacks?: Stack<T>[];
+  selected?: string;
   debug?: boolean;
 } & Pick<StackProps<T>, 'itemRenderer'>;
 
 /**
  * Row of Stacks.
  */
-export const Matrix = <T extends Item>({ stacks = [], itemRenderer, debug = false }: MatrixProps<T>) => {
+export const Matrix = <T extends Item>({
+  stacks = [],
+  selected: _selected,
+  itemRenderer,
+  debug = false,
+}: MatrixProps<T>) => {
   // const domAttributes = useArrowNavigationGroup({ axis: 'grid' });
 
-  const [selected, setSelected] = useState<string>();
+  const [selected, setSelected] = useState(_selected);
+  useEffect(() => setSelected(_selected), [_selected]);
   useEffect(() => {
     if (!selected && stacks.length) {
       setSelected(stacks[0].id);
