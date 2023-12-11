@@ -43,8 +43,35 @@ type Data = {
   id: string;
   title: string;
   blocks?: string[];
-  bullets?: { done: boolean; text: string }[];
+  outline?: { done: boolean; text: string }[];
   image?: string;
+};
+
+type SectionType = 'text' | 'outline' | 'sketch';
+
+const sectionTypes: SectionType[] = ['text', 'text', 'text', 'text', 'outline', 'outline', 'sketch'];
+
+const createSection = (type: SectionType): Partial<Data> => {
+  switch (type) {
+    case 'text':
+      return {
+        blocks: faker.helpers.multiple(() => faker.lorem.sentences(), { count: { min: 1, max: 8 } }),
+      };
+    case 'outline':
+      return {
+        outline: faker.helpers.multiple(
+          () => ({
+            done: faker.datatype.boolean(),
+            text: faker.lorem.sentence(),
+          }),
+          { count: { min: 1, max: 8 } },
+        ),
+      };
+    case 'sketch':
+      return {
+        image: faker.helpers.arrayElement(Object.keys(images)),
+      };
+  }
 };
 
 const createStacks = () =>
@@ -53,35 +80,18 @@ const createStacks = () =>
       id: faker.string.uuid(),
       title: faker.lorem.sentence(),
       items: faker.helpers.multiple(
-        () => {
-          const data: Data = {
-            id: faker.string.uuid(),
-            title: faker.lorem.sentence(),
-          };
-
-          if (faker.datatype.boolean({ probability: 0.7 })) {
-            data.blocks = faker.helpers.multiple(() => faker.lorem.sentences(), { count: { min: 1, max: 8 } });
-          } else if (faker.datatype.boolean({ probability: 0.4 })) {
-            data.image = faker.helpers.arrayElement(Object.keys(images));
-          } else {
-            data.bullets = faker.helpers.multiple(
-              () => ({
-                done: faker.datatype.boolean(),
-                text: faker.lorem.sentence(),
-              }),
-              { count: { min: 1, max: 8 } },
-            );
-          }
-
-          return data;
-        },
+        () => ({
+          id: faker.string.uuid(),
+          title: faker.lorem.sentence(),
+          ...createSection(faker.helpers.arrayElement(sectionTypes)),
+        }),
         { count: 16 },
       ),
     }),
     { count: 4 },
   );
 
-const ItemRenderer = ({ title, blocks, bullets, image }: Data) => {
+const ItemRenderer = ({ title, blocks, outline, image }: Data) => {
   const Image = image && images[image];
 
   return (
@@ -93,7 +103,7 @@ const ItemRenderer = ({ title, blocks, bullets, image }: Data) => {
             {block}
           </div>
         ))}
-        {bullets?.map(({ done, text }, i) => (
+        {outline?.map(({ done, text }, i) => (
           <div key={i} className='flex items-center gap-4'>
             <Input.Root>
               <Input.Checkbox checked={done} />
@@ -162,15 +172,61 @@ const Story = () => {
   const actions = useMemo<Action[]>(() => {
     return [
       {
-        id: 'stack',
+        id: 'stack-select',
         shortcut: ['^s'],
         section: 'navigation',
         name: 'Select stack...',
       },
+      ...stacks.map((stack, i) => ({
+        id: stack.id,
+        section: 'stacks',
+        parent: 'stack-select',
+        shortcut: [`^${i + 1}`],
+        name: stack.title,
+        perform: () => setSelected(stack.id),
+      })),
+      {
+        id: 'section-insert',
+        section: 'content',
+        name: 'Insert section...',
+        shortcut: ['ALT ⌘ I'],
+      },
+      ...sectionTypes.map((type) => ({
+        id: `section-insert-${type}`,
+        section: 'content',
+        parent: 'section-insert',
+        name: `Insert ${type}`,
+        perform: () => {
+          setStacks((stacks) => {
+            return stacks.map((stack) => {
+              if (stack.id === selectedRef.current) {
+                const item = {
+                  id: faker.string.uuid(),
+                  title: faker.lorem.sentence(),
+                  ...createSection(type),
+                };
+
+                const idx = stack.items.findIndex((item) => item.id === selectedRef.current);
+                console.log('>>>>>>', idx);
+
+                // TODO(burdon): Insert in place?
+                return { ...stack, items: [...stack.items, item] };
+              }
+
+              return stack;
+            });
+          });
+        },
+      })),
+      {
+        id: 'section-delete',
+        section: 'content',
+        name: 'Delete section',
+      },
       {
         id: 'stack-create',
-        section: 'navigation',
-        shortcut: ['^c'],
+        section: 'content',
+        shortcut: ['ALT ⌘ N'],
         name: 'Create stack',
         perform: () => {
           const stack = {
@@ -189,7 +245,7 @@ const Story = () => {
       },
       {
         id: 'stack-delete',
-        section: 'navigation',
+        section: 'content',
         name: 'Delete stack',
         perform: () => {
           setStacks((stacks) => {
@@ -207,14 +263,6 @@ const Story = () => {
           setDebug((debug) => !debug);
         },
       },
-      ...stacks.map((stack, i) => ({
-        id: stack.id,
-        section: 'stacks',
-        parent: 'stack',
-        shortcut: [`^${i + 1}`],
-        name: stack.title,
-        perform: () => setSelected(stack.id),
-      })),
     ];
   }, [stacks]);
 
