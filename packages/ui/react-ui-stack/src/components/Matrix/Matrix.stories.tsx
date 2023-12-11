@@ -5,7 +5,7 @@
 import '@dxosTheme';
 
 import { faker } from '@faker-js/faker';
-import { ChartPieSlice, ChartScatter, Image, Polygon, type Icon } from '@phosphor-icons/react';
+import { BoundingBox, ChartPieSlice, ChartScatter, Image, Polygon, type Icon } from '@phosphor-icons/react';
 import {
   type Action,
   KBarAnimator,
@@ -23,7 +23,7 @@ import { fixedInsetFlexLayout, groupBorder, inputSurface, mx } from '@dxos/react
 
 import { Matrix } from './Matrix';
 
-faker.seed(1);
+faker.seed(2);
 
 // TODO(burdon): Context (forward) vs desk/table.
 // TODO(burdon): Add stack; Add item; buttons.
@@ -31,13 +31,6 @@ faker.seed(1);
 // TODO(burdon): Allow viewing of two stacks at once.
 // TODO(burdon): Surface/mosaic.
 // TODO(burdon): Virtualize x.
-
-const images: { [key: string]: Icon } = {
-  chart: ChartScatter,
-  pie: ChartPieSlice,
-  polygon: Polygon,
-  image: Image,
-};
 
 type Data = {
   id: string;
@@ -49,7 +42,15 @@ type Data = {
 
 type SectionType = 'text' | 'outline' | 'sketch';
 
-const sectionTypes: SectionType[] = ['text', 'text', 'text', 'text', 'outline', 'outline', 'sketch'];
+const sectionTypes: SectionType[] = ['text', 'outline', 'sketch'];
+
+const images: { [key: string]: Icon } = {
+  chart: ChartScatter,
+  pie: ChartPieSlice,
+  polygon: Polygon,
+  image: Image,
+  box: BoundingBox,
+};
 
 const createSection = (type: SectionType): Partial<Data> => {
   switch (type) {
@@ -83,7 +84,13 @@ const createStacks = () =>
         () => ({
           id: faker.string.uuid(),
           title: faker.lorem.sentence(),
-          ...createSection(faker.helpers.arrayElement(sectionTypes)),
+          ...createSection(
+            faker.datatype.boolean({ probability: 0.6 })
+              ? 'text'
+              : faker.datatype.boolean({ probability: 0.6 })
+              ? 'outline'
+              : 'sketch',
+          ),
         }),
         { count: 16 },
       ),
@@ -146,7 +153,7 @@ const KBarCustomResults = () => {
             {shortcut && (
               <div className='flex gap-2'>
                 {shortcut.map((key, i) => (
-                  <kbd key={i} className='text-neutral-400 mr-1'>
+                  <kbd key={i} className='whitespace-nowrap text-xs text-neutral-400 mr-1'>
                     {key}
                   </kbd>
                 ))}
@@ -173,7 +180,6 @@ const Story = () => {
     return [
       {
         id: 'stack-select',
-        shortcut: ['^s'],
         section: 'navigation',
         name: 'Select stack...',
       },
@@ -189,7 +195,7 @@ const Story = () => {
         id: 'section-insert',
         section: 'content',
         name: 'Insert section...',
-        shortcut: ['ALT ⌘ I'],
+        shortcut: ['Alt ⌘ I'],
       },
       ...sectionTypes.map((type) => ({
         id: `section-insert-${type}`,
@@ -205,9 +211,6 @@ const Story = () => {
                   title: faker.lorem.sentence(),
                   ...createSection(type),
                 };
-
-                const idx = stack.items.findIndex((item) => item.id === selectedRef.current);
-                console.log('>>>>>>', idx);
 
                 // TODO(burdon): Insert in place?
                 return { ...stack, items: [...stack.items, item] };
@@ -226,7 +229,7 @@ const Story = () => {
       {
         id: 'stack-create',
         section: 'content',
-        shortcut: ['ALT ⌘ N'],
+        shortcut: ['Alt ⌘ N'],
         name: 'Create stack',
         perform: () => {
           const stack = {
