@@ -22,6 +22,7 @@ export type Stack<T extends Item> = {
 export type MatrixProps<T extends Item> = {
   stacks?: Stack<T>[];
   selected?: string;
+  onSelect?: (id: string) => void;
   debug?: boolean;
 } & Pick<StackProps<T>, 'itemRenderer'>;
 
@@ -30,31 +31,24 @@ export type MatrixProps<T extends Item> = {
  */
 export const Matrix = <T extends Item>({
   stacks = [],
-  selected: _selected,
+  selected,
+  onSelect,
   itemRenderer,
   debug = false,
 }: MatrixProps<T>) => {
   // const domAttributes = useArrowNavigationGroup({ axis: 'grid' });
 
-  const [selected, setSelected] = useState(_selected);
-  useEffect(() => setSelected(_selected), [_selected]);
-  useEffect(() => {
-    if (!selected && stacks.length) {
-      setSelected(stacks[0].id);
-    }
-  }, []);
-
   const handleBack = () => {
     const idx = stacks.findIndex((stack) => stack.id === selected);
     if (idx > 0) {
-      setSelected(stacks[idx - 1].id);
+      onSelect?.(stacks[idx - 1].id);
     }
   };
 
   const handleForward = () => {
     const idx = stacks.findIndex((stack) => stack.id === selected);
     if (idx < stacks.length - 1) {
-      setSelected(stacks[idx + 1].id);
+      onSelect?.(stacks[idx + 1].id);
     }
   };
 
@@ -67,7 +61,7 @@ export const Matrix = <T extends Item>({
             key={stack.id}
             stack={stack}
             selected={selected === stack.id}
-            onSelect={() => setSelected(stack.id)}
+            onSelect={() => onSelect?.(stack.id)}
             onBack={handleBack}
             onForward={handleForward}
             classNames='w-[800px]'
@@ -160,7 +154,7 @@ export const Stack = <T extends Item>({
         className={mx(
           'flex flex-col shrink-0 grow my-1 overflow-hidden shadow rounded snap-center ',
           inputSurface,
-          'transition ease-in-out duration-500',
+          'transition ease-in-out duration-300',
           selected ? 'opacity-100' : 'opacity-50',
           classNames,
         )}

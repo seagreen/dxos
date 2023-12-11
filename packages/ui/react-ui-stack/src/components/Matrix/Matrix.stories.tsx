@@ -16,7 +16,7 @@ import {
   KBarSearch,
   useMatches,
 } from 'kbar';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import { Input } from '@dxos/react-ui';
 import { fixedInsetFlexLayout, groupBorder, inputSurface, mx } from '@dxos/react-ui-theme';
@@ -111,49 +111,67 @@ const ItemRenderer = ({ title, blocks, bullets, image }: Data) => {
   );
 };
 
-const RenderResults = () => {
+const KBarCustomResults = () => {
   const { results } = useMatches();
 
   return (
-    <div className='shadow rounded'>
-      <KBarResults
-        items={results}
-        onRender={({ item, active }) => {
-          const { name, shortcut } = item as Action;
+    <KBarResults
+      items={results}
+      onRender={({ item, active }) => {
+        if (typeof item === 'string') {
+          return <div className='p-2 text-neutral-300 border-l-4 border-transparent'>{item}</div>;
+        }
 
-          return (
-            <div
-              className={mx(
-                'flex w-full px-2 py-1 gap-4 border-l-4',
-                active ? 'border-neutral-500 bg-neutral-50' : 'border-transparent',
-              )}
-            >
-              <div className='w-full truncate'>{name}</div>
-              <div className='text-neutral-400'>{shortcut}</div>
-            </div>
-          );
-        }}
-      />
-    </div>
+        // TODO(burdon): Render ancestors.
+        //  https://github.com/timc1/kbar/blob/main/example/src/App.tsx
+        const { name, shortcut } = item;
+        return (
+          <div
+            className={mx(
+              'flex w-full p-2 gap-4 border-l-4',
+              active ? 'border-neutral-500 bg-neutral-50' : 'border-transparent',
+            )}
+          >
+            <div className='w-full truncate cursor-pointer'>{name}</div>
+            {shortcut && (
+              <div className='flex gap-2'>
+                {shortcut.map((key, i) => (
+                  <kbd key={i} className='text-neutral-400 mr-1'>
+                    {key}
+                  </kbd>
+                ))}
+              </div>
+            )}
+          </div>
+        );
+      }}
+    />
   );
 };
 
 const Story = () => {
+  const [debug, setDebug] = useState(false);
   const [stacks, setStacks] = useState(createStacks());
-  const [selected, setSelected] = useState<string>();
+  const [selected, setSelected] = useState<string | undefined>(stacks[0]?.id);
+  const selectedRef = useRef(selected);
+  useEffect(() => {
+    selectedRef.current = selected;
+  }, [selected]);
 
   // https://github.com/timc1/kbar#readme
   const actions = useMemo<Action[]>(() => {
     return [
       {
         id: 'stack',
-        shortcut: ['s'],
+        shortcut: ['^s'],
+        section: 'navigation',
         name: 'Select stack...',
       },
       {
         id: 'stack-create',
-        shortcut: ['c'],
-        name: 'Create stack...',
+        section: 'navigation',
+        shortcut: ['^c'],
+        name: 'Create stack',
         perform: () => {
           const stack = {
             id: faker.string.uuid(),
@@ -170,15 +188,30 @@ const Story = () => {
         },
       },
       {
-        id: 'help',
-        shortcut: ['h'],
-        name: 'Help',
-        perform: () => {},
+        id: 'stack-delete',
+        section: 'navigation',
+        name: 'Delete stack',
+        perform: () => {
+          setStacks((stacks) => {
+            const updated = stacks.filter((stack) => stack.id !== selectedRef.current);
+            setSelected(updated.length ? updated[0].id : undefined);
+            return updated;
+          });
+        },
+      },
+      {
+        id: 'debug',
+        section: 'utils',
+        name: 'Toggle debug',
+        perform: () => {
+          setDebug((debug) => !debug);
+        },
       },
       ...stacks.map((stack, i) => ({
         id: stack.id,
+        section: 'stacks',
         parent: 'stack',
-        shortcut: [String(i + 1)],
+        shortcut: [`^${i + 1}`],
         name: stack.title,
         perform: () => setSelected(stack.id),
       })),
@@ -190,16 +223,22 @@ const Story = () => {
       <KBarPortal>
         <KBarPositioner>
           <KBarAnimator>
-            <div className={mx(inputSurface, groupBorder, 'border shadow w-[500px]')}>
+            <div className={mx(inputSurface, groupBorder, 'border shadow-lg w-[500px]')}>
               <KBarSearch className='w-full p-3 outline-none' />
-              <RenderResults />
+              <KBarCustomResults />
             </div>
           </KBarAnimator>
         </KBarPositioner>
       </KBarPortal>
 
       <div className={mx(fixedInsetFlexLayout, 'bg-neutral-100')}>
-        <Matrix<Data> stacks={stacks} selected={selected} itemRenderer={ItemRenderer} />
+        <Matrix<Data>
+          stacks={stacks}
+          itemRenderer={ItemRenderer}
+          selected={selected}
+          onSelect={setSelected}
+          debug={debug}
+        />
       </div>
     </KBarProvider>
   );
