@@ -574,6 +574,11 @@
         },
         {
           "type": "json",
+          "path": "packages/experimental/matrix/package.json",
+          "jsonpath": "$.version"
+        },
+        {
+          "type": "json",
           "path": "packages/experimental/metagraph/package.json",
           "jsonpath": "$.version"
         },

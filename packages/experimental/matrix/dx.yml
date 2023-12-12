@@ -1,0 +1,28 @@
+version: 1
+
+package:
+  modules:
+    - name: matrix
+      type: dxos:type/app
+      displayName: Matrix
+      tags:
+        - showcase
+      build:
+        command: pnpm -w nx bundle matrix
+
+runtime:
+  client:
+    storage:
+      persistent: true
+
+  services:
+    signaling:
+      - server: wss://kube.dxos.org/.well-known/dx/signal
+      - server: wss://dev.kube.dxos.org/.well-known/dx/signal
+    ice:
+      - urls: turn:kube.dxos.org:3478
+        username: dxos
+        credential: dxos
+    ipfs:
+      server: https://dev.kube.dxos.org/ipfs/api
+      gateway: https://dev.kube.dxos.org/ipfs/gateway

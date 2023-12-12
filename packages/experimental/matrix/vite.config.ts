@@ -1,0 +1,70 @@
+//
+// Copyright 2023 DXOS.org
+//
+
+import { defineConfig } from "vite";
+import ReactPlugin from '@vitejs/plugin-react';
+import { resolve } from "path";
+import { ThemePlugin } from "@dxos/react-ui-theme/plugin";
+
+import { ConfigPlugin } from "@dxos/config/vite-plugin";
+
+const { osThemeExtension } = require('@dxos/react-shell/theme-extensions');
+
+// https://vitejs.dev/config
+export default defineConfig({
+  build: {
+    outDir: 'out/matrix',
+    sourcemap: true,
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, './index.html')
+      },
+      output: {
+        chunkFileNames,
+        manualChunks: {
+          react: ['react', 'react-dom'],
+          dxos: ['@dxos/react-client'],
+          ui: ['@dxos/react-ui', '@dxos/react-ui-theme'],
+          editor: ['@dxos/react-ui-editor'],
+        },
+      },
+    },
+  },
+  plugins: [
+    ConfigPlugin(),
+    ReactPlugin({ jsxRuntime: 'classic' }),
+    ThemePlugin({
+      extensions: [osThemeExtension],
+      root: __dirname,
+      content: [
+        resolve(__dirname, './index.html'),
+        resolve(__dirname, './src/**/*.{js,ts,jsx,tsx}'),
+      ],
+    }),
+  ],
+  server: {
+    host: true,
+  },
+});
+
+function chunkFileNames (chunkInfo) {
+  if (chunkInfo.facadeModuleId && chunkInfo.facadeModuleId.match(/index.[^\/]+$/gm)) {
+    let segments = chunkInfo.facadeModuleId.split('/').reverse().slice(1);
+    const nodeModulesIdx = segments.indexOf('node_modules');
+    if (nodeModulesIdx !== -1) {
+      segments = segments.slice(0, nodeModulesIdx);
+    }
+    const ignoredNames = [
+      'dist',
+      'lib',
+      'browser'
+    ]
+    const significantSegment = segments.find(segment => !ignoredNames.includes(segment));
+    if (significantSegment) {
+      return `assets/${significantSegment}-[hash].js`;
+    }
+  }
+
+  return 'assets/[name]-[hash].js';
+}

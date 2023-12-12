@@ -166,7 +166,7 @@ const KBarCustomResults = () => {
   );
 };
 
-const Story = () => {
+export const App = () => {
   const [debug, setDebug] = useState(false);
   const [stacks, setStacks] = useState(createStacks());
   const [selected, setSelected] = useState<string | undefined>(stacks[0]?.id);
@@ -294,11 +294,3 @@ const Story = () => {
     </KBarProvider>
   );
 };
-
-export default {
-  component: Matrix,
-  render: Story,
-  layout: 'fullscreen',
-};
-
-export const Default = {};

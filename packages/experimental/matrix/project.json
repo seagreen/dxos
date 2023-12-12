@@ -1,0 +1,34 @@
+{
+  "sourceRoot": "packages/experimental/matrix/src",
+  "projectType": "library",
+  "targets": {
+    "bundle": {
+      "executor": "@nx/vite:build",
+      "options": {
+        "outputPath": "packages/experimental/matrix/out/matrix"
+      },
+      "outputs": [
+        "{options.outputPath}"
+      ]
+    },
+    "compile": {
+      "options": {
+        "entryPoints": [
+          "packages/experimental/matrix/src/index.ts"
+        ],
+        "platforms": [
+          "browser"
+        ]
+      }
+    },
+    "serve": {
+      "executor": "@nx/vite:dev-server",
+      "options": {
+        "buildTarget": "matrix:bundle"
+      }
+    }
+  },
+  "implicitDependencies": [
+    "esbuild"
+  ]
+}
