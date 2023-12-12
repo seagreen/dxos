@@ -1,5 +1,5 @@
 {
-  "sourceRoot": "packages/experimental/matrix/src",
+  "sourceRoot": "packages/experimental/matrix-demo/src",
   "projectType": "library",
   "targets": {
     "bundle": {
@@ -14,7 +14,7 @@
     "serve": {
       "executor": "@nx/vite:dev-server",
       "options": {
-        "buildTarget": "matrix:bundle"
+        "buildTarget": "matrix-demo:bundle"
       }
     }
   }
