@@ -2,7 +2,9 @@
 // Copyright 2023 DXOS.org
 //
 
-import { defineConfig } from "vite";
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { defineConfig, searchForWorkspaceRoot } from 'vite';
 import ReactPlugin from '@vitejs/plugin-react';
 import { resolve } from "path";
 import { ThemePlugin } from "@dxos/react-ui-theme/plugin";
@@ -33,7 +35,6 @@ export default defineConfig({
   },
   plugins: [
     ConfigPlugin(),
-    ReactPlugin({ jsxRuntime: 'classic' }),
     ThemePlugin({
       extensions: [osThemeExtension],
       root: __dirname,
@@ -42,9 +43,38 @@ export default defineConfig({
         resolve(__dirname, './src/**/*.{js,ts,jsx,tsx}'),
       ],
     }),
+    ReactPlugin({ jsxRuntime: 'classic' }),
+    {
+      name: 'bundle-buddy',
+      buildEnd() {
+        const deps: { source: string; target: string }[] = [];
+        for (const id of this.getModuleIds()) {
+          const m = this.getModuleInfo(id);
+          if (m != null && !m.isExternal) {
+            for (const target of m.importedIds) {
+              deps.push({ source: m.id, target });
+            }
+          }
+        }
+
+        const outDir = join(__dirname, 'out');
+        if (!existsSync(outDir)) {
+          mkdirSync(outDir);
+        }
+        writeFileSync(join(outDir, 'graph.json'), JSON.stringify(deps, null, 2));
+      },
+    },
   ],
   server: {
     host: true,
+    fs: {
+      strict: false,
+      allow: [
+        // TODO(wittjosiah): Not detecting pnpm-workspace?
+        //   https://vitejs.dev/config/server-options.html#server-fs-allow
+        searchForWorkspaceRoot(process.cwd()),
+      ],
+    },
   },
 });
 
