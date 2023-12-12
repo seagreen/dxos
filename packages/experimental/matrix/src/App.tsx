@@ -27,7 +27,6 @@ faker.seed(2);
 
 // TODO(burdon): Context (forward) vs desk/table.
 // TODO(burdon): Add stack; Add item; buttons.
-
 // TODO(burdon): Allow viewing of two stacks at once.
 // TODO(burdon): Surface/mosaic.
 // TODO(burdon): Virtualize x.
