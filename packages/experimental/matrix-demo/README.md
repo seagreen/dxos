@@ -1,1 +1,4 @@
-# @dxos/matrix
+# @dxos/matrix-demo
+
+A stack demo.
+
