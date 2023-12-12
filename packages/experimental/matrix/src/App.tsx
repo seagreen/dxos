@@ -21,7 +21,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Input } from '@dxos/react-ui';
 import { fixedInsetFlexLayout, groupBorder, inputSurface, mx } from '@dxos/react-ui-theme';
 
-import { Matrix } from './Matrix';
+import { Matrix, type MatrixOptions } from './Matrix';
 
 faker.seed(2);
 
@@ -167,7 +167,7 @@ const KBarCustomResults = () => {
 };
 
 export const App = () => {
-  const [debug, setDebug] = useState(false);
+  const [options, setOptions] = useState<MatrixOptions>({ debug: false, smooth: false });
   const [stacks, setStacks] = useState(createStacks());
   const [selected, setSelected] = useState<string | undefined>(stacks[0]?.id);
   const selectedRef = useRef(selected);
@@ -263,7 +263,15 @@ export const App = () => {
         section: 'utils',
         name: 'Toggle debug',
         perform: () => {
-          setDebug((debug) => !debug);
+          setOptions((options) => ({ ...options, debug: !options?.debug }));
+        },
+      },
+      {
+        id: 'animation',
+        section: 'utils',
+        name: 'Toggle animation',
+        perform: () => {
+          setOptions((options) => ({ ...options, animation: !options?.animation }));
         },
       },
     ];
@@ -287,8 +295,8 @@ export const App = () => {
           stacks={stacks}
           itemRenderer={ItemRenderer}
           selected={selected}
+          options={options}
           onSelect={setSelected}
-          debug={debug}
         />
       </div>
     </KBarProvider>

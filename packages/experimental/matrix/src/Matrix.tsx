@@ -19,23 +19,22 @@ export type Stack<T extends Item> = {
   items: T[];
 };
 
+export type MatrixOptions = {
+  animation?: boolean;
+  debug?: boolean;
+};
+
 export type MatrixProps<T extends Item> = {
   stacks?: Stack<T>[];
   selected?: string;
+  options?: MatrixOptions;
   onSelect?: (id: string) => void;
-  debug?: boolean;
 } & Pick<StackProps<T>, 'itemRenderer'>;
 
 /**
  * Row of Stacks.
  */
-export const Matrix = <T extends Item>({
-  stacks = [],
-  selected,
-  onSelect,
-  itemRenderer,
-  debug = false,
-}: MatrixProps<T>) => {
+export const Matrix = <T extends Item>({ stacks = [], selected, options, onSelect, itemRenderer }: MatrixProps<T>) => {
   // const domAttributes = useArrowNavigationGroup({ axis: 'grid' });
 
   const handleBack = () => {
@@ -61,12 +60,12 @@ export const Matrix = <T extends Item>({
             key={stack.id}
             stack={stack}
             selected={selected === stack.id}
+            options={options}
             onSelect={() => onSelect?.(stack.id)}
             onBack={handleBack}
             onForward={handleForward}
             classNames='w-[800px]'
             itemRenderer={itemRenderer}
-            debug={debug}
           />
         ))}
         <div className='flex shrink-0 w-[800px]' />
@@ -80,12 +79,12 @@ export type ItemRenderer<T extends Item> = (item: T) => JSX.Element;
 export type StackProps<T extends Item> = {
   classNames?: string;
   stack: Stack<T>;
+  options?: MatrixOptions;
   selected?: boolean;
   onSelect?: () => void;
   onBack?: () => void;
   onForward?: () => void;
   itemRenderer?: ItemRenderer<T>;
-  debug?: boolean;
 };
 
 /**
@@ -94,12 +93,12 @@ export type StackProps<T extends Item> = {
 export const Stack = <T extends Item>({
   classNames,
   stack,
+  options,
   selected: _selected,
   onSelect,
   onBack,
   onForward,
   itemRenderer,
-  debug,
 }: StackProps<T>) => {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -167,7 +166,7 @@ export const Stack = <T extends Item>({
             <Article className={mx(getSize(5), 'text-neutral-500')} />
           </div>
           <div className='grow truncate text-lg'>{stack.title}</div>
-          {debug && <div className='text-xs text-neutral-200 font-thin'>{stack.id.slice(0, 8)}</div>}
+          {options?.debug && <div className='text-xs text-neutral-200 font-thin'>{stack.id.slice(0, 8)}</div>}
           <div className='flex shrink-0 flex-row-reverse w-16 pr-1'>
             <Button variant='ghost'>
               <DotsThreeVertical className={mx(getSize(5), 'text-neutral-500')} />
@@ -183,9 +182,9 @@ export const Stack = <T extends Item>({
               itemRenderer={itemRenderer}
               active={selected}
               selected={itemSelected === item.id}
+              options={options}
               onSelect={() => handleSelect(item)}
               onNavigate={handleNavigate}
-              debug={debug}
             />
           ))}
         </List>
@@ -199,9 +198,9 @@ export type SectionProps<T extends Item> = {
   itemRenderer?: ItemRenderer<T>;
   active?: boolean; // Stack is active.
   selected?: boolean;
+  options?: MatrixOptions;
   onSelect?: () => void;
   onNavigate?: (direction: 'up' | 'down' | 'left' | 'right') => void;
-  debug?: boolean;
 };
 
 /**
@@ -212,16 +211,21 @@ export const Section = <T extends Item>({
   itemRenderer,
   active,
   selected,
+  options,
   onSelect,
   onNavigate,
-  debug,
 }: SectionProps<T>) => {
   const ref = useRef<HTMLInputElement>(null);
   const [focused, setFocused] = useState(false);
   useEffect(() => {
     if (focused) {
       onSelect?.();
-      ref.current?.scrollIntoView({ behavior: active ? 'instant' : 'instant', block: 'start', inline: 'center' });
+      // TODO(burdon): Smooth isn't smooth.
+      ref.current?.scrollIntoView({
+        behavior: active ? (options?.animation ? 'smooth' : 'instant') : 'instant',
+        block: 'start',
+        inline: 'center',
+      });
     }
   }, [focused]);
   useEffect(() => {
@@ -268,7 +272,7 @@ export const Section = <T extends Item>({
           <div className='flex shrink-0 flex-row-reverse w-20' />
           <div className='flex flex-col w-full'>
             {itemRenderer?.(item)}
-            {debug && (
+            {options?.debug && (
               <div className='mt-4 text-xs text-neutral-200 font-thin'>
                 {JSON.stringify({ id: item.id.slice(0, 8), active, selected, focused })}
               </div>
