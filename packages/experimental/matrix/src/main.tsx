@@ -9,6 +9,13 @@ import '@dxosTheme';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 
+import { ThemeProvider } from '@dxos/react-ui';
+import { defaultTx } from '@dxos/react-ui-theme';
+
 import { App } from './App';
 
-createRoot(document.getElementById('root')!).render(<App />);
+createRoot(document.getElementById('root')!).render(
+  <ThemeProvider tx={defaultTx}>
+    <App />
+  </ThemeProvider>,
+);
