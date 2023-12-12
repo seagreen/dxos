@@ -6,7 +6,7 @@
 import { Article, DotsThreeVertical } from '@phosphor-icons/react';
 import React, { type KeyboardEvent, useEffect, useRef, useState } from 'react';
 
-import { Button, DensityProvider, List, ListItem } from '@dxos/react-ui';
+import { Button, DensityProvider, DropdownMenu, List, ListItem } from '@dxos/react-ui';
 import { getSize, inputSurface, mx } from '@dxos/react-ui-theme';
 
 export type Item = {
@@ -28,13 +28,21 @@ export type MatrixProps<T extends Item> = {
   stacks?: Stack<T>[];
   selected?: string;
   options?: MatrixOptions;
-  onSelect?: (id: string) => void;
+  onSelect?: (stack: string) => void;
+  onInsert?: (stack: string, item: string, type: string) => void;
 } & Pick<StackProps<T>, 'itemRenderer'>;
 
 /**
  * Row of Stacks.
  */
-export const Matrix = <T extends Item>({ stacks = [], selected, options, onSelect, itemRenderer }: MatrixProps<T>) => {
+export const Matrix = <T extends Item>({
+  stacks = [],
+  selected,
+  options,
+  onSelect,
+  onInsert,
+  itemRenderer,
+}: MatrixProps<T>) => {
   // const domAttributes = useArrowNavigationGroup({ axis: 'grid' });
 
   const handleBack = () => {
@@ -64,6 +72,7 @@ export const Matrix = <T extends Item>({ stacks = [], selected, options, onSelec
             onSelect={() => onSelect?.(stack.id)}
             onBack={handleBack}
             onForward={handleForward}
+            onInsert={(item, type) => onInsert?.(stack.id, item, type)}
             classNames='w-[800px]'
             itemRenderer={itemRenderer}
           />
@@ -84,6 +93,7 @@ export type StackProps<T extends Item> = {
   onSelect?: () => void;
   onBack?: () => void;
   onForward?: () => void;
+  onInsert?: (item: string, type: string) => void;
   itemRenderer?: ItemRenderer<T>;
 };
 
@@ -98,6 +108,7 @@ export const Stack = <T extends Item>({
   onSelect,
   onBack,
   onForward,
+  onInsert,
   itemRenderer,
 }: StackProps<T>) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -185,6 +196,7 @@ export const Stack = <T extends Item>({
               options={options}
               onSelect={() => handleSelect(item)}
               onNavigate={handleNavigate}
+              onInsert={(type) => onInsert?.(item.id, type)}
             />
           ))}
         </List>
@@ -201,6 +213,7 @@ export type SectionProps<T extends Item> = {
   options?: MatrixOptions;
   onSelect?: () => void;
   onNavigate?: (direction: 'up' | 'down' | 'left' | 'right') => void;
+  onInsert?: (type: string) => void;
 };
 
 /**
@@ -214,6 +227,7 @@ export const Section = <T extends Item>({
   options,
   onSelect,
   onNavigate,
+  onInsert,
 }: SectionProps<T>) => {
   const ref = useRef<HTMLInputElement>(null);
   const [focused, setFocused] = useState(false);
@@ -280,9 +294,28 @@ export const Section = <T extends Item>({
           </div>
           <div className='flex shrink-0 flex-row-reverse w-20 pr-2'>
             <div>
-              <Button variant='ghost'>
-                <DotsThreeVertical className={mx(getSize(5), 'text-neutral-500')} />
-              </Button>
+              <DropdownMenu.Root>
+                <DropdownMenu.Trigger asChild>
+                  <Button variant='ghost'>
+                    <DotsThreeVertical className={mx(getSize(5), 'text-neutral-500')} />
+                  </Button>
+                </DropdownMenu.Trigger>
+                <DropdownMenu.Portal>
+                  {/* TODO(burdon): Adapter. */}
+                  <DropdownMenu.Content side='top' classNames='z-[51]'>
+                    <DropdownMenu.Viewport>
+                      <DropdownMenu.Item onClick={() => onInsert?.('text')}>Insert text</DropdownMenu.Item>
+                    </DropdownMenu.Viewport>
+                    <DropdownMenu.Viewport>
+                      <DropdownMenu.Item onClick={() => onInsert?.('outline')}>Insert outline</DropdownMenu.Item>
+                    </DropdownMenu.Viewport>
+                    <DropdownMenu.Viewport>
+                      <DropdownMenu.Item onClick={() => onInsert?.('sketch')}>Insert sketch</DropdownMenu.Item>
+                    </DropdownMenu.Viewport>
+                    <DropdownMenu.Arrow />
+                  </DropdownMenu.Content>
+                </DropdownMenu.Portal>
+              </DropdownMenu.Root>
             </div>
           </div>
         </div>

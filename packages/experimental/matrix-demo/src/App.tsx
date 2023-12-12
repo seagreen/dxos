@@ -166,13 +166,36 @@ const KBarCustomResults = () => {
 };
 
 export const App = () => {
-  const [options, setOptions] = useState<MatrixOptions>({ debug: false, animation: false });
+  const [options, setOptions] = useState<MatrixOptions>({ debug: true, animation: false });
   const [stacks, setStacks] = useState(createStacks());
   const [selected, setSelected] = useState<string | undefined>(stacks[0]?.id);
   const selectedRef = useRef(selected);
   useEffect(() => {
     selectedRef.current = selected;
   }, [selected]);
+
+  // TODO(burdon): Select after.
+  const handleInsert = (stackId: string, itemId: string, type: string) => {
+    setStacks((stacks) => {
+      return stacks.map((stack) => {
+        if (stack.id === stackId) {
+          const idx = stack.items.findIndex((item) => item.id === itemId);
+          stack.items.splice(idx, 0, {
+            id: faker.string.uuid(),
+            title: faker.lorem.sentence(),
+            ...createSection(type as SectionType),
+          });
+
+          return {
+            ...stack,
+            items: [...stack.items],
+          };
+        }
+
+        return stack;
+      });
+    });
+  };
 
   // https://github.com/timc1/kbar#readme
   const actions = useMemo<Action[]>(() => {
@@ -296,6 +319,7 @@ export const App = () => {
           selected={selected}
           options={options}
           onSelect={setSelected}
+          onInsert={handleInsert}
         />
       </div>
     </KBarProvider>
