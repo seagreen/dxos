@@ -167,7 +167,7 @@ const KBarCustomResults = () => {
 };
 
 export const App = () => {
-  const [options, setOptions] = useState<MatrixOptions>({ debug: false, smooth: false });
+  const [options, setOptions] = useState<MatrixOptions>({ debug: false, animation: false });
   const [stacks, setStacks] = useState(createStacks());
   const [selected, setSelected] = useState<string | undefined>(stacks[0]?.id);
   const selectedRef = useRef(selected);
