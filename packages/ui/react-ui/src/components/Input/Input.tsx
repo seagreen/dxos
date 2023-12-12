@@ -179,10 +179,7 @@ const TextInput = forwardRef<HTMLInputElement, InputScopedProps<TextInputProps>>
     const density = useDensityContext(propsDensity);
     const elevation = useElevationContext(propsElevation);
     const { validationValence } = useInputContext(INPUT_NAME, __inputScope);
-
     const { tx } = themeContextValue;
-
-    console.log('[theme context value]', themeContextValue);
 
     return (
       <TextInputPrimitive
