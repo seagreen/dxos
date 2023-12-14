@@ -24,9 +24,6 @@
       "path": "../../../common/util"
     },
     {
-      "path": "../../../experimental/matrix"
-    },
-    {
       "path": "../../../sdk/app-framework"
     },
     {
@@ -37,6 +34,9 @@
     },
     {
       "path": "../../../ui/react-ui-mosaic"
+    },
+    {
+      "path": "../../../ui/react-ui-stack"
     },
     {
       "path": "../../../ui/react-ui-theme"

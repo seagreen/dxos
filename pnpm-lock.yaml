@@ -6471,7 +6471,7 @@ importers:
         specifier: ^2.4.5
         version: 2.4.5
 
-  packages/experimental/matrix:
+  packages/experimental/matrix-demo:
     dependencies:
       '@dxos/config':
         specifier: workspace:*

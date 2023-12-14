@@ -574,7 +574,7 @@
         },
         {
           "type": "json",
-          "path": "packages/experimental/matrix/package.json",
+          "path": "packages/experimental/matrix-demo/package.json",
           "jsonpath": "$.version"
         },
         {
