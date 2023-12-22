@@ -194,6 +194,7 @@ export const TreeViewContainer = ({
                     <Button
                       variant='ghost'
                       classNames='pli-2.5'
+                      data-testid='treeView.openSettings'
                       {...(!navigationSidebarOpen && { tabIndex: -1 })}
                       onClick={() => {
                         void dispatch({

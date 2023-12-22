@@ -76,6 +76,21 @@ export class AppManager {
     return this.page.getByTestId('spacePlugin.object');
   }
 
+  async enablePlugin(plugin: string) {
+    await this.page.getByTestId('treeView.openSettings').click();
+    await this.page.getByTestId(`pluginList.${plugin}`).click();
+    await this.page.reload();
+    await this.page.getByTestId('treeView.haloButton').waitFor();
+  }
+
+  async changeStorageVersionInMetadata(version: number) {
+    await this.page.evaluate(() => {
+      (window as any).changeStorageVersionInMetadata(version);
+    });
+
+    await this.page.getByTestId('resetDialog').waitFor();
+  }
+
   // TODO(wittjosiah): Consider factoring out into plugin packages.
 
   // Markdown Plugin
