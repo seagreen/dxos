@@ -97,10 +97,8 @@ export const ClientPlugin = ({
       });
 
       try {
-        await client.initialize();
         await oldClient.initialize();
-
-        console.log({ client, oldClient });
+        await client.initialize();
 
         // TODO(wittjosiah): Remove. This is a hack to get the app to boot with the new identity after a reset.
         client.reloaded.on(() => {
@@ -138,6 +136,7 @@ export const ClientPlugin = ({
             });
 
             await newObs.wait();
+            void oldClient.destroy();
           } else {
             await client.halo.createIdentity();
             // TODO(wittjosiah): Ideally this would be per app rather than per identity.
