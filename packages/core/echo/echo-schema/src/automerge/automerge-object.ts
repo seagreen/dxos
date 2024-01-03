@@ -4,6 +4,7 @@
 
 import { Event, Trigger } from '@dxos/async';
 import { next as automerge, type ChangeOptions, type ChangeFn, type Doc, type Heads } from '@dxos/automerge/automerge';
+import { isAutomergeWasmInitialized } from '@dxos/automerge/init';
 import { type DocHandleChangePayload, type DocHandle } from '@dxos/automerge/automerge-repo';
 import { Reference } from '@dxos/document-model';
 import { failedInvariant, invariant } from '@dxos/invariant';
@@ -69,6 +70,10 @@ export class AutomergeObject implements TypedObjectProperties {
   _id = PublicKey.random().toHex();
 
   constructor(initialProps?: unknown, opts?: TypedObjectOptions) {
+    if(!isAutomergeWasmInitialized) {
+      throw new Error('Automerge WASM has not been initialized.');
+    }
+
     this._initNewObject(initialProps, opts);
 
     if (opts?.schema) {

@@ -141,6 +141,7 @@ export class ServiceContext {
     if (this.identityManager.identity) {
       await this._initialize(ctx);
     }
+    await this.automergeHost.open();
     log.trace('dxos.sdk.service-context.open', trace.end({ id: this._instanceId }));
     log('opened');
   }

@@ -8,8 +8,8 @@
   "author": "info@dxos.org",
   "imports": {
     "#automerge-wasm": {
-      "browser": "./dist/lib/browser/automerge-wasm.js",
-      "import": "./dist/lib/browser/automerge-wasm.js",
+      "browser": "./dist/lib/vite/automerge-wasm.mjs",
+      "import": "./dist/lib/vite/automerge-wasm.mjs",
       "require": "./exports/node/automerge-wasm.cjs",
       "node": "./exports/node/automerge-wasm.cjs",
       "types": "./dist/types/src/automerge-wasm.d.ts"
@@ -31,8 +31,8 @@
   },
   "exports": {
     "./automerge-wasm": {
-      "browser": "./dist/lib/browser/automerge-wasm.js",
-      "import": "./dist/lib/browser/automerge-wasm.js",
+      "browser": "./dist/lib/vite/automerge-wasm.mjs",
+      "import": "./dist/lib/vite/automerge-wasm.mjs",
       "require": "./exports/node/automerge-wasm.cjs",
       "node": "./exports/node/automerge-wasm.cjs",
       "types": "./dist/types/src/automerge-wasm.d.ts"
@@ -57,6 +57,11 @@
       "require": "./dist/lib/node/automerge-repo.cjs",
       "node": "./dist/lib/node/automerge-repo.cjs",
       "types": "./dist/types/src/automerge-repo.d.ts"
+    },
+    "./init": {
+      "browser": "./exports/browser/init.mjs",
+      "import": "./exports/browser/init.mjs",
+      "types": "./exports/browser/init.d.ts"
     }
   },
   "typesVersions": {
@@ -72,6 +77,9 @@
       ],
       "automerge-wasm": [
         "dist/types/src/automerge-wasm.d.ts"
+      ],
+      "init": [
+        "exports/browser/init.d.ts"
       ]
     }
   },
@@ -81,7 +89,7 @@
     "src"
   ],
   "scripts": {
-    "compile": "tsx scripts/compile.mts"
+    "compile": "tsx scripts/compile.mts && vite build"
   },
   "dependencies": {
     "@automerge/automerge": "^2.1.7",

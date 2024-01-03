@@ -20,9 +20,10 @@ import { type PeerInfo } from '@dxos/protocols/proto/dxos/mesh/teleport/automerg
 import { type Directory } from '@dxos/random-access-storage';
 import { AutomergeReplicator } from '@dxos/teleport-extension-automerge-replicator';
 import { arrayToBuffer, bufferToArray } from '@dxos/util';
+import { initAutomergeWasm } from '@dxos/automerge/init';
 
 export class AutomergeHost {
-  private readonly _repo: Repo;
+  private _repo!: Repo;
   private readonly _meshNetwork: MeshNetworkAdapter;
   private readonly _clientNetwork: LocalHostNetworkAdapter;
   private readonly _storage: AutomergeStorageAdapter;
@@ -31,6 +32,15 @@ export class AutomergeHost {
     this._meshNetwork = new MeshNetworkAdapter();
     this._clientNetwork = new LocalHostNetworkAdapter();
     this._storage = new AutomergeStorageAdapter(storageDirectory);
+  }
+
+  get repo(): Repo {
+    invariant(this._repo, 'AutomergeHost not initialized.');
+    return this._repo;
+  }
+
+  async open(): Promise<void> {
+    await initAutomergeWasm();
     this._repo = new Repo({
       network: [this._clientNetwork, this._meshNetwork],
       storage: this._storage,
@@ -40,10 +50,6 @@ export class AutomergeHost {
     });
     this._clientNetwork.ready();
     this._meshNetwork.ready();
-  }
-
-  get repo(): Repo {
-    return this._repo;
   }
 
   async close() {

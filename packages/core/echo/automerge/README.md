@@ -2,6 +2,13 @@
 
 Automerge adapter package
 
+- Bundling automerge-repo to CJS
+- Bundling automerge-wasm with vite to not require WASM and TLA plugins.
+  - Consumers need to await `__tla` promise manually. See TLA plugin docs.
+- Both esbuild and vite used to bundle different parts.
+- When using automerge-repo plugins, one needs to alias `@automerge/automerge-repo` to `@dxos/automerge/automerge-repo`
+
+
 ## Installation
 
 ```bash

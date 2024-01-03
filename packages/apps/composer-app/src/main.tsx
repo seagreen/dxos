@@ -2,6 +2,7 @@
 // Copyright 2020 DXOS.org
 //
 
+import '@dxos/client/init-automerge'; // Place before any other ECHO imports. Requires TLA.
 import '@dxosTheme';
 
 import React, { StrictMode } from 'react';

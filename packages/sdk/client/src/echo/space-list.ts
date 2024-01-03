@@ -96,6 +96,8 @@ export class SpaceList extends MulticastObservable<Space[]> implements Echo {
     }));
     await this._invitationProxy.open();
 
+    await this._automergeContext.open();
+
     // Subscribe to spaces and create proxies.
     const gotInitialUpdate = new Trigger();
 

@@ -3,6 +3,7 @@
 //
 
 import { type Message, NetworkAdapter, type PeerId, Repo, cbor } from '@dxos/automerge/automerge-repo';
+import { initAutomergeWasm } from '@dxos/automerge/init';
 import { type Stream } from '@dxos/codec-protobuf';
 import { invariant } from '@dxos/invariant';
 import { log } from '@dxos/log';
@@ -13,12 +14,23 @@ import { type HostInfo, type DataService, type SyncRepoResponse } from '@dxos/pr
  * Hosts the automerege repo.
  */
 export class AutomergeContext {
-  private _repo: Repo;
+  private _repo!: Repo;
   private _adapter?: LocalClientNetworkAdapter = undefined;
 
   constructor(dataService: DataService | undefined = undefined) {
     if (dataService) {
       this._adapter = new LocalClientNetworkAdapter(dataService);
+    }
+  }
+
+  get repo(): Repo {
+    invariant(this._repo, 'AutomergeContext not initialized.');
+    return this._repo;
+  }
+
+  async open(): Promise<void> {
+    await initAutomergeWasm();
+    if(this._adapter) {
       this._repo = new Repo({
         network: [this._adapter],
       });
@@ -26,10 +38,6 @@ export class AutomergeContext {
     } else {
       this._repo = new Repo({ network: [] });
     }
-  }
-
-  get repo(): Repo {
-    return this._repo;
   }
 
   async close() {

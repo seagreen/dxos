@@ -20,6 +20,7 @@ import { EchoDatabase } from '../database';
 import { Hypergraph } from '../hypergraph';
 import { setGlobalAutomergePreference } from '../object';
 import { schemaBuiltin } from '../proto';
+import { synchronized } from '@dxos/async';
 
 /**
  * @deprecated Use TestBuilder.
@@ -37,6 +38,7 @@ export const createDatabase = async (graph = new Hypergraph()) => {
   const host = await createMemoryDatabase(modelFactory);
   const proxy = await createRemoteDatabaseFromDataServiceHost(modelFactory, host.backend.createDataServiceHost());
   const automergeContext = new AutomergeContext();
+  await automergeContext.open();
   const db = new EchoDatabase(proxy.itemManager, proxy.backend as DatabaseProxy, graph, automergeContext);
   await db.automerge.open({
     rootUrl: automergeContext.repo.create().url,
@@ -49,11 +51,22 @@ export class TestBuilder {
   public readonly defaultSpaceKey = PublicKey.random();
   public readonly automergeContext = new AutomergeContext();
 
+  private _isOpened = false;
+
   constructor(public readonly graph = new Hypergraph(), public readonly base = new DatabaseTestBuilder()) {}
 
   public readonly peers = new ComplexMap<PublicKey, TestPeer>(PublicKey.hash);
 
+  @synchronized
+  private async _open() {
+    if (!this._isOpened) {
+      await this.automergeContext.open();
+      this._isOpened = true;
+    }
+  }
+
   async createPeer(spaceKey = this.defaultSpaceKey): Promise<TestPeer> {
+    await this._open();
     const base = await this.base.createPeer(spaceKey);
     const peer = new TestPeer(this, base, spaceKey, this.automergeContext.repo.create().url);
     this.peers.set(peer.base.key, peer);

@@ -28,6 +28,7 @@ describe('AutomergeHost', () => {
       host,
     );
     const client = new AutomergeContext(dataService);
+    await client.open();
     afterTest(() => client.close());
 
     // Create document in repo.

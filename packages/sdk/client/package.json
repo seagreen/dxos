@@ -55,6 +55,10 @@
       "import": "./dist/lib/browser/testing/index.mjs",
       "require": "./dist/lib/node/testing/index.cjs",
       "node": "./dist/lib/node/testing/index.cjs"
+    },
+    "./init-automerge": {
+      "browser": "./init-automerge/index.mjs",
+      "import": "./init-automerge/index.mjs"
     }
   },
   "types": "dist/types/src/index.d.ts",
@@ -80,6 +84,9 @@
       ],
       "testing": [
         "dist/types/src/testing/index.d.ts"
+      ],
+      "init-automerge": [
+        "init-automerge/index.d.ts"
       ]
     }
   },
@@ -89,6 +96,7 @@
   ],
   "dependencies": {
     "@dxos/async": "workspace:*",
+    "@dxos/automerge": "workspace:*",
     "@dxos/client-protocol": "workspace:*",
     "@dxos/client-services": "workspace:*",
     "@dxos/codec-protobuf": "workspace:*",

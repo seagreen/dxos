@@ -2,6 +2,7 @@
 // Copyright 2022 DXOS.org
 //
 
+import '@dxos/client/init-automerge'; // Place before any other ECHO imports. Requires TLA.
 import { initializeAppTelemetry } from '@braneframe/plugin-telemetry/headless';
 import { mountDevtoolsHooks } from '@dxos/client/devtools';
 import { WorkerRuntime } from '@dxos/client-services';
