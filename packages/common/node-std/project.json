@@ -17,6 +17,7 @@
           "function-bind",
           "get-intrinsic",
           "gopd",
+          "buffer",
           "has",
           "has-property-descriptors",
           "has-proto",
@@ -29,8 +30,10 @@
           "is-generator-function",
           "is-nan",
           "is-typed-array",
+          "ieee754",
           "object-is",
           "object-keys",
+          "base64-js",
           "path-browserify",
           "set-function-length",
           "string_decoder",
@@ -41,6 +44,7 @@
         "entryPoints": [
           "packages/common/node-std/src/assert.js",
           "packages/common/node-std/src/crypto.js",
+          "packages/common/node-std/src/buffer.js",
           "packages/common/node-std/src/events.js",
           "packages/common/node-std/src/fs.js",
           "packages/common/node-std/src/globals.js",
@@ -49,14 +53,10 @@
           "packages/common/node-std/src/stream.js",
           "packages/common/node-std/src/util.js"
         ],
-        "platforms": [
-          "browser"
-        ]
+        "platforms": ["browser"]
       }
     },
     "lint": {}
   },
-  "implicitDependencies": [
-    "esbuild"
-  ]
+  "implicitDependencies": ["esbuild"]
 }

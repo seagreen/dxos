@@ -37,7 +37,8 @@
     "@types/pify": "^3.0.2",
     "@types/randombytes": "^2.0.0",
     "randombytes": "^2.1.0",
-    "source-map-support": "^0.5.12"
+    "source-map-support": "^0.5.12",
+    "webdriverio": "^8.28.0"
   },
   "publishConfig": {
     "access": "public"

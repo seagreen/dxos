@@ -5,4 +5,9 @@ export default defineConfig({
   test: {
     include: ['src/vitest/**/*.{test,spec}.?(c|m)[jt]s?(x)'],
   },
+  resolve: {
+    alias: {
+      buffer: 'node:buffer',
+    },
+  },
 });
