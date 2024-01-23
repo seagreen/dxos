@@ -82,7 +82,7 @@
     "@types/zen-observable": "^0.8.3",
     "@typescript-eslint/eslint-plugin": "^6.7.0",
     "@typescript-eslint/parser": "^6.7.0",
-    "@vitest/browser": "0.34.6",
+    "@vitest/browser": "1.2.1",
     "@vuepress/client": "2.0.0-rc.0",
     "chai": "^4.3.4",
     "chai-as-promised": "^7.1.1",
@@ -127,7 +127,8 @@
     "vite-plugin-top-level-await": "^1.4.1",
     "vite-plugin-wasm": "^3.3.0",
     "vitest": "^1.2.1",
-    "wait-for-expect": "^3.0.2"
+    "wait-for-expect": "^3.0.2",
+    "webdriverio": "^8.29.0"
   },
   "engines": {
     "node": ">=12.0.0"
