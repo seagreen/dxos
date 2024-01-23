@@ -84,7 +84,7 @@
     "@typescript-eslint/parser": "^6.7.0",
     "@vitest/browser": "1.2.1",
     "@vuepress/client": "2.0.0-rc.0",
-    "chai": "^4.3.4",
+    "chai": "^5.0.0",
     "chai-as-promised": "^7.1.1",
     "chai-dom": "^1.11.0",
     "chalk": "^4.1.0",
