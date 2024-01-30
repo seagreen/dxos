@@ -17,7 +17,8 @@
     "./util": "./dist/lib/browser/util.mjs",
     "./fs": "./dist/lib/browser/fs.mjs",
     "./fs/promises": "./dist/lib/browser/fs/promises.mjs",
-    "./buffer": "./dist/lib/browser/buffer.mjs"
+    "./buffer": "./dist/lib/browser/buffer.mjs",
+    "./os": "./dist/lib/browser/os.mjs"
   },
   "files": [
     "dist"

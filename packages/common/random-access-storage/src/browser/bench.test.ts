@@ -2,7 +2,7 @@
 // Copyright 2021 DXOS.org
 //
 
-import 'source-map-support/register';
+// import 'source-map-support/register';
 
 import { describe } from 'vitest';
 

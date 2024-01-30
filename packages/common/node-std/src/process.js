@@ -10,14 +10,13 @@
 
 /* eslint-disable */
 
-function nextTick (fun, ...args) {
-  if(args.length > 0) {
+function nextTick(fun, ...args) {
+  if (args.length > 0) {
     queueMicrotask(() => fun(...args));
   } else {
     queueMicrotask(fun);
   }
 }
-
 
 const title = 'browser';
 const platform = 'browser';
@@ -25,11 +24,13 @@ const browser = true;
 const env = {};
 const argv = [];
 const version = ''; // empty string to avoid regexp issues
-const versions = {};
+const versions = {
+  node: '20.0.0',
+};
 const release = {};
 const config = {};
 
-function noop () {}
+function noop() {}
 
 const on = noop;
 const addListener = noop;
@@ -39,19 +40,19 @@ const removeListener = noop;
 const removeAllListeners = noop;
 const emit = noop;
 
-function binding (name) {
+function binding(name) {
   throw new Error('process.binding is not supported');
 }
 
-function cwd () {
+function cwd() {
   return '/';
 }
 
-function chdir (dir) {
+function chdir(dir) {
   throw new Error('process.chdir is not supported');
 }
 
-function umask () {
+function umask() {
   return 0;
 }
 
@@ -69,7 +70,7 @@ var performanceNow =
 
 // generate timestamp or delta
 // see http://nodejs.org/api/process.html#process_process_hrtime
-function hrtime (previousTimestamp) {
+function hrtime(previousTimestamp) {
   var clocktime = performanceNow.call(performance) * 1e-3;
   var seconds = Math.floor(clocktime);
   var nanoseconds = Math.floor((clocktime % 1) * 1e9);
@@ -86,7 +87,7 @@ function hrtime (previousTimestamp) {
 
 var startTime = new Date();
 
-function uptime () {
+function uptime() {
   var currentTime = new Date();
   var dif = currentTime - startTime;
   return dif / 1000;

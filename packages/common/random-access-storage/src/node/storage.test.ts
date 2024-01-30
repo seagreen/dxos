@@ -9,9 +9,10 @@ import { promises as fs, constants } from 'fs';
 import path from 'path';
 import { afterAll, beforeAll, describe, test } from 'vitest';
 
-import { createStorage } from './storage';
+import { createStorage } from '..';
 import { type File, StorageType } from '../common';
 import { randomText, storageTests } from '../testing';
+import { waitForDebugger } from '../testing/wait-for-debugger';
 
 const ROOT_DIRECTORY = path.resolve(path.join(__dirname, '../out', 'testing'));
 

@@ -3975,9 +3975,6 @@ importers:
       assert:
         specifier: ^2.0.0
         version: 2.0.0
-      buffer:
-        specifier: ^6.0.3
-        version: 6.0.3
       events:
         specifier: ^3.3.0
         version: 3.3.0
@@ -3990,6 +3987,10 @@ importers:
       util:
         specifier: ^0.12.4
         version: 0.12.5
+    devDependencies:
+      buffer:
+        specifier: ^6.0.3
+        version: 6.0.3
 
   packages/common/phoenix:
     dependencies:

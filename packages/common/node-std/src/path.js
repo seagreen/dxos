@@ -15,5 +15,10 @@ export {
   extname,
   format,
   parse,
+  sep,
+  delimiter,
+  posix,
+  win32,
+  _makeLong,
 } from 'path-browserify';
 export default path;

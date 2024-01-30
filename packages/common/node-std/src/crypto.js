@@ -5,3 +5,5 @@
 export const randomBytes = () => {
   throw new Error('Not available on this platform');
 };
+
+export default {};

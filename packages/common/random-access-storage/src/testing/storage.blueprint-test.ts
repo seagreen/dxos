@@ -9,6 +9,7 @@ import { describe, test } from 'vitest';
 import { asyncTimeout } from '@dxos/async';
 
 import { StorageType, type File, type Storage } from '../common';
+import { waitForDebugger } from './wait-for-debugger';
 
 chai.use(chaiAsPromised);
 
@@ -24,6 +25,7 @@ export const storageTests = (testGroupName: StorageType, createStorage: () => St
 
   describe(testGroupName, () => {
     test('open & close', async () => {
+      await waitForDebugger()
       const storage = createStorage();
       const directory = storage.createDirectory();
       const fileName = randomText();

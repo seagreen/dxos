@@ -6,7 +6,7 @@ import del from 'del';
 import path from 'path';
 import { afterAll, beforeAll, describe } from 'vitest';
 
-import { createStorage } from './storage';
+import { createStorage } from '..';
 import { StorageType } from '../common';
 import { storageBenchmark } from '../testing/benchmark.blueprint-test';
 

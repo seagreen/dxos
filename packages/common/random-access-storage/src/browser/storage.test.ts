@@ -2,10 +2,10 @@
 // Copyright 2021 DXOS.org
 //
 
-import 'source-map-support/register';
+// import 'source-map-support/register';
 
-import { expect } from 'chai';
-import { describe, test } from 'vitest';
+// import { expect } from 'chai';
+import { describe, expect, test } from 'vitest';
 
 import { createStorage } from '..';
 import { StorageType } from '../common';
@@ -20,6 +20,6 @@ describe('Tests for different storage types in different browsers', () => {
 
   test.skip(`Used ${StorageType.WEBFS} by default`, async () => {
     const storage = createStorage({ root: ROOT_DIRECTORY });
-    expect(storage.type).to.be(StorageType.WEBFS);
+    expect(storage.type).toBe(StorageType.WEBFS);
   });
 });
