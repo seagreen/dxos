@@ -7,7 +7,7 @@ import 'source-map-support/register';
 import { expect } from 'chai';
 import { describe, test } from 'vitest';
 
-import { createStorage } from './storage';
+import { createStorage } from '..';
 import { StorageType } from '../common';
 import { storageTests } from '../testing';
 
