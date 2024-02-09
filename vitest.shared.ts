@@ -39,7 +39,7 @@ const createBrowserConfig = (browserName: 'chrome') =>
     test: {
       ...resolveReporterConfig({ browserMode: true }),
       name: targetProject,
-      include: [`src/**/*.test.ts`],
+      include: ['**/src/**/*.test.ts', '!**/src/**/*.node.test.ts'],
 
       testTimeout: isDebug ? 9999999 : 5000,
       inspect: isDebug,
@@ -62,14 +62,14 @@ const createBrowserConfig = (browserName: 'chrome') =>
 
 const resolveReporterConfig = (args: { browserMode: boolean }): UserConfig['test'] => {
   if (shouldCreateXmlReport) {
-    const vitestReportDir = `vitest${args.browserMode ? '-browser' : ''}-reports`;
+    const vitestReportDir = `vitest${args.browserMode ? "-browser" : ""}-reports`;
     return {
-      reporters: ['junit', 'basic'],
+      reporters: ['junit', 'verbose'],
       outputFile: join(__dirname, `test-results/${vitestReportDir}/${targetProject}/report.xml`),
     };
   }
   return {
-    reporters: ['basic'],
+    reporters: ['verbose'],
   };
 };
 
