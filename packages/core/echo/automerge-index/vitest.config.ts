@@ -23,7 +23,11 @@ defineProject({
     dir: '.',
     browser: {
       enabled: true,
-      name: 'chrome',
+      name: 'chromium',
+      provider: 'playwright',
+      headless: false,
+      isolate: false,
     },
+    testTimeout: 999999999999,
   },
 });

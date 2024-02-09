@@ -6,7 +6,7 @@ test('sanity', ({ expect }) => {
 
 test.skip('debugger', async () => {
   await waitForDebugger();
-});
+}, 9999999);
 
 /**
  * Will wait for the debugger to be attached and stop on the breakpoint.
