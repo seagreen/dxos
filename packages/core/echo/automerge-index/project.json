@@ -5,7 +5,9 @@
     "build": {},
     "compile": {
       "options": {
-        "entryPoints": ["packages/core/echo/automerge-index/src/index.ts"],
+        "entryPoints": [
+          "packages/core/echo/automerge-index/src/index.ts"
+        ],
         "injectGlobals": true
       }
     },
@@ -13,6 +15,9 @@
     "vitest": {}
   },
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": ["esbuild", "test"],
+  "implicitDependencies": [
+    "esbuild",
+    "test"
+  ],
   "name": "automerge-index"
 }
