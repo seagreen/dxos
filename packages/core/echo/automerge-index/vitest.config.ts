@@ -16,7 +16,7 @@ defineProject({
       enabled: false,
     },
     cache: false,
-    include: [`src/sanity.test.ts`],
+    include: [`packages/core/echo/automerge-index/src/sanity.test.ts`],
     exclude: ['**/node_modules/**', '**/dist/**', '**/build/**', '**/.nx/**'],
     name: 'automerge-index',
     root: '.',
