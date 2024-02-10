@@ -9,8 +9,8 @@ import { sleep } from '@dxos/async';
 import { subscriptionHandler } from '@dxos/functions';
 
 import { RequestProcessor } from './processor';
-import { createResolvers } from './resolvers';
 import { type ChainVariant, createChainResources } from '../../chain';
+import { createResolvers } from '../../resolvers';
 import { getKey } from '../../util';
 
 export const handler = subscriptionHandler(async ({ event, context, response }) => {
