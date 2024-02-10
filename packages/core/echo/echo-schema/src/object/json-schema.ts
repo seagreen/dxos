@@ -27,8 +27,7 @@ export const getPropType = (type?: Schema.PropType): string => {
   }
 };
 
-// TODO(burdon): https://json-schema.org/implementations#javascript
-// https://json-schema.org/learn/getting-started-step-by-step#define
+// TODO(burdon): https://effect-ts.github.io/effect/docs/schema
 export interface JsonSchema {
   $schema?: string;
   $id?: string;

@@ -4932,8 +4932,8 @@ importers:
         version: 1.2.2
     devDependencies:
       fast-check:
-        specifier: ~3.3.0
-        version: 3.3.0
+        specifier: ^3.15.1
+        version: 3.15.1
       hypercore-protocol:
         specifier: ^8.0.7
         version: 8.0.7
@@ -5022,6 +5022,15 @@ importers:
       '@dxos/util':
         specifier: workspace:*
         version: link:../../../common/util
+      '@effect/schema':
+        specifier: ^0.62.1
+        version: 0.62.1(effect@2.3.1)(fast-check@3.15.1)
+      effect:
+        specifier: ^2.3.1
+        version: 2.3.1
+      fast-check:
+        specifier: ^3.15.1
+        version: 3.15.1
       lodash.defaultsdeep:
         specifier: ^4.6.1
         version: 4.6.1
@@ -5548,8 +5557,8 @@ importers:
         specifier: ~0.1.10
         version: 0.1.12(typescript@5.2.2)
       fast-check:
-        specifier: ~3.3.0
-        version: 3.3.0
+        specifier: ^3.15.1
+        version: 3.15.1
       typescript:
         specifier: ^5.2.2
         version: 5.2.2
@@ -5859,8 +5868,8 @@ importers:
         specifier: ^2.0.6
         version: 2.0.6
       fast-check:
-        specifier: ~3.3.0
-        version: 3.3.0
+        specifier: ^3.15.1
+        version: 3.15.1
       typescript:
         specifier: ^5.2.2
         version: 5.2.2
@@ -7630,8 +7639,8 @@ importers:
         specifier: ^18.11.9
         version: 18.11.9
       fast-check:
-        specifier: ~3.3.0
-        version: 3.3.0
+        specifier: ^3.15.1
+        version: 3.15.1
       source-map-support:
         specifier: ^0.5.12
         version: 0.5.21
@@ -14137,6 +14146,16 @@ packages:
       - '@types/react'
       - supports-color
     dev: true
+
+  /@effect/schema@0.62.1(effect@2.3.1)(fast-check@3.15.1):
+    resolution: {integrity: sha512-Zi8PtOElNyq0INLqGlDrMqB/uzs/TACP2ZhcLABm/QjFVvRTO996UaVdsOyA+OTqroQkoYEe+q/cnXxlMAGLBw==}
+    peerDependencies:
+      effect: ^2.3.1
+      fast-check: ^3.13.2
+    dependencies:
+      effect: 2.3.1
+      fast-check: 3.15.1
+    dev: false
 
   /@emotion/babel-plugin@11.10.2(@babel/core@7.21.3):
     resolution: {integrity: sha512-xNQ57njWTFVfPAc3cjfuaPdsgLp5QOSuRsj9MA6ndEhH/AzuZM86qIQzt6rq+aGBwj3n5/TkLmU5lhAfdRmogA==}
@@ -28959,6 +28978,10 @@ packages:
   /ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
 
+  /effect@2.3.1:
+    resolution: {integrity: sha512-bOmhWIt3WjccP2DXan8eJmIqjVXwan0hj+Y6BHJOauHt8HNEuQndp6D7bAUsUsjPoKGCU70J9sMeT5QEVYlgbQ==}
+    dev: false
+
   /ejs@3.1.8:
     resolution: {integrity: sha512-/sXZeMlhS0ArkfX2Aw780gJzXSMPnKjtspYZv+f3NiKLlubezAHDU5+9xz6gd3/NhG3txQCo6xlglmTS+oTGEQ==}
     engines: {node: '>=0.10.0'}
@@ -30417,12 +30440,11 @@ packages:
       count-trailing-zeros: 1.0.1
     dev: true
 
-  /fast-check@3.3.0:
-    resolution: {integrity: sha512-Zu6tZ4g0T4H9Tiz3tdNPEHrSbuICj7yhdOM9RCZKNMkpjZ9avDV3ORklXaEmh4zvkX24/bGZ9DxKKqWfXttUqw==}
+  /fast-check@3.15.1:
+    resolution: {integrity: sha512-GutOXZ+SCxGaFWfHe0Pbeq8PrkpGtPxA9/hdkI3s9YzqeMlrq5RdJ+QfYZ/S93jMX+tAyqgW0z5c9ppD+vkGUw==}
     engines: {node: '>=8.0.0'}
     dependencies:
-      pure-rand: 5.0.5
-    dev: true
+      pure-rand: 6.0.2
 
   /fast-deep-equal@2.0.1:
     resolution: {integrity: sha512-bCK/2Z4zLidyB4ReuIsvALH6w31YfAQDmXMqMx6FyfHqvBxtjC0eRumeSu4Bs3XtXwpyIywtSTrVT99BxY1f9w==}
@@ -40234,13 +40256,8 @@ packages:
       - utf-8-validate
     dev: true
 
-  /pure-rand@5.0.5:
-    resolution: {integrity: sha512-BwQpbqxSCBJVpamI6ydzcKqyFmnd5msMWUGvzXLm1aXvusbbgkbOto/EUPM00hjveJEaJtdbhUjKSzWRhQVkaw==}
-    dev: true
-
   /pure-rand@6.0.2:
     resolution: {integrity: sha512-6Yg0ekpKICSjPswYOuC5sku/TSWaRYlA0qsXqJgM/d/4pLPHPuTxK7Nbf7jFKzAeedUhR8C7K9Uv63FBsSo8xQ==}
-    dev: true
 
   /q@1.5.1:
     resolution: {integrity: sha512-kV/CThkXo6xyFEZUugw/+pIOywXcDbFYgSct5cT3gqlbkBE1SJdwy6UQoZvodiWF/ckQLZyDE/Bu1M6gVu5lVw==}
