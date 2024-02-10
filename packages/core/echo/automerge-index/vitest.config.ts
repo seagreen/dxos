@@ -6,7 +6,7 @@ import { defineProject, mergeConfig } from 'vitest/config';
 
 // import configShared from '../../../../vitest.shared';
 
-console.log(process.cwd());
+// console.log(process.cwd());
 
 export default // configShared,
 defineProject({
@@ -15,6 +15,7 @@ defineProject({
     coverage: {
       enabled: false,
     },
+    reporters: ['verbose'],
     cache: false,
     include: [`packages/core/echo/automerge-index/src/sanity.test.ts`],
     exclude: ['**/node_modules/**', '**/dist/**', '**/build/**', '**/.nx/**'],
@@ -25,7 +26,7 @@ defineProject({
       enabled: true,
       name: 'chromium',
       provider: 'playwright',
-      headless: false,
+      headless: true,
       isolate: false,
     },
     testTimeout: 999999999999,
