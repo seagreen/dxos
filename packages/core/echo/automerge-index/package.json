@@ -20,6 +20,8 @@
     "src"
   ],
   "dependencies": {
+    "@dxos/async": "workspace:*",
+    "@dxos/automerge": "workspace:*",
     "@dxos/log": "workspace:*"
   },
   "devDependencies": {},

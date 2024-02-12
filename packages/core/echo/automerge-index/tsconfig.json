@@ -13,7 +13,13 @@
   ],
   "references": [
     {
+      "path": "../../../common/async"
+    },
+    {
       "path": "../../../common/log"
+    },
+    {
+      "path": "../automerge"
     }
   ]
 }

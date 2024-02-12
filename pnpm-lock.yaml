@@ -4615,6 +4615,12 @@ importers:
 
   packages/core/echo/automerge-index:
     dependencies:
+      '@dxos/async':
+        specifier: workspace:*
+        version: link:../../../common/async
+      '@dxos/automerge':
+        specifier: workspace:*
+        version: link:../automerge
       '@dxos/log':
         specifier: workspace:*
         version: link:../../../common/log
