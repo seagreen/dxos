@@ -3005,12 +3005,6 @@ importers:
       vite:
         specifier: ^5.0.12
         version: 5.0.12(@types/node@18.11.9)
-      vue:
-        specifier: ^3.3.12
-        version: 3.4.15(typescript@5.2.2)
-      vuepress:
-        specifier: 2.0.0-rc.0
-        version: 2.0.0-rc.0(@types/node@18.11.9)(@vuepress/client@2.0.0-rc.0)(ts-node@10.9.1)(typescript@5.2.2)(vue@3.4.15)
 
   packages/apps/plugins/plugin-stack:
     dependencies:
