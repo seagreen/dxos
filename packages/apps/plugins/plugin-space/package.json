@@ -69,7 +69,7 @@
     "vite": "^5.0.12"
   },
   "peerDependencies": {
-    "@babel/core": "^7.0.0-0",
+    "@babel/core": "^7.18.13",
     "@braneframe/plugin-client": "workspace:*",
     "@braneframe/plugin-graph": "workspace:*",
     "@braneframe/plugin-layout": "workspace:*",
