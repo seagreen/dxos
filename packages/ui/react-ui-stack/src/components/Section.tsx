@@ -38,16 +38,19 @@ import {
 
 import { translationKey } from '../translations';
 
+// TODO(wittjosiah): Naming.
 export const StackSectionContentSchema = S.struct({
   id: S.string,
   title: S.optional(S.string),
 });
 
+// TODO(wittjosiah): Naming.
 export const StackSectionSchema = S.struct({
   id: S.string,
   object: StackSectionContentSchema,
 });
 
+// TODO(wittjosiah): Naming.
 export type StackSectionContentType = S.Schema.To<typeof StackSectionContentSchema>;
 export type StackSectionType = S.Schema.To<typeof StackSectionSchema>;
 

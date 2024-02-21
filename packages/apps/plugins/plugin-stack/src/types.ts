@@ -59,6 +59,7 @@ export type StackPluginProvides = SurfaceProvides &
   SettingsProvides<StackSettingsProps> &
   TranslationsProvides & { stack: StackState };
 
+// TODO(wittjosiah): Prefer parsing to validating.
 export const isStack = (data: unknown): data is StackType => {
   const result = S.validate(StackSchema)(data);
   const program = Effect.match(result, {

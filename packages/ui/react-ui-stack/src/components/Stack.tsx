@@ -32,11 +32,13 @@ export type Direction = 'horizontal' | 'vertical';
 
 export const DEFAULT_TYPE = 'stack-section';
 
+// TODO(wittjosiah): Naming.
 export const StackSchema = S.struct({
   id: S.string,
   sections: S.mutable(S.array(StackSectionSchema)),
 });
 
+// TODO(wittjosiah): Naming.
 export type StackType = S.Schema.To<typeof StackSchema>;
 
 export type StackProps<TData extends StackSectionContentType = StackSectionContentType> = Omit<
