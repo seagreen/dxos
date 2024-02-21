@@ -58,8 +58,8 @@
     "@dxos/text-model": "workspace:*",
     "@dxos/tracing": "workspace:*",
     "@dxos/util": "workspace:*",
-    "@effect/schema": "^0.62.1",
-    "effect": "^2.3.1",
+    "@effect/schema": "^0.63.0",
+    "effect": "^2.4.0",
     "lodash.defaultsdeep": "^4.6.1",
     "lodash.get": "^4.4.2"
   },

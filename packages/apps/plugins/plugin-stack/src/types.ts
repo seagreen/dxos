@@ -8,7 +8,6 @@ import type { DeepSignal } from 'deepsignal/react';
 import { Effect } from 'effect';
 import type { FC } from 'react';
 
-import { type Stack as StackType } from '@braneframe/types';
 import type {
   GraphBuilderProvides,
   Intent,
@@ -59,7 +58,7 @@ export type StackPluginProvides = SurfaceProvides &
   SettingsProvides<StackSettingsProps> &
   TranslationsProvides & { stack: StackState };
 
-export const isStack = (data: unknown): data is StackType => {
+export const isStack = (data: unknown) => {
   const result = S.validate(StackItem)(data);
   const program = Effect.match(result, {
     onFailure: () => false,

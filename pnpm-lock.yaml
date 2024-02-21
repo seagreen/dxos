@@ -3039,14 +3039,14 @@ importers:
         specifier: workspace:*
         version: link:../../../common/util
       '@effect/schema':
-        specifier: ^0.62.1
-        version: 0.62.6(effect@2.3.8)(fast-check@3.15.1)
+        specifier: ^0.63.0
+        version: 0.63.0(effect@2.4.0)(fast-check@3.15.1)
       deepsignal:
         specifier: ^1.5.0
         version: 1.5.0(@preact/signals-react@1.3.8)
       effect:
-        specifier: ^2.3.1
-        version: 2.3.8
+        specifier: ^2.4.0
+        version: 2.4.0
       node-fetch:
         specifier: ^2.6.0
         version: 2.6.7
@@ -5040,11 +5040,11 @@ importers:
         specifier: workspace:*
         version: link:../../../common/util
       '@effect/schema':
-        specifier: ^0.62.1
-        version: 0.62.6(effect@2.3.5)(fast-check@3.15.1)
+        specifier: ^0.63.0
+        version: 0.63.0(effect@2.4.0)(fast-check@3.15.1)
       effect:
-        specifier: ^2.3.1
-        version: 2.3.5
+        specifier: ^2.4.0
+        version: 2.4.0
       lodash.defaultsdeep:
         specifier: ^4.6.1
         version: 4.6.1
@@ -6816,8 +6816,8 @@ importers:
         specifier: workspace:*
         version: link:../../common/util
       '@effect/schema':
-        specifier: ^0.62.1
-        version: 0.62.6(effect@2.3.5)(fast-check@3.15.1)
+        specifier: ^0.63.0
+        version: 0.63.0(effect@2.4.0)(fast-check@3.15.1)
       '@langchain/community':
         specifier: ^0.0.26
         version: 0.0.26(discord.js@14.14.1)(faiss-node@0.5.1)(google-auth-library@8.9.0)(googleapis@126.0.1)(html-to-text@9.0.5)(jsdom@20.0.1)
@@ -6852,8 +6852,8 @@ importers:
         specifier: ^14.14.1
         version: 14.14.1
       effect:
-        specifier: ^2.3.1
-        version: 2.3.5
+        specifier: ^2.4.0
+        version: 2.4.0
       email-addresses:
         specifier: ^5.0.0
         version: 5.0.0
@@ -9022,14 +9022,14 @@ importers:
         specifier: workspace:*
         version: link:../react-ui-theme
       '@effect/schema':
-        specifier: ^0.62.1
-        version: 0.62.6(effect@2.3.5)(fast-check@3.15.1)
+        specifier: ^0.63.0
+        version: 0.63.0(effect@2.4.0)(fast-check@3.15.1)
       '@fluentui/react-tabster':
         specifier: ^9.19.0
         version: 9.19.0(@types/react-dom@18.0.6)(@types/react@18.0.21)(react-dom@18.2.0)(react@18.2.0)
       effect:
-        specifier: ^2.3.1
-        version: 2.3.5
+        specifier: ^2.4.0
+        version: 2.4.0
       react-resize-detector:
         specifier: ^7.1.2
         version: 7.1.2(react-dom@18.2.0)(react@18.2.0)
@@ -13985,23 +13985,13 @@ packages:
       - supports-color
     dev: true
 
-  /@effect/schema@0.62.6(effect@2.3.5)(fast-check@3.15.1):
-    resolution: {integrity: sha512-Y/vkQ63EXcQUiJM01lbZ5lb7wCEK8gTcM5wZ1L20TvqFuAXHLp0cs66L3Sk3eIbiX0mv4aYxBWSKhwvhWAhc6g==}
+  /@effect/schema@0.63.0(effect@2.4.0)(fast-check@3.15.1):
+    resolution: {integrity: sha512-z+QTqCUexkh/qyEz5WMHVV/dDLr5jN2eOMUsXzgxzmtBFiBy1L8xunbt+/JgGBhPLOBqLzDysLlnL56edzTNzQ==}
     peerDependencies:
-      effect: ^2.3.5
+      effect: ^2.4.0
       fast-check: ^3.13.2
     dependencies:
-      effect: 2.3.5
-      fast-check: 3.15.1
-    dev: false
-
-  /@effect/schema@0.62.6(effect@2.3.8)(fast-check@3.15.1):
-    resolution: {integrity: sha512-Y/vkQ63EXcQUiJM01lbZ5lb7wCEK8gTcM5wZ1L20TvqFuAXHLp0cs66L3Sk3eIbiX0mv4aYxBWSKhwvhWAhc6g==}
-    peerDependencies:
-      effect: ^2.3.5
-      fast-check: ^3.13.2
-    dependencies:
-      effect: 2.3.8
+      effect: 2.4.0
       fast-check: 3.15.1
     dev: false
 
@@ -28774,12 +28764,8 @@ packages:
   /ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
 
-  /effect@2.3.5:
-    resolution: {integrity: sha512-qarp/WBRty4VM//ZEKDY8Bu3Tolr1afEIwFVZtU3eMOtBZpRIQkLVQMTOjUTt3qeJAAIHfYfEk7GiKg6ABCWlg==}
-    dev: false
-
-  /effect@2.3.8:
-    resolution: {integrity: sha512-jLPRJp1f85HwIu2eP1BFJGF2La0wS8xfqYNSJsTKDlCemyDSGMbtHvtEGKJCB0TQg+CK+DxJAvWOHloTGqMa9w==}
+  /effect@2.4.0:
+    resolution: {integrity: sha512-HAtFVAbAGYDzfGbrSrX1gzMzXym15zk1+ps72X8W1wdZY0vxq+u23w8u9DhAZjiJPHT4W9ZYL7QWQqpP4t+dSg==}
     dev: false
 
   /ejs@3.1.8:
