@@ -19,26 +19,32 @@ import {
 } from '@dxos/react-ui-mosaic';
 import { dropRing, groupBorder, mx, textBlockWidth } from '@dxos/react-ui-theme';
 
-import { SectionTile, type StackContextValue, type StackSectionContent, StackSectionItem } from './Section';
+import {
+  SectionTile,
+  type StackContextValue,
+  StackSectionSchema,
+  type StackSectionContentType,
+  type StackSectionType,
+} from './Section';
 import { translationKey } from '../translations';
 
 export type Direction = 'horizontal' | 'vertical';
 
 export const DEFAULT_TYPE = 'stack-section';
 
-export const StackItem = S.struct({
+export const StackSchema = S.struct({
   id: S.string,
-  items: S.mutable(S.array(StackSectionItem)),
+  sections: S.mutable(S.array(StackSectionSchema)),
 });
 
-export type StackItemType = S.Schema.To<typeof StackItem>;
+export type StackType = S.Schema.To<typeof StackSchema>;
 
-export type StackProps<TData extends StackSectionContent = StackSectionContent> = Omit<
+export type StackProps<TData extends StackSectionContentType = StackSectionContentType> = Omit<
   MosaicContainerProps<TData, number>,
   'debug' | 'Component'
 > &
   StackContextValue<TData> & {
-    items?: StackSectionItem[];
+    sections?: StackSectionType[];
     separation?: boolean; // TODO(burdon): Style.
   };
 
@@ -47,7 +53,7 @@ export const Stack = ({
   type = DEFAULT_TYPE,
   classNames,
   SectionContent,
-  items = [],
+  sections = [],
   separation = true,
   transform,
   onOver,
@@ -58,7 +64,7 @@ export const Stack = ({
 }: StackProps) => {
   const { ref: containerRef, width = 0 } = useResizeDetector<HTMLDivElement>({ refreshRate: 200 });
   const { operation, overItem } = useMosaic();
-  const itemsWithPreview = useItemsWithPreview({ path: id, items });
+  const itemsWithPreview = useItemsWithPreview({ path: id, items: sections });
 
   // TODO(burdon): Why callback not useMemo?
   const getOverlayStyle = useCallback(() => ({ width: Math.min(width, 59 * 16) }), [width]);
@@ -95,7 +101,7 @@ export const Stack = ({
           path={id}
           type={type}
           classNames={classNames}
-          item={{ id, items: itemsWithPreview }}
+          item={{ id, sections: itemsWithPreview }}
           itemContext={{ separation, transform, onDeleteSection, onNavigateToSection, SectionContent }}
           isOver={overItem && Path.hasRoot(overItem.path, id) && (operation === 'copy' || operation === 'transfer')}
           Component={StackTile}
@@ -105,8 +111,8 @@ export const Stack = ({
   );
 };
 
-const StackTile: MosaicTileComponent<StackItemType, HTMLOListElement> = forwardRef(
-  ({ classNames, path, isOver, item: { items }, itemContext }, forwardedRef) => {
+const StackTile: MosaicTileComponent<StackType, HTMLOListElement> = forwardRef(
+  ({ classNames, path, isOver, item: { sections }, itemContext }, forwardedRef) => {
     const { t } = useTranslation(translationKey);
     const { Component, type } = useContainer();
     const domAttributes = useArrowNavigationGroup({ axis: 'grid' });
@@ -125,9 +131,9 @@ const StackTile: MosaicTileComponent<StackItemType, HTMLOListElement> = forwardR
         )}
         {...domAttributes}
       >
-        {items.length > 0 ? (
-          <Mosaic.SortableContext items={items} direction='vertical'>
-            {items.map((item, index) => (
+        {sections.length > 0 ? (
+          <Mosaic.SortableContext items={sections} direction='vertical'>
+            {sections.map((item, index) => (
               <Mosaic.SortableTile
                 key={item.id}
                 item={item}

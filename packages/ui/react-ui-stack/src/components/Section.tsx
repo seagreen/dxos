@@ -38,22 +38,22 @@ import {
 
 import { translationKey } from '../translations';
 
-export const StackSectionContent = S.struct({
+export const StackSectionContentSchema = S.struct({
   id: S.string,
   title: S.optional(S.string),
 });
 
-export const StackSectionItem = S.struct({
+export const StackSectionSchema = S.struct({
   id: S.string,
-  object: StackSectionContent,
+  object: StackSectionContentSchema,
 });
 
-export type StackSectionContent = S.Schema.To<typeof StackSectionContent>;
-export type StackSectionItem = S.Schema.To<typeof StackSectionItem>;
+export type StackSectionContentType = S.Schema.To<typeof StackSectionContentSchema>;
+export type StackSectionType = S.Schema.To<typeof StackSectionSchema>;
 
-export type StackContextValue<TData extends StackSectionContent = StackSectionContent> = {
+export type StackContextValue<TData extends StackSectionContentType = StackSectionContentType> = {
   SectionContent: FC<{ data: TData }>;
-  transform?: (item: MosaicDataItem, type?: string) => StackSectionItem;
+  transform?: (item: MosaicDataItem, type?: string) => StackSectionType;
   onDeleteSection?: (path: string) => void;
   onNavigateToSection?: (id: string) => void;
 };
@@ -169,7 +169,7 @@ export const Section: ForwardRefExoticComponent<SectionProps & RefAttributes<HTM
   );
 });
 
-export const SectionTile: MosaicTileComponent<StackSectionItem & StackContextValue, HTMLLIElement> = forwardRef(
+export const SectionTile: MosaicTileComponent<StackSectionType & StackContextValue, HTMLLIElement> = forwardRef(
   ({ path, type, active, draggableStyle, draggableProps, item, itemContext }, forwardedRef) => {
     const { t } = useTranslation(translationKey);
     const { activeItem } = useMosaic();
@@ -189,7 +189,7 @@ export const SectionTile: MosaicTileComponent<StackSectionItem & StackContextVal
       : contentItem;
 
     // TODO(thure): When `item` is a preview, it is a Graph.Node and has `data` instead of `object`.
-    const itemObject = transformedItem.object ?? (transformedItem as unknown as { data: StackSectionContent }).data;
+    const itemObject = transformedItem.object ?? (transformedItem as unknown as { data: StackSectionContentType }).data;
 
     const section = (
       <Section

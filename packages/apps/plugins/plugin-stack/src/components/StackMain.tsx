@@ -45,7 +45,7 @@ const StackMain: FC<{ stack: StackType; separation?: boolean }> = ({ stack, sepa
   const fileManagerPlugin = useResolvePlugin(parseFileManagerPlugin);
 
   const id = `stack-${stack.id}`;
-  const items = stack.sections
+  const sections = stack.sections
     // TODO(wittjosiah): Should the database handle this differently?
     // TODO(wittjosiah): Render placeholders for missing objects so they can be removed from the stack?
     .filter(({ object }) => Boolean(object));
@@ -62,7 +62,7 @@ const StackMain: FC<{ stack: StackType; separation?: boolean }> = ({ stack, sepa
       return 'reject';
     }
 
-    const exists = items.findIndex(({ id }) => id === active.item.id) >= 0;
+    const exists = sections.findIndex(({ id }) => id === active.item.id) >= 0;
     if (!exists) {
       return 'copy';
     } else {
@@ -133,7 +133,7 @@ const StackMain: FC<{ stack: StackType; separation?: boolean }> = ({ stack, sepa
         data-testid='main.stack'
         SectionContent={SectionContent}
         type={StackType.Section.schema.typename}
-        items={items}
+        sections={sections}
         separation={separation}
         transform={handleTransform}
         onDrop={handleDrop}

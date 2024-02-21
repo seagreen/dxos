@@ -8,6 +8,7 @@ import type { DeepSignal } from 'deepsignal/react';
 import { Effect } from 'effect';
 import type { FC } from 'react';
 
+import { type Stack as StackType } from '@braneframe/types';
 import type {
   GraphBuilderProvides,
   Intent,
@@ -17,7 +18,7 @@ import type {
   SurfaceProvides,
   TranslationsProvides,
 } from '@dxos/app-framework';
-import { StackItem } from '@dxos/react-ui-stack';
+import { StackSchema } from '@dxos/react-ui-stack';
 
 import { STACK_PLUGIN } from './meta';
 
@@ -58,8 +59,8 @@ export type StackPluginProvides = SurfaceProvides &
   SettingsProvides<StackSettingsProps> &
   TranslationsProvides & { stack: StackState };
 
-export const isStack = (data: unknown) => {
-  const result = S.validate(StackItem)(data);
+export const isStack = (data: unknown): data is StackType => {
+  const result = S.validate(StackSchema)(data);
   const program = Effect.match(result, {
     onFailure: () => false,
     onSuccess: () => true,

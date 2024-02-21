@@ -10,16 +10,18 @@ import { faker } from '@dxos/random';
 import { Mosaic, type MosaicDropEvent, type MosaicMoveEvent, type MosaicOperation, Path } from '@dxos/react-ui-mosaic';
 import { withTheme } from '@dxos/storybook-utils';
 
-import { type StackSectionContent, type StackSectionItem } from './Section';
+import { type StackSectionType, type StackSectionContentType } from './Section';
 import { Stack, type StackProps } from './Stack';
 import { FullscreenDecorator } from '../testing/decorators';
 import { TestObjectGenerator } from '../testing/generator';
 
 faker.seed(3);
 
-const SimpleContent = ({ data }: { data: StackSectionContent }) => <div className='p-4 text-center'>{data.title}</div>;
+const SimpleContent = ({ data }: { data: StackSectionContentType }) => (
+  <div className='p-4 text-center'>{data.title}</div>
+);
 
-const ComplexContent = ({ data }: { data: StackSectionContent & { body?: string; image?: string } }) => (
+const ComplexContent = ({ data }: { data: StackSectionContentType & { body?: string; image?: string } }) => (
   <div className='flex'>
     <div className='grow p-4'>
       <h1>{data.title ?? data.id}</h1>
@@ -125,20 +127,20 @@ const DemoStack = ({
   operation = 'transfer',
   classNames,
 }: DemoStackProps) => {
-  const [items, setItems] = useState<StackSectionItem[]>(() => {
+  const [sections, setSections] = useState<StackSectionType[]>(() => {
     const generator = new TestObjectGenerator({ types });
     return generator.createObjects({ length: count }).map((object) => ({ id: faker.string.uuid(), object }));
   });
 
-  const itemsRef = useRef(items);
+  const sectionsRef = useRef(sections);
 
   const handleOver = ({ active }: MosaicMoveEvent<number>) => {
     if (operation === 'reject') {
       return 'reject';
     }
 
-    // TODO(wittjosiah): Items is stale here for some inexplicable reason, so ref helps.
-    const exists = itemsRef.current.findIndex((item) => item.id === active.item.id) >= 0;
+    // TODO(wittjosiah): Sections is stale here for some inexplicable reason, so ref helps.
+    const exists = sectionsRef.current.findIndex((item) => item.id === active.item.id) >= 0;
 
     if (!exists) {
       return operation;
@@ -148,7 +150,7 @@ const DemoStack = ({
   };
 
   const handleDrop = ({ operation, active, over }: MosaicDropEvent<number>) => {
-    setItems((items) => {
+    setSections((items) => {
       if (
         (active.path === Path.create(id, active.item.id) || active.path === id) &&
         (operation !== 'copy' || over.path === Path.create(id, over.item.id) || over.path === id)
@@ -157,21 +159,21 @@ const DemoStack = ({
       }
 
       if (over.path === Path.create(id, over.item.id)) {
-        items.splice(over.position!, 0, active.item as StackSectionItem);
+        items.splice(over.position!, 0, active.item as StackSectionType);
       } else if (over.path === id) {
-        items.push(active.item as StackSectionItem);
+        items.push(active.item as StackSectionType);
       }
 
       const i = [...items];
-      itemsRef.current = i;
+      sectionsRef.current = i;
       return i;
     });
   };
 
   const handleRemove = (path: string) => {
-    setItems((items) => {
+    setSections((items) => {
       const newItems = items.filter((item) => item.id !== Path.last(path));
-      itemsRef.current = newItems;
+      sectionsRef.current = newItems;
       return newItems;
     });
   };
@@ -182,7 +184,7 @@ const DemoStack = ({
       classNames={classNames}
       data-testid={id}
       SectionContent={SectionContent}
-      items={items}
+      sections={sections}
       onOver={handleOver}
       onDrop={handleDrop}
       onDeleteSection={handleRemove}
