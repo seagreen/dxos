@@ -2,6 +2,7 @@
 // Copyright 2023 DXOS.org
 //
 
+import * as S from '@effect/schema/Schema';
 import { DotsSixVertical, X, ArrowSquareOut, DotsThreeVertical } from '@phosphor-icons/react';
 import React, {
   forwardRef,
@@ -37,7 +38,18 @@ import {
 
 import { translationKey } from '../translations';
 
-export type StackSectionContent = MosaicDataItem & { title?: string };
+export const StackSectionContent = S.struct({
+  id: S.string,
+  title: S.optional(S.string),
+});
+
+export const StackSectionItem = S.struct({
+  id: S.string,
+  object: StackSectionContent,
+});
+
+export type StackSectionContent = S.Schema.To<typeof StackSectionContent>;
+export type StackSectionItem = S.Schema.To<typeof StackSectionItem>;
 
 export type StackContextValue<TData extends StackSectionContent = StackSectionContent> = {
   SectionContent: FC<{ data: TData }>;
@@ -45,17 +57,6 @@ export type StackContextValue<TData extends StackSectionContent = StackSectionCo
   onDeleteSection?: (path: string) => void;
   onNavigateToSection?: (id: string) => void;
 };
-
-export type StackItem = MosaicDataItem &
-  StackContextValue & {
-    items: StackSectionItem[];
-  };
-
-export type StackSectionItem = MosaicDataItem & {
-  object: StackSectionContent;
-};
-
-export type StackSectionItemWithContext = StackSectionItem & StackContextValue;
 
 export type SectionProps = PropsWithChildren<{
   // Data props.
@@ -168,7 +169,7 @@ export const Section: ForwardRefExoticComponent<SectionProps & RefAttributes<HTM
   );
 });
 
-export const SectionTile: MosaicTileComponent<StackSectionItemWithContext, HTMLLIElement> = forwardRef(
+export const SectionTile: MosaicTileComponent<StackSectionItem & StackContextValue, HTMLLIElement> = forwardRef(
   ({ path, type, active, draggableStyle, draggableProps, item, itemContext }, forwardedRef) => {
     const { t } = useTranslation(translationKey);
     const { activeItem } = useMosaic();

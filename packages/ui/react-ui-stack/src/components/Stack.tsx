@@ -2,6 +2,7 @@
 // Copyright 2023 DXOS.org
 //
 
+import * as S from '@effect/schema/Schema';
 import { useArrowNavigationGroup } from '@fluentui/react-tabster';
 import React, { forwardRef, useCallback } from 'react';
 import { useResizeDetector } from 'react-resize-detector';
@@ -18,18 +19,19 @@ import {
 } from '@dxos/react-ui-mosaic';
 import { dropRing, groupBorder, mx, textBlockWidth } from '@dxos/react-ui-theme';
 
-import {
-  SectionTile,
-  type StackContextValue,
-  type StackItem,
-  type StackSectionContent,
-  type StackSectionItem,
-} from './Section';
+import { SectionTile, type StackContextValue, type StackSectionContent, StackSectionItem } from './Section';
 import { translationKey } from '../translations';
 
 export type Direction = 'horizontal' | 'vertical';
 
 export const DEFAULT_TYPE = 'stack-section';
+
+export const StackItem = S.struct({
+  id: S.string,
+  items: S.mutable(S.array(StackSectionItem)),
+});
+
+export type StackItemType = S.Schema.To<typeof StackItem>;
 
 export type StackProps<TData extends StackSectionContent = StackSectionContent> = Omit<
   MosaicContainerProps<TData, number>,
@@ -103,7 +105,7 @@ export const Stack = ({
   );
 };
 
-const StackTile: MosaicTileComponent<StackItem, HTMLOListElement> = forwardRef(
+const StackTile: MosaicTileComponent<StackItemType, HTMLOListElement> = forwardRef(
   ({ classNames, path, isOver, item: { items }, itemContext }, forwardedRef) => {
     const { t } = useTranslation(translationKey);
     const { Component, type } = useContainer();

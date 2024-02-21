@@ -2,11 +2,13 @@
 // Copyright 2023 DXOS.org
 //
 
+import * as S from '@effect/schema/Schema';
 import type { IconProps } from '@phosphor-icons/react';
 import type { DeepSignal } from 'deepsignal/react';
+import { Effect } from 'effect';
 import type { FC } from 'react';
 
-import { Stack as StackType } from '@braneframe/types';
+import { type Stack as StackType } from '@braneframe/types';
 import type {
   GraphBuilderProvides,
   Intent,
@@ -16,7 +18,7 @@ import type {
   SurfaceProvides,
   TranslationsProvides,
 } from '@dxos/app-framework';
-import { TypedObject } from '@dxos/react-client/echo';
+import { StackItem } from '@dxos/react-ui-stack';
 
 import { STACK_PLUGIN } from './meta';
 
@@ -57,5 +59,11 @@ export type StackPluginProvides = SurfaceProvides &
   SettingsProvides<StackSettingsProps> &
   TranslationsProvides & { stack: StackState };
 
-export const isStack = (data: unknown): data is StackType =>
-  data instanceof TypedObject && data.__typename === StackType.schema.typename;
+export const isStack = (data: unknown): data is StackType => {
+  const result = S.validate(StackItem)(data);
+  const program = Effect.match(result, {
+    onFailure: () => false,
+    onSuccess: () => true,
+  });
+  return Effect.runSync(program);
+};
