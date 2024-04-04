@@ -1,0 +1,13 @@
+diff --git a/package.json b/package.json
+index 5c43721dca2cb9d5ed5365a405dbf9df5cc252c8..549b5cb3fa856c81d68b213db1483096bb095acc 100644
+--- a/package.json
++++ b/package.json
+@@ -40,7 +40,7 @@
+   },
+   "homepage": "https://github.com/octalmage/robotjs",
+   "dependencies": {
+-    "nan": "^2.14.0",
++    "nan": "^2.19.0",
+     "node-abi": "^2.13.0",
+     "prebuild-install": "^5.3.3"
+   },

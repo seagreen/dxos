@@ -1,0 +1,13 @@
+diff --git a/package.json b/package.json
+index 157b375fa3aad764af052d15fb847f7998ad4328..55f1df97b1851b0f3d48d3c627b8a6a0e3ac813d 100644
+--- a/package.json
++++ b/package.json
+@@ -19,7 +19,7 @@
+     "node": ">= 8.0.0"
+   },
+   "dependencies": {
+-    "nan": "^2.14.0"
++    "nan": "^2.19.0"
+   },
+   "licenses": [
+     {

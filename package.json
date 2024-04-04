@@ -157,7 +157,9 @@
       "@nx/js@17.3.2": "patches/@nx__js@17.3.2.patch",
       "random-access-idb@1.2.2": "patches/random-access-idb@1.2.2.patch",
       "@radix-ui/react-dropdown-menu@2.0.5": "patches/@radix-ui__react-dropdown-menu@2.0.5.patch",
-      "@radix-ui/react-dropdown-menu@2.0.7-rc.10": "patches/@radix-ui__react-dropdown-menu@2.0.7-rc.10.patch"
+      "@radix-ui/react-dropdown-menu@2.0.7-rc.10": "patches/@radix-ui__react-dropdown-menu@2.0.7-rc.10.patch",
+      "fs-ext@2.0.0": "patches/fs-ext@2.0.0.patch",
+      "robotjs@0.6.0": "patches/robotjs@0.6.0.patch"
     }
   }
 }
