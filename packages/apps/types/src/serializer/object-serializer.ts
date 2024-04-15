@@ -13,7 +13,7 @@ import { serializers } from './serializers';
 import { getSpaceProperty } from './space-properties';
 import { type SerializedObject, type SerializedSpace, TypeOfExpando } from './types';
 import { UniqueNames } from './util';
-import { FolderType } from '../schema';
+import { Collection } from '../schema';
 
 export class ObjectSerializer {
   private readonly _uniqueNames = new UniqueNames();
@@ -35,19 +35,19 @@ export class ObjectSerializer {
   }
 
   async serializeObjects(space: Space): Promise<SerializedObject[]> {
-    const spaceRoot = getSpaceProperty<FolderType>(space, FolderType.typename);
+    const spaceRoot = getSpaceProperty<Collection>(space, Collection.typename);
     if (!spaceRoot) {
       throw new Error('No root folder.');
     }
 
-    // Skip root folder.
+    // Skip root collection.
     const objects: SerializedObject[] = [];
     objects.push(...(await this._serializeFolder(spaceRoot)).children);
     return objects;
   }
 
   async deserializeObjects(space: Space, serializedSpace: SerializedSpace): Promise<Space> {
-    const spaceRoot = getSpaceProperty<FolderType>(space, FolderType.typename);
+    const spaceRoot = getSpaceProperty<Collection>(space, Collection.typename);
     if (!spaceRoot) {
       throw new Error('No root folder.');
     }
@@ -57,14 +57,14 @@ export class ObjectSerializer {
     return space;
   }
 
-  private async _serializeFolder(folder: FolderType): Promise<SerializedObject & { type: 'folder' }> {
+  private async _serializeFolder(collection: Collection): Promise<SerializedObject & { type: 'folder' }> {
     const files: SerializedObject[] = [];
-    for (const child of folder.objects) {
+    for (const child of collection.objects) {
       if (!child) {
         continue;
       }
 
-      if (child instanceof FolderType) {
+      if (child instanceof Collection) {
         files.push(await this._serializeFolder(child));
         continue;
       }
@@ -93,40 +93,39 @@ export class ObjectSerializer {
 
     return {
       type: 'folder',
-      id: folder.id,
-      // TODO(mykola): Use folder.name instead of folder.title.
-      name: this._uniqueNames.unique(folder.name ?? (folder as any).title),
+      id: collection.id,
+      name: this._uniqueNames.unique(collection.name),
       children: files,
     };
   }
 
-  private async _deserializeFolder(folder: FolderType, data: SerializedObject[]): Promise<void> {
+  private async _deserializeFolder(collection: Collection, data: SerializedObject[]): Promise<void> {
     for (const object of data) {
       try {
-        let child = folder.objects.find((item) => item?.id === object.id);
+        let child = collection.objects.find((item) => item?.id === object.id);
         switch (object.type) {
           case 'folder': {
             if (!child) {
-              child = create(FolderType, { name: object.name, objects: [] });
+              child = create(Collection, { name: object.name, objects: [] });
 
               // TODO(dmaretskyi): This won't work.
               // child[base]._id = object.id;
-              folder.objects.push(child);
+              collection.objects.push(child);
             }
 
-            await this._deserializeFolder(child as FolderType, object.children);
+            await this._deserializeFolder(child as Collection, object.children);
             break;
           }
 
           case 'file': {
-            const child = folder.objects.find((item) => item?.id === object.id);
+            const child = collection.objects.find((item) => item?.id === object.id);
             const serializer = serializers[object.typename] ?? jsonSerializer;
             const deserialized = await serializer.deserialize(object.content!, child, serializers);
 
             if (!child) {
               // TODO(dmaretskyi): This won't work.
               // deserialized[base]._id = object.id;
-              folder.objects.push(deserialized);
+              collection.objects.push(deserialized);
             }
             break;
           }
