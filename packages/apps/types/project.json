@@ -13,6 +13,10 @@
         "injectGlobals": true
       }
     },
-    "lint": {}
-  }
+    "lint": {},
+    "test": {}
+  },
+  "implicitDependencies": [
+    "test"
+  ]
 }
