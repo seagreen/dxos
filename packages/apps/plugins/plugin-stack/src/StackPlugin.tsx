@@ -11,8 +11,11 @@ import { updateGraphWithAddObjectAction } from '@braneframe/plugin-space';
 import { SectionType, StackType } from '@braneframe/types';
 import { resolvePlugin, type Plugin, type PluginDefinition, parseIntentPlugin } from '@dxos/app-framework';
 import { EventSubscriptions } from '@dxos/async';
-import { create, Filter } from '@dxos/echo-schema';
+import { create, Filter, type Query } from '@dxos/echo-schema';
 import { LocalStorageStore } from '@dxos/local-storage';
+import { PublicKey } from '@dxos/react-client';
+import { SpaceState } from '@dxos/react-client/echo';
+import { ComplexMap } from '@dxos/util';
 
 import { StackMain, StackSettings, AddSectionDialog, dataHasAddSectionDialogProps } from './components';
 import meta, { STACK_PLUGIN } from './meta';
@@ -79,10 +82,15 @@ export const StackPlugin = (): PluginDefinition<StackPluginProvides> => {
             return;
           }
 
+          const queries = new ComplexMap<PublicKey, Query<StackType>>(PublicKey.hash);
           const subscriptions = new EventSubscriptions();
           const { unsubscribe } = client.spaces.subscribe((spaces) => {
             subscriptions.clear();
             spaces.forEach((space) => {
+              if (space.state.get() !== SpaceState.READY) {
+                return;
+              }
+
               subscriptions.add(
                 updateGraphWithAddObjectAction({
                   graph,
@@ -99,15 +107,20 @@ export const StackPlugin = (): PluginDefinition<StackPluginProvides> => {
               );
 
               // Add all stacks to the graph.
-              const query = space.db.query(Filter.schema(StackType));
+              let query = queries.get(space.key);
+              if (!query) {
+                query = space.db.query(Filter.schema(StackType));
+                queries.set(space.key, query);
+              }
+
               let previousObjects: StackType[] = [];
               subscriptions.add(
                 effect(() => {
-                  const removedObjects = previousObjects.filter((object) => !query.objects.includes(object));
-                  previousObjects = query.objects;
+                  const removedObjects = previousObjects.filter((object) => !query?.objects.includes(object));
+                  previousObjects = query?.objects ?? [];
                   batch(() => {
                     removedObjects.forEach((object) => graph.removeNode(object.id));
-                    query.objects.forEach((object) => {
+                    query?.objects.forEach((object) => {
                       graph.addNodes({
                         id: object.id,
                         data: object,

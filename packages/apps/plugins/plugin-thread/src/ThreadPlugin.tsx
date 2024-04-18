@@ -21,14 +21,15 @@ import {
   parseGraphPlugin,
 } from '@dxos/app-framework';
 import { EventSubscriptions, type UnsubscribeCallback } from '@dxos/async';
-import { createDocAccessor, type EchoReactiveObject } from '@dxos/echo-schema';
+import { createDocAccessor, type Query, type EchoReactiveObject } from '@dxos/echo-schema';
 import { create } from '@dxos/echo-schema';
 import { LocalStorageStore } from '@dxos/local-storage';
-import { getSpace, getTextInRange, Filter, isSpace } from '@dxos/react-client/echo';
+import { PublicKey } from '@dxos/react-client';
+import { getSpace, getTextInRange, Filter, isSpace, SpaceState } from '@dxos/react-client/echo';
 import { ScrollArea } from '@dxos/react-ui';
 import { comments, listener } from '@dxos/react-ui-editor';
 import { translations as threadTranslations } from '@dxos/react-ui-thread';
-import { nonNullable } from '@dxos/util';
+import { ComplexMap, nonNullable } from '@dxos/util';
 
 import {
   ThreadMain,
@@ -140,10 +141,15 @@ export const ThreadPlugin = (): PluginDefinition<ThreadPluginProvides> => {
             return;
           }
 
+          const queries = new ComplexMap<PublicKey, Query<ThreadType>>(PublicKey.hash);
           const subscriptions = new EventSubscriptions();
           const { unsubscribe } = client.spaces.subscribe((spaces) => {
             subscriptions.clear();
             spaces.forEach((space) => {
+              if (space.state.get() !== SpaceState.READY) {
+                return;
+              }
+
               subscriptions.add(
                 updateGraphWithAddObjectAction({
                   graph,
@@ -161,7 +167,12 @@ export const ThreadPlugin = (): PluginDefinition<ThreadPluginProvides> => {
               );
 
               // Add all threads not linked to documents to the graph.
-              const query = space.db.query(Filter.schema(ThreadType));
+              let query = queries.get(space.key);
+              if (!query) {
+                query = space.db.query(Filter.schema(ThreadType));
+                queries.set(space.key, query);
+              }
+
               // TODO(wittjosiah): There should be a better way to do this.
               //  Resolvers in echo schema is likely the solution.
               const documentQuery = space.db.query(Filter.schema(DocumentType));
@@ -171,7 +182,7 @@ export const ThreadPlugin = (): PluginDefinition<ThreadPluginProvides> => {
                   const documentThreads = documentQuery.objects
                     .flatMap((doc) => doc.comments?.map((comment) => comment.thread?.id))
                     .filter(nonNullable);
-                  const objects = query.objects.filter((thread) => !documentThreads.includes(thread.id));
+                  const objects = query?.objects.filter((thread) => !documentThreads.includes(thread.id)) ?? [];
                   const removedObjects = previousObjects.filter((object) => !objects.includes(object));
                   previousObjects = objects;
 

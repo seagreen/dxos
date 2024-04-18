@@ -11,7 +11,9 @@ import { updateGraphWithAddObjectAction } from '@braneframe/plugin-space';
 import { SketchType } from '@braneframe/types';
 import { resolvePlugin, type PluginDefinition, parseIntentPlugin } from '@dxos/app-framework';
 import { EventSubscriptions } from '@dxos/async';
-import { create, Expando, Filter } from '@dxos/echo-schema';
+import { create, Expando, Filter, type Query } from '@dxos/echo-schema';
+import { PublicKey } from '@dxos/react-client';
+import { ComplexMap } from '@dxos/util';
 
 import { SketchMain, SketchComponent } from './components';
 import meta, { SKETCH_PLUGIN } from './meta';
@@ -42,6 +44,7 @@ export const SketchPlugin = (): PluginDefinition<SketchPluginProvides> => {
             return;
           }
 
+          const queries = new ComplexMap<PublicKey, Query<SketchType>>(PublicKey.hash);
           const subscriptions = new EventSubscriptions();
           const { unsubscribe } = client.spaces.subscribe((spaces) => {
             subscriptions.clear();
@@ -62,16 +65,21 @@ export const SketchPlugin = (): PluginDefinition<SketchPluginProvides> => {
               );
 
               // Add all sketches to the graph.
-              const query = space.db.query(Filter.schema(SketchType));
+              let query = queries.get(space.key);
+              if (!query) {
+                query = space.db.query(Filter.schema(SketchType));
+                queries.set(space.key, query);
+              }
+
               let previousObjects: SketchType[] = [];
               subscriptions.add(
                 effect(() => {
-                  const removedObjects = previousObjects.filter((object) => !query.objects.includes(object));
-                  previousObjects = query.objects;
+                  const removedObjects = previousObjects.filter((object) => !query?.objects.includes(object));
+                  previousObjects = query?.objects ?? [];
 
                   batch(() => {
                     removedObjects.forEach((object) => graph.removeNode(object.id));
-                    query.objects.forEach((object) => {
+                    query?.objects.forEach((object) => {
                       graph.addNodes({
                         id: object.id,
                         data: object,
