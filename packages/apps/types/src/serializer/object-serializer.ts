@@ -106,7 +106,7 @@ export class ObjectSerializer {
         switch (object.type) {
           case 'folder': {
             if (!child) {
-              child = create(Collection, { name: object.name, objects: [] });
+              child = create(Collection, { name: object.name, objects: [], views: {} });
 
               // TODO(dmaretskyi): This won't work.
               // child[base]._id = object.id;
