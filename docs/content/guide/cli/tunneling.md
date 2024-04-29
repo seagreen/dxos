@@ -4,7 +4,7 @@ order: 10
 
 # Tunneling
 
-The CLI can be used to configure live [tunnels](../kube/tunneling) on the [KUBE](../kube/).
+The CLI can be used to configure live [tunnels](../kube/tunneling.md) on the [KUBE](../kube/).
 
 To enable tunneling for an existing app:
 
@@ -24,4 +24,4 @@ To list active tunnels:
 dx tunnel list
 ```
 
-Learn more about how to configure [tunneling in `dx.yml`](../kube/tunneling).
+Learn more about how to configure [tunneling in `dx.yml`](../kube/tunneling.md).

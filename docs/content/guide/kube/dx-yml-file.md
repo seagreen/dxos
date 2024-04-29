@@ -5,9 +5,9 @@ label: dx.yml file
 
 # `dx.yml` file
 
-This file defines how an application is to be configured and deployed to KUBE. It is placed at the root of a project and picked up by [`dx`](../cli) CLI during `dx publish`. If using a DXOS [sample](../samples) or [template](../cli/app-templates), there is one provided by default.
+This file defines how an application is to be configured and deployed to KUBE. It is placed at the root of a project and picked up by [`dx`](../cli) CLI during `dx publish`. If using a DXOS [sample](../samples.md) or [template](../cli/app-templates.md), there is one provided by default.
 
-Supply a `modules` section describing the array of modules to deploy. Each one has a name which governs the final DNS name of the app deployed to the KUBE. KUBE will host apps on subdomains of `localhost` like `<app>.localhost` and the KUBE's [main hostname](./commands#configuration) (`<app-name>.kube.local` by default).
+Supply a `modules` section describing the array of modules to deploy. Each one has a name which governs the final DNS name of the app deployed to the KUBE. KUBE will host apps on subdomains of `localhost` like `<app>.localhost` and the KUBE's [main hostname](./commands.md#configuration) (`<app-name>.kube.local` by default).
 
 An example `dx.yml` file:
 

@@ -7,11 +7,11 @@ description: DXOS Spaces
 
 A `space` is an instance of an ECHO database which can be replicated by a number of peers.
 
-This section describes how to create, join, and invite peers to [ECHO Spaces](../platform/#spaces) with the TypeScript API.
+This section describes how to create, join, and invite peers to [ECHO Spaces](../platform.md/#spaces) with the TypeScript API.
 
 ## Creating spaces
 
-Having established an [identity](./identity), a space can be created:
+Having established an [identity](./identity.md), a space can be created:
 
 ```ts file=./snippets/create-space.ts#L5-
 import { Client } from '@dxos/client';
@@ -56,7 +56,7 @@ Whenever an Identity is created, a Space is automatically created and marked as 
 
 ## Creating an invitation
 
-See [ECHO Spaces](../platform/#spaces) for a description of the way peers join spaces.
+See [ECHO Spaces](../platform.md/#spaces) for a description of the way peers join spaces.
 
 ```ts file=./snippets/invite-to-space.ts#L5-
 import { Client } from '@dxos/client';
@@ -84,7 +84,7 @@ const client = new Client();
 
 ## Accepting invitations
 
-See [ECHO Spaces](../platform/#spaces) for a description of the way peers join spaces.
+See [ECHO Spaces](../platform.md/#spaces) for a description of the way peers join spaces.
 
 ```ts file=./snippets/join-space.ts#L5-
 import { Client } from '@dxos/client';
@@ -106,4 +106,4 @@ const client = new Client();
 })();
 ```
 
-Having obtained a `space`, it is now possible to [query](./queries) and [mutate](./mutations) objects in that space.
+Having obtained a `space`, it is now possible to [query](./queries.md) and [mutate](./mutations.md) objects in that space.

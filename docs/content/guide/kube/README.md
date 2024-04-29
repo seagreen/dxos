@@ -7,7 +7,7 @@ dir:
 
 # KUBE Installation
 
-KUBE is a set of runtime services for static web apps and peer-to-peer applications. It can host applications on a local network and expose them to the outer internet via automatic tunneling. It also provides services for peer and network discovery. Learn more about [KUBE](../platform/kube).
+KUBE is a set of runtime services for static web apps and peer-to-peer applications. It can host applications on a local network and expose them to the outer internet via automatic tunneling. It also provides services for peer and network discovery. Learn more about [KUBE](../platform/kube.md).
 
 To install KUBE:
 
@@ -36,4 +36,4 @@ Once running, KUBE reports status:
 kube status
 ```
 
-KUBE will [automatically stay up to date](./auto-update).
+KUBE will [automatically stay up to date](./auto-update.md).

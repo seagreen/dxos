@@ -6,7 +6,7 @@ order: 20
 
 ### Custom signaling server
 
-To use a local [KUBE](../glossary#kube) [signaling server](../glossary#signaling-service) instead of the public default:
+To use a local [KUBE](../glossary.md#kube) [signaling server](../glossary.md#signaling-service) instead of the public default:
 
 ```ts file=./snippets/create-with-signal-server.ts#L5-
 import { Client, Config } from '@dxos/client';
@@ -26,7 +26,7 @@ const client = new Client({
 
 ### Custom HALO source
 
-By default the client will use `https://halo.dxos.org` as the storage [`vault`](../glossary#vault), but if there was a version of HALO deployed to a local KUBE, the `remoteSource` configuration value can be used to point the client to it:
+By default the client will use `https://halo.dxos.org` as the storage [`vault`](../glossary.md#vault), but if there was a version of HALO deployed to a local KUBE, the `remoteSource` configuration value can be used to point the client to it:
 
 ```ts file=./snippets/create-with-custom-vault.ts#L5-
 import { Client, Config } from '@dxos/client';
@@ -42,7 +42,7 @@ const client = new Client({
 });
 ```
 
-To deploy a locally operated HALO application, clone the [`dxos`](https://github.com/dxos/dxos) repo, and follow the [repository guide](https://github.com/dxos/dxos/tree/main/REPOSITORY_GUIDE.md) to set up a local HALO build. HALO is a regular DXOS application with a [`dx.yml`](../cli/publishing) configuration file. You should be able to [start up a local KUBE](../quick-start#starting-a-kube) and [deploy to it](../quick-start#deploying-your-app-to-a-kube).
+To deploy a locally operated HALO application, clone the [`dxos`](https://github.com/dxos/dxos) repo, and follow the [repository guide](https://github.com/dxos/dxos/tree/main/REPOSITORY_GUIDE.md) to set up a local HALO build. HALO is a regular DXOS application with a [`dx.yml`](../cli/publishing.md) configuration file. You should be able to [start up a local KUBE](../quick-start.md#starting-a-kube) and [deploy to it](../quick-start.md#deploying-your-app-to-a-kube).
 
 ## Config Plugin
 

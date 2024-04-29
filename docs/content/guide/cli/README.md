@@ -56,4 +56,4 @@ pnpm run deploy
 Take care not to omit the term `run` as `pnpm` will assume `deploy` means something else otherwise
 :::
 
-The configuration is read from a file [`dx.yml`](../kube/dx-yml-file) in the root of the project.
+The configuration is read from a file [`dx.yml`](../kube/dx-yml-file.md) in the root of the project.

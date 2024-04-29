@@ -6,7 +6,7 @@ order: 3
 
 A `space` is an instance of an ECHO database which can be replicated by a number of peers.
 
-This section describes how to create, join, and invite peers to [ECHO Spaces](../platform/#spaces) in `react`.
+This section describes how to create, join, and invite peers to [ECHO Spaces](../platform.md/#spaces) in `react`.
 
 ## Creating spaces
 
@@ -141,12 +141,12 @@ export const App = () => {
 
 ## Joining spaces
 
-See [the platform overview](../platform/#spaces) describing the general process of joining peers to a space.
+See [the platform overview](../platform.md/#spaces) describing the general process of joining peers to a space.
 
-Now that you have a space, you can invite people to it using our [Sharing UI flows](./sharing-ui-flows).
+Now that you have a space, you can invite people to it using our [Sharing UI flows](./sharing-ui-flows.md).
 
 ::: note Tip
-To implement invitation flows manually, see the TypeScript API about [joining spaces](../typescript/spaces#creating-an-invitation).
+To implement invitation flows manually, see the TypeScript API about [joining spaces](../typescript/spaces.md#creating-an-invitation).
 :::
 
-See a more detailed example in the [`Tasks` application sample](../samples#tasks).
+See a more detailed example in the [`Tasks` application sample](../samples.md#tasks).

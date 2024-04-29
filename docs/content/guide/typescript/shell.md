@@ -6,14 +6,14 @@ order: 21
 
 # Shell
 
-The shell is a set of components and pre-built workflows for managing [ECHO](../platform) spaces, invitations, and identity.
+The shell is a set of components and pre-built workflows for managing [ECHO](../platform/) spaces, invitations, and identity.
 
 <div class="shell-images">
   <img class="light" src="../platform/images/shell-light.png" alt="Shell profile panel" />
   <img class="dark" src="../platform/images/shell-dark.png" alt="Shell profile panel" />
 </div>
 
-[Read more about Shell.](../platform/halo#shell)
+[Read more about Shell.](../platform/halo.md#shell)
 
 ## Installation
 

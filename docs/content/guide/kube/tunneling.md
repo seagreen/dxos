@@ -35,10 +35,10 @@ dx app publish
 
 The command will print the public URL of the application if tunneling is enabled. 🚀
 
-To configure live tunnels on the KUBE directly, use the [`dx` CLI](../cli/tunneling).
+To configure live tunnels on the KUBE directly, use the [`dx` CLI](../cli/tunneling.md).
 
 ::: info Tip
-If using a DXOS [application template](../cli/app-templates) the deploy command is available as a script `pnpm run deploy`.
+If using a DXOS [application template](../cli/app-templates.md) the deploy command is available as a script `pnpm run deploy`.
 :::
 
 ::: warning Caution

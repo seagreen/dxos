@@ -7,13 +7,13 @@ order: 5
 
 The `dx` CLI is used to deploy static apps to [KUBE](../kube).
 
-Drop a [`dx.yml`](../kube/dx-yml-file) file at the root of the project, and run:
+Drop a [`dx.yml`](../kube/dx-yml-file.md) file at the root of the project, and run:
 
 ```bash
 dx publish
 ```
 
-If using an [application template](./app-templates) or [sample](../samples) from DXOS, a `dx.yml` file is provided by default and the npm script `deploy` is available:
+If using an [application template](./app-templates.md) or [sample](../samples.md) from DXOS, a `dx.yml` file is provided by default and the npm script `deploy` is available:
 
 ```bash
 pnpm run deploy
@@ -23,4 +23,4 @@ pnpm run deploy
 Take care not to omit the term `run` as `pnpm` will assume `deploy` means something else otherwise
 :::
 
-[Learn more about `dx.yml` in the KUBE section](../kube/dx-yml-file)
+[Learn more about `dx.yml` in the KUBE section](../kube/dx-yml-file.md)
