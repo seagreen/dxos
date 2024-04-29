@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# offline - only check local links
+lychee \
+  --offline \
+  --exclude ".proto" \
+  docs/content/guide docs/content/composer
